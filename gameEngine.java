@@ -63,7 +63,7 @@ public class gameEngine {
                     playScreen.requestFocus();
 
                     // Play screen loop
-                    while (!playScreen.winner()) {
+                    while (!playScreen.winner() & !playScreen.looser()) {
                         Thread.sleep(1);
                     }
 

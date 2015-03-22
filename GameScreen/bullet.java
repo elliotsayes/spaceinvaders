@@ -12,18 +12,19 @@ public class bullet {
     int size = 3;
     int x;
     int y;
-   
+    int direction;
     
     // Creates bullet at (u,v)
-    public bullet(int u,int v){
+    public bullet(int u,int v, int dist){
         x = u;
         y = v;
+        direction = dist;
     }
     
     // moves bullet, controls movement pattern 
     void move(){
         if (y != 0){
-            y = y - 1;
+            y = y + direction;
         }
     }
     

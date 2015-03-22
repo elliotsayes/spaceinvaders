@@ -3,6 +3,7 @@ package GameScreen;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JPanel;
 
 public class troops {
@@ -10,12 +11,15 @@ public class troops {
         int movePos = 1;
         int troopSize = 15;
         ArrayList<enemy> army;
+        ammo bullets = new ammo(1);
+        Random ran = new Random();
         
         // troops Constructor initialises array setting enemy layout 
         public troops(){
             
              // Initialises enemys
             army = new ArrayList<>();
+            bullets.setRateOfFire(10);
             int x = 20;
             int y = 20;
             for(int temp = 0;temp!=troopSize;temp++){
@@ -36,9 +40,16 @@ public class troops {
                     y = 10;
                 } 
                 for(int temp = 0;temp!=army.size();temp++){
-                army.get(temp).move(movePos, y);     
-            }
+                army.get(temp).move(movePos, y);
                 
+                // Spawns enemy bullets
+                int num = ran.nextInt(10);
+                if (num<= 1){
+                    bullets.spawnMissile(army.get(temp).getx(), army.get(temp).gety());
+                }
+               
+            }
+             bullets.move();    
 	}
         
         // Calls paint method for each enemy
@@ -46,11 +57,16 @@ public class troops {
              for(int temp = 0;temp!=army.size();temp++){
                     army.get(temp).paint(win);
             }
+            bullets.paint(win);
         }
         
         // Returns enemy array
         public ArrayList<enemy> getArmy(){
             return army;
+        }
+        
+         public ArrayList<bullet> getAmmo(){
+            return bullets.getbullets();
         }
         
         // Hits the enemy then checks for life..

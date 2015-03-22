@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 public class Winnerr extends JPanel {
     
+    
     public Winnerr() {
         ImageIcon pic = new ImageIcon(getClass().getResource("test.gif"));
         JLabel label = new JLabel(pic, JLabel.CENTER);

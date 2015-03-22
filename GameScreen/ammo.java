@@ -14,9 +14,9 @@ public class ammo {
     boolean can_shoot = true;
     int fire_rate = 1000 /* ms */;
     Timer fire_timer;
-    
+    int direction;/* -1 for up 1 for down */
     // Constructor initialises array of bullets
-    public ammo(){
+    public ammo(int dist){
         bullets = new ArrayList<>();
         this.fire_timer = new Timer(fire_rate,(new ActionListener(){
                 @Override
@@ -25,12 +25,13 @@ public class ammo {
                     fire_timer.stop();
                 }
                 }));
+        direction = dist;
     }
     
     // Adds bullet and (x,y) 
     public void spawnMissile(int x,int y){
         if(can_shoot){
-            bullets.add(new bullet(x , y));
+            bullets.add(new bullet(x , y, direction));
             can_shoot = false;
             fire_timer.start();
         }
@@ -76,5 +77,9 @@ public class ammo {
     // Removes bullet from screen and index i
     void remove(int i) {
         bullets.remove(i);
+    }
+    
+    public void setRateOfFire(int i){
+        fire_rate = i;
     }
 }

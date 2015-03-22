@@ -22,13 +22,14 @@ import javax.swing.Timer;
 
 public class player {
     
-        ammo bullets = new ammo();
+        ammo bullets = new ammo(-1);
 	int x = 400;
 	int xa = 0;
         int y = 460;
         Color color = Color.DARK_GRAY;
         int score;
         ImageIcon image;
+        int health = 3;
 
         // Player constructor
 	public player(){
@@ -49,7 +50,10 @@ public class player {
 		g.fillRect(x, y, 60, 10);
                 //g.drawImage(image.getImage(), 400, 300, null);
                 bullets.paint(g);
-                g.drawString(String.valueOf(score), 20, 20);
+                g.drawString("Score:", 20, 20);
+                g.drawString(String.valueOf(score), 100, 20);
+                g.drawString("Health:", 200, 20);
+                g.drawString(String.valueOf(health), 280, 20);
                 
 	}
 
@@ -80,5 +84,20 @@ public class player {
             
         }
         
+        public int gety(){
+            return y;
+        }
+        
+        public int getx(){
+            return x;
+        }
+
+    int health() {
+        return health;
+    }
+
+    void playerHit() {
+        health -= 1;
+    }
         
 }
