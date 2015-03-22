@@ -76,7 +76,7 @@ public class player {
         // Removes bullet and increases player score
         public void hit(int i){
             bullets.remove(i);
-            score = score + 1;
+            score = score + 100;
             
         }
         
