@@ -3,20 +3,37 @@ package GameScreen;
 
 
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.Timer;
 
 public class ammo {
     
     ArrayList<bullet> bullets;
-   
+    boolean can_shoot = true;
+    int fire_rate = 500 /* ms */;
+    Timer fire_timer;
+    
     // Constructor initialises array of bullets
     public ammo(){
         bullets = new ArrayList<>();
+        this.fire_timer = new Timer(fire_rate,(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    can_shoot = true;
+                    fire_timer.stop();
+                }
+                }));
     }
     
     // Adds bullet and (x,y) 
     public void spawnMissile(int x,int y){
-        bullets.add(new bullet(x , y));
+        if(can_shoot){
+            bullets.add(new bullet(x , y));
+            can_shoot = false;
+            fire_timer.start();
+        }
     }
     
     // Paints bullets

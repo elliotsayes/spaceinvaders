@@ -2,23 +2,58 @@
 package GameScreen;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 
 public class gameScreen extends JPanel {
     
+    JPanel temp_this = this;
     // Game Screen Entities
     troops invaders = new troops();
     player shooter = new player();
+    // Game timer for repaint
+    Timer paint_timer, player_timer, enemy_timer;
+    int paint_updateInterval = 10;
+    int player_updateInterval = 5;
+    int enemy_updateInterval = 10;
     
     // gameScreen Constructor
     public gameScreen() {
+                
+                // ActionListener for time, what happens when timer executes
+                this.paint_timer = new Timer(paint_updateInterval,(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    repaint();
+                }
+                }));
+                
+                this.player_timer = new Timer(player_updateInterval,(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    shooter.move(temp_this);
+                }
+                }));
+                
+                this.enemy_timer = new Timer(enemy_updateInterval,(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    invaders.moveArmy(temp_this);
+                    collision();
+                }
+                }));
+                
+                
                 // Gets User Input
 		addKeyListener(new KeyListener() {
 			@Override
@@ -32,11 +67,21 @@ public class gameScreen extends JPanel {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
+                            if (!enemy_timer.isRunning()){
+                                if (e.getKeyCode() == KeyEvent.VK_SPACE){
+                                    enemy_timer.start();
+                                }
+                            }
+                            if(e.getKeyCode() == KeyEvent.VK_P){
+                                 enemy_timer.stop();
+                             }
                             shooter.keyPressed(e);
 			}
 		});
                 this.setFocusable(true);
                 this.requestFocus();
+                paint_timer.start();
+                player_timer.start();
 	}
     
     @Override

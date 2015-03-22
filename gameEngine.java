@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import killscreen.Winnerr;
 
 /*
- * GameEngine includes Main class, handles game logic and menus
+ * GameEngine includes Main class, handles game menus logic 
  * Controls JFrame
  */
 
@@ -16,7 +16,7 @@ public class gameEngine {
    
     // Config
     private static final String windowTitle = "*PewPew*";
-    private static final Color backgroundColor = Color.black;
+    private static final Color backgroundColor = Color.BLACK;
     
 
     public static void main(String[] args) throws InterruptedException{ 
@@ -43,27 +43,25 @@ public class gameEngine {
         gameWindow.validate();
         MainMenu.repaint();
        
-        // MainMenu loop
+        // MainMenu loop Waits for a selection to be made
         while(!(MainMenu.selection() == 1)){
-        MainMenu.repaint();
+        //MainMenu.repaint();
         Thread.sleep(10);
         }
         
         // Removes MainMenu and loads next panel
-        MainMenu.removeAll();
         gameWindow.remove(MainMenu);
         Thread.sleep(10);
         gameWindow.add(playScreen);
         gameWindow.validate();
         playScreen.requestFocus();
-        playScreen.repaint();
         
         // Play screen loop
         while(!playScreen.winner()){
-            playScreen.move();
-            playScreen.collision();
-            playScreen.repaint();
-            Thread.sleep(10);
+            //playScreen.move();
+            //playScreen.collision();
+            //playScreen.repaint();
+            Thread.sleep(1);
         }
         
         // Removes playScreen

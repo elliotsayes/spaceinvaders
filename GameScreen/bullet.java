@@ -3,6 +3,7 @@ package GameScreen;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import javax.swing.Timer;
 
 
 public class bullet {
@@ -11,7 +12,7 @@ public class bullet {
     int size = 3;
     int x;
     int y;
-    int dist = 10;
+   
     
     // Creates bullet at (u,v)
     public bullet(int u,int v){
@@ -22,7 +23,7 @@ public class bullet {
     // moves bullet, controls movement pattern 
     void move(){
         if (y != 0){
-            y = y - dist;
+            y = y - 1;
         }
     }
     
