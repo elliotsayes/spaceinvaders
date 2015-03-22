@@ -17,7 +17,6 @@ public class gameEngine {
     // Config
     private static final String windowTitle = "*PewPew*";
     private static final Color backgroundColor = Color.BLACK;
-    
 
     public static void main(String[] args) throws InterruptedException{ 
         
@@ -37,46 +36,54 @@ public class gameEngine {
         playScreen.setBackground(backgroundColor);
         MainMenu.setBackground(Color.white);
         win.setBackground(backgroundColor);
-   
-        // Add main menu to frame
-        gameWindow.add(MainMenu);
-        gameWindow.validate();
-        MainMenu.repaint();
-       
-        // MainMenu loop Waits for a selection to be made
-        while(!(MainMenu.selection() == 1)){
-        //MainMenu.repaint();
-        Thread.sleep(10);
+        int game_state = 0;
+        while(true){
+            
+            switch (game_state) {
+
+                case 0:
+                    // Add main menu to frame
+                    gameWindow.add(MainMenu);
+                    gameWindow.validate();
+                    MainMenu.repaint();
+
+                    // MainMenu loop Waits for a selection to be made
+                    while (!(MainMenu.selection() == 1)) {
+                        Thread.sleep(1);
+                    }
+                    // Removes MainMenu 
+                    gameWindow.remove(MainMenu);
+                    game_state = 1;
+                    break;
+
+                case 1:
+
+                    gameWindow.add(playScreen);
+                    gameWindow.validate();
+                    playScreen.requestFocus();
+
+                    // Play screen loop
+                    while (!playScreen.winner()) {
+                        Thread.sleep(1);
+                    }
+
+                    // Removes playScreen
+                    gameWindow.remove(playScreen);
+                    game_state = 2;
+                    break;
+
+                case 2:
+                    // Adds winner screen
+                    gameWindow.add(win);
+                    gameWindow.validate();
+                    playScreen.requestFocus();
+                    playScreen.repaint();
+                    Thread.sleep(10000);
+                    break;
+
+            }
         }
-        
-        // Removes MainMenu and loads next panel
-        gameWindow.remove(MainMenu);
-        Thread.sleep(10);
-        gameWindow.add(playScreen);
-        gameWindow.validate();
-        playScreen.requestFocus();
-        
-        // Play screen loop
-        while(!playScreen.winner()){
-            //playScreen.move();
-            //playScreen.collision();
-            //playScreen.repaint();
-            Thread.sleep(1);
-        }
-        
-        // Removes playScreen
-        gameWindow.remove(playScreen);
-        Thread.sleep(10);
-        
-        // Adds winner screen
-        gameWindow.add(win);
-        gameWindow.validate();
-        playScreen.requestFocus();
-        playScreen.repaint();
-        }
-        
-        
-    
+    }
 }
     
     

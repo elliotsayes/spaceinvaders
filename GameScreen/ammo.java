@@ -12,7 +12,7 @@ public class ammo {
     
     ArrayList<bullet> bullets;
     boolean can_shoot = true;
-    int fire_rate = 500 /* ms */;
+    int fire_rate = 100 /* ms */;
     Timer fire_timer;
     
     // Constructor initialises array of bullets
