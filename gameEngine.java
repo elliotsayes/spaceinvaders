@@ -1,6 +1,6 @@
 //package pew;
 
-import GameScreen.gameScreen;
+import GameScreen.GamePanel;
 import MainMenu.mainMenu;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -30,7 +30,7 @@ public class gameEngine {
         
         // * Add game panels here *
         mainMenu MainMenu = new mainMenu(370,300);
-        gameScreen playScreen = new gameScreen();
+        GamePanel playScreen = new GamePanel();
         Winnerr win = new Winnerr();
         
          // Set screens background color
