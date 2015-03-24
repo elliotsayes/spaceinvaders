@@ -122,8 +122,8 @@ public class gameScreen extends JPanel {
         }
         }
         pewpew = invaders.getAmmo();
-        int x = shooter.getx();
-        int y = shooter.gety();
+        int x = shooter.getx() + 30;
+        int y = shooter.gety() + 5;
         for(int k = 0;k != pewpew.size();k++ ){
             if (((x-30) <= pewpew.get(k).getx() )&((x + 30 )>= (pewpew.get(k).getx() + 2))){
                       if (((y-30) <= pewpew.get(k).gety() )&((y + 30) >= (pewpew.get(k).gety() + 2))){ 

@@ -1,3 +1,4 @@
+//package pew;
 
 import GameScreen.gameScreen;
 import MainMenu.mainMenu;
@@ -37,7 +38,7 @@ public class gameEngine {
         MainMenu.setBackground(Color.white);
         win.setBackground(backgroundColor);
         int game_state = 0;
-        while(true){
+        while(game_state != -1){
             
             switch (game_state) {
 
@@ -53,7 +54,7 @@ public class gameEngine {
                     }
                     // Removes MainMenu 
                     gameWindow.remove(MainMenu);
-                    game_state = 1;
+                    game_state = MainMenu.selection();
                     break;
 
                 case 1:
@@ -80,7 +81,6 @@ public class gameEngine {
                     playScreen.repaint();
                     Thread.sleep(10000);
                     break;
-
             }
         }
     }

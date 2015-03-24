@@ -12,11 +12,10 @@ public class ammo {
     
     ArrayList<bullet> bullets;
     boolean can_shoot = true;
-    int fire_rate = 1000 /* ms */;
     Timer fire_timer;
     int direction;/* -1 for up 1 for down */
     // Constructor initialises array of bullets
-    public ammo(int dist){
+    public ammo(int dist, int fire_rate){
         bullets = new ArrayList<>();
         this.fire_timer = new Timer(fire_rate,(new ActionListener(){
                 @Override
@@ -79,7 +78,5 @@ public class ammo {
         bullets.remove(i);
     }
     
-    public void setRateOfFire(int i){
-        fire_rate = i;
-    }
+   
 }

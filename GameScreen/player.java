@@ -22,7 +22,8 @@ import javax.swing.Timer;
 
 public class player {
     
-        ammo bullets = new ammo(-1);
+        int setRateOfFire = 100;
+        ammo bullets = new ammo(-1 , setRateOfFire);
 	int x = 400;
 	int xa = 0;
         int y = 460;
@@ -30,10 +31,12 @@ public class player {
         int score;
         ImageIcon image;
         int health = 3;
-
+        
+        
         // Player constructor
 	public player(){
             image = new ImageIcon(getClass().getResource("test2.gif"));
+            
 	}
 
         // Moves Player aswell as bullets

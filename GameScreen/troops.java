@@ -10,8 +10,9 @@ public class troops {
         
         int movePos = 1;
         int troopSize = 15;
+        int setRateOfFire = 10;
         ArrayList<enemy> army;
-        ammo bullets = new ammo(1);
+        ammo bullets = new ammo(1 , setRateOfFire);
         Random ran = new Random();
         
         // troops Constructor initialises array setting enemy layout 
@@ -19,7 +20,6 @@ public class troops {
             
              // Initialises enemys
             army = new ArrayList<>();
-            bullets.setRateOfFire(10);
             int x = 20;
             int y = 20;
             for(int temp = 0;temp!=troopSize;temp++){
@@ -40,16 +40,15 @@ public class troops {
                     y = 10;
                 } 
                 for(int temp = 0;temp!=army.size();temp++){
-                army.get(temp).move(movePos, y);
-                
-                // Spawns enemy bullets
-                int num = ran.nextInt(10);
-                if (num<= 1){
-                    bullets.spawnMissile(army.get(temp).getx(), army.get(temp).gety());
+                    army.get(temp).move(movePos, y);
+
+                    // Spawns enemy bullets
+                    int num = ran.nextInt(1000);
+                    if (num<= 1){
+                        bullets.spawnMissile(army.get(temp).getx(), army.get(temp).gety());
+                    }
                 }
-               
-            }
-             bullets.move();    
+            bullets.move();    
 	}
         
         // Calls paint method for each enemy

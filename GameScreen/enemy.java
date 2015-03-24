@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 public class enemy {
     
-    int health = 1;
+    int health = 5;
     Color color = Color.green;
     int size = 40;
     int x;
