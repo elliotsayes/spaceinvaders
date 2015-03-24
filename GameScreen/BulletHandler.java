@@ -8,14 +8,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
-public class ammo {
+public class BulletHandler {
     
-    ArrayList<bullet> bullets;
+    ArrayList<Bullet> bullets;
     boolean can_shoot = true;
     Timer fire_timer;
     int direction;/* -1 for up 1 for down */
     // Constructor initialises array of bullets
-    public ammo(int dist, int fire_rate){
+    public BulletHandler(int dist, int fire_rate){
         bullets = new ArrayList<>();
         this.fire_timer = new Timer(fire_rate,(new ActionListener(){
                 @Override
@@ -30,7 +30,7 @@ public class ammo {
     // Adds bullet and (x,y) 
     public void spawnMissile(int x,int y){
         if(can_shoot){
-            bullets.add(new bullet(x , y, direction));
+            bullets.add(new Bullet(x , y, direction));
             can_shoot = false;
             fire_timer.start();
         }
@@ -57,7 +57,7 @@ public class ammo {
     }
     
     // Returns array of bullets
-    public ArrayList<bullet> getbullets(){
+    public ArrayList<Bullet> getbullets(){
         return bullets;
     }
     

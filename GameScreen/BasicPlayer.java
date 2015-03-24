@@ -8,22 +8,15 @@ package GameScreen;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
-public class player {
+
+public class BasicPlayer {
     
         int setRateOfFire = 100;
-        ammo bullets = new ammo(-1 , setRateOfFire);
+        BulletHandler bullets = new BulletHandler(-1 , setRateOfFire);
 	int x = 400;
 	int xa = 0;
         int y = 460;
@@ -34,8 +27,7 @@ public class player {
         
         
         // Player constructor
-	public player(){
-            image = new ImageIcon(getClass().getResource("test2.gif"));
+	public BasicPlayer(){
             
 	}
 
@@ -51,13 +43,11 @@ public class player {
 	public void paint(Graphics2D g) {
                 g.setColor(color);
 		g.fillRect(x, y, 60, 10);
-                //g.drawImage(image.getImage(), 400, 300, null);
                 bullets.paint(g);
                 g.drawString("Score:", 20, 20);
                 g.drawString(String.valueOf(score), 100, 20);
                 g.drawString("Health:", 200, 20);
                 g.drawString(String.valueOf(health), 280, 20);
-                
 	}
 
         // Player mechanics

@@ -1,33 +1,36 @@
 
 package GameScreen;
 
-// Basic enemy class, can be extended to add features
+// Basic enemy class, can be extended for different enemy types
 
-import java.awt.Color;
+
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
-public class enemy {
+public class BasicEnemy {
     
+    //  Enemy config
     int health = 5;
-    Color color = Color.green;
     int size = 40;
+    // Image must be in package folder, include extension in name
+    String enemyIcon = "Basic_Enemy_Sprite.gif";
+    
+    // Enemy profile
     int x;
     int y;
     ImageIcon image;
     
-    // Enemy constructor, initialises (x,y) position
-    public enemy(int u,int v){
+    // Enemy constructor, initialises profile
+    public BasicEnemy(int u,int v){
         x = u;
         y = v;
-        image = new ImageIcon(getClass().getResource("enemy_sprite.gif"));
+        image = new ImageIcon(getClass().getResource(enemyIcon));
     }
     
     // Moves enemy by (x,y)
     public void move(int u, int v){
-            y = y + v;
-            x = x + u; 
+        y = y + v;
+        x = x + u; 
     }
     
     // Returns x pos
@@ -42,17 +45,12 @@ public class enemy {
     
     // Paints enemy, controls look of enemy
     public void paint(Graphics2D win){
-        
-        win.setColor(color);
         win.drawImage(image.getImage(), x, y,size,size, null);
-        //win.fillOval(x,y,size,size);
-	// Main menu message
-	}
+    }
     
     // Damages enemy and returns 1 if no signs of life
-    public boolean hit() {
-        health -= 1;
-        size -= 5;
+    public boolean hit(int damage) {
+        health -= damage;
         if(health == 0){
             return(true);
         }

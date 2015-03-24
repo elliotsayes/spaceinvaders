@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import javax.swing.Timer;
 
 
-public class bullet {
+public class Bullet {
     
     Color color = Color.red;
     int size = 3;
@@ -15,7 +15,7 @@ public class bullet {
     int direction;
     
     // Creates bullet at (u,v)
-    public bullet(int u,int v, int dist){
+    public Bullet(int u,int v, int dist){
         x = u;
         y = v;
         direction = dist;

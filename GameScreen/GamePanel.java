@@ -15,12 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
-public class gameScreen extends JPanel {
+public class GamePanel extends JPanel {
     
     JPanel temp_this = this;
     // Game Screen Entities
-    troops invaders = new troops();
-    player shooter = new player();
+    EnemyHandler invaders = new EnemyHandler();
+    BasicPlayer shooter = new BasicPlayer();
     // Game timer for repaint
     Timer paint_timer, player_timer, enemy_timer;
     int paint_updateInterval = 10;
@@ -28,7 +28,7 @@ public class gameScreen extends JPanel {
     int enemy_updateInterval = 10;
     
     // gameScreen Constructor
-    public gameScreen() {
+    public GamePanel() {
                 
                 // ActionListener for time, what happens when timer executes
                 this.paint_timer = new Timer(paint_updateInterval,(new ActionListener(){
@@ -102,8 +102,8 @@ public class gameScreen extends JPanel {
     
     // Needs to be re-written, messy
     public void collision(){
-        ArrayList<enemy> badies = invaders.getArmy();
-        ArrayList<bullet> pewpew = shooter.getAmo();
+        ArrayList<BasicEnemy> badies = invaders.getArmy();
+        ArrayList<Bullet> pewpew = shooter.getAmo();
         int temp, temp2;
         for(temp = 0;temp!=badies.size();++temp){
             if (temp >= badies.size()){return;}
