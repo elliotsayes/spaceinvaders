@@ -23,7 +23,7 @@ public class BasicPlayer {
         Color color = Color.DARK_GRAY;
         int score;
         ImageIcon image;
-        int health = 3;
+        int health = 30;
         
         
         // Player constructor
@@ -44,6 +44,7 @@ public class BasicPlayer {
                 g.setColor(color);
 		g.fillRect(x, y, 60, 10);
                 bullets.paint(g);
+                g.setColor(Color.WHITE);
                 g.drawString("Score:", 20, 20);
                 g.drawString(String.valueOf(score), 100, 20);
                 g.drawString("Health:", 200, 20);
@@ -91,6 +92,13 @@ public class BasicPlayer {
 
     void playerHit() {
         health -= 1;
+        reset();
+    }
+    
+    public void reset(){
+        x = 400;
+	xa = 0;
+        y = 460;
     }
         
 }

@@ -79,7 +79,9 @@ public class gameEngine {
                     gameWindow.validate();
                     playScreen.requestFocus();
                     playScreen.repaint();
-                    Thread.sleep(10000);
+                    Thread.sleep(1000);
+                    playScreen.restart();
+                    game_state = 1;
                     break;
             }
         }

@@ -11,7 +11,7 @@ public class EnemyHandler {
         // Enemy config
         int movePos = 1;
         int enemyArraySize = 15;
-        int fireDelay = 10;
+        int fireDelay = 5;
         ArrayList<BasicEnemy> enemyArray;
         BulletHandler bullets = new BulletHandler(1 , fireDelay);
         Random ran = new Random();
