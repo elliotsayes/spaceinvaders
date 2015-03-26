@@ -23,23 +23,30 @@ public class EnemyHandler {
             enemyArray = new ArrayList<>();
             int x = 20;
             int y = 20;
-            for(int temp = 0;temp!=enemyArraySize;temp++){
+            for(int temp1 = 0;temp1!=3;temp1++){
+                for(int temp = 0;temp!=enemyArraySize;temp++){
                 enemyArray.add(new BasicEnemy(x,y));
                 x = x + 40;
+                }
+            y += 60;
+            x = 20;
             }
         }
         
         // Updates enemy position, controls movement pattern
 	void moveArmy(JPanel win) {
                 int y = 0;
-                int sze = enemyArray.size();
+                int sze = enemyArray.size() - 1;
                 // Checks there are enemys and then updates there postion
-                if (sze == 0){return;}
+                //if (sze == 0){return;}
                 // Checks if they have reached end of screen and inverses movement direction
-                if ((enemyArray.get(sze - 1).getx() == win.getWidth() - 30) | (enemyArray.get(0).getx() == 0)) {
+                for(int temp1 = 0;temp1 <= sze;temp1++){
+                if ((enemyArray.get(temp1).getx() == win.getWidth() - 30) | (enemyArray.get(temp1).getx() == 0)) {
                     movePos = movePos * -1;
                     y = 10;
+                    temp1 = sze + 1;
                 } 
+                }
                 for(int temp = 0;temp!=enemyArray.size();temp++){
                     enemyArray.get(temp).move(movePos, y);
 

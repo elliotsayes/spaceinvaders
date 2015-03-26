@@ -10,8 +10,8 @@ import javax.swing.ImageIcon;
 public class BasicEnemy {
     
     //  Enemy config
-    int health = 5;
-    int size = 40;
+    int health = 1;
+    int size = 30;
     // Image must be in package folder, include extension in name
     String enemyIcon = "Basic_Enemy_Sprite.gif";
     

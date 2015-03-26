@@ -81,6 +81,7 @@ public class gameEngine {
                     playScreen.repaint();
                     Thread.sleep(1000);
                     playScreen.restart();
+                    gameWindow.remove(win);
                     game_state = 1;
                     break;
             }

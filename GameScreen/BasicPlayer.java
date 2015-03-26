@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 public class BasicPlayer {
     
-        int setRateOfFire = 100;
+        int setRateOfFire = 1000;
         BulletHandler bullets = new BulletHandler(-1 , setRateOfFire);
 	int x = 400;
 	int xa = 0;
@@ -37,6 +37,7 @@ public class BasicPlayer {
 			x = x + xa;
                 bullets.move();
                 bullets.kill();
+       
 	}
 
         // Paints player and bullets, determins look of player
