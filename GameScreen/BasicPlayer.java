@@ -20,6 +20,7 @@ public class BasicPlayer {
 	int x = 400;
 	int xa = 0;
         int y = 460;
+        boolean move_left,move_right;
         Color color = Color.DARK_GRAY;
         int score;
         ImageIcon image;
@@ -33,10 +34,15 @@ public class BasicPlayer {
 
         // Moves Player aswell as bullets
 	public void move(JPanel win) {
-		if (x + xa > 0 && x + xa < win.getWidth()-60)
-			x = x + xa;
-                bullets.move();
-                bullets.kill();
+            
+            if(move_left && (x - 1 > 0 && x - 1 < win.getWidth()-60)){
+                x += -1;
+            }
+            if(move_right && (x + 1 > 0 && x + 1 < win.getWidth()-60)){
+                x += 1;
+            }
+            bullets.move();
+            bullets.kill();
        
 	}
 
@@ -54,15 +60,20 @@ public class BasicPlayer {
 
         // Player mechanics
 	public void keyReleased(KeyEvent e) {
-		xa = 0;
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+                        move_left = false;
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+                        move_right = false;
 	}
         
         // Player mechanics
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-			xa = -1;
+			//xa = -1;
+                        move_left = true;
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-			xa = 1;
+			//xa = 1;
+                        move_right = true;
                 if (e.getKeyCode() == KeyEvent.VK_SPACE)
 			bullets.spawnMissile(x + 30, y);
 	}

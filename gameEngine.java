@@ -37,6 +37,8 @@ public class gameEngine {
         playScreen.setBackground(backgroundColor);
         MainMenu.setBackground(Color.white);
         win.setBackground(backgroundColor);
+        
+        // Initialise game state
         int game_state = 0;
         while(game_state != -1){
             
@@ -82,7 +84,7 @@ public class gameEngine {
                     Thread.sleep(1000);
                     playScreen.restart();
                     gameWindow.remove(win);
-                    game_state = 1;
+                    game_state = 0;
                     break;
             }
         }
