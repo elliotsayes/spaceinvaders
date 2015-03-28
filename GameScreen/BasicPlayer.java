@@ -84,7 +84,7 @@ public class BasicPlayer {
         if (move_left && (coordinates.getX() - 1 > 0 && coordinates.getX() - 1 < win.getWidth() - width)) {
             coordinates.setX(coordinates.getX() - 1);
         }
-        if (move_right && (coordinates.getX() + 1 > 0 && coordinates.getY() + 1 < win.getWidth() - width)) {
+        if (move_right && (coordinates.getX() + 1 > 0 && coordinates.getX() + 1 < win.getWidth() - width)) {
             coordinates.setX(coordinates.getX() + 1);
         }
         bullets.move();
