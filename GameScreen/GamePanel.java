@@ -112,8 +112,8 @@ public class GamePanel extends JPanel {
                 if (temp2 >= pewpew.size()) {
                     return;
                 }
-                if (((badies.get(temp).getx() - 30) <= pewpew.get(temp2).getx()) & ((badies.get(temp).getx() + 30) >= (pewpew.get(temp2).getx() + 2))) {
-                    if (((badies.get(temp).gety() - 30) <= pewpew.get(temp2).gety()) & ((badies.get(temp).gety() + 30) >= (pewpew.get(temp2).gety() + 2))) {
+                if (((badies.get(temp).getX() - 30) <= pewpew.get(temp2).getx()) & ((badies.get(temp).getX() + 30) >= (pewpew.get(temp2).getx() + 2))) {
+                    if (((badies.get(temp).getY() - 30) <= pewpew.get(temp2).gety()) & ((badies.get(temp).getY() + 30) >= (pewpew.get(temp2).gety() + 2))) {
                         invaders.hit(temp);
                         shooter.hit(temp2);
                         temp -= 1;

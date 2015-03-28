@@ -41,7 +41,7 @@ public class EnemyHandler {
                 //if (sze == 0){return;}
                 // Checks if they have reached end of screen and inverses movement direction
                 for(int temp1 = 0;temp1 <= sze;temp1++){
-                if ((enemyArray.get(temp1).getx() == win.getWidth() - 30) | (enemyArray.get(temp1).getx() == 0)) {
+                if ((enemyArray.get(temp1).getX() == win.getWidth() - 30) | (enemyArray.get(temp1).getX() == 0)) {
                     movePos = movePos * -1;
                     y = 10;
                     temp1 = sze + 1;
@@ -53,7 +53,7 @@ public class EnemyHandler {
                     // Spawns enemy bullets
                     int num = ran.nextInt(1000);
                     if (num<= 1){
-                        bullets.spawnMissile(enemyArray.get(temp).getx(), enemyArray.get(temp).gety());
+                        bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY());
                     }
                 }
             bullets.move();    
