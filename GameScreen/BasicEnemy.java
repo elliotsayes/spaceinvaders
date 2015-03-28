@@ -5,20 +5,21 @@ import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 
 public class BasicEnemy {
-
-    //  Enemy config
+    static String defaultSprite = "Basic_Enemy_Sprite.gif";
+    
+    //  Enemy parameters
     int health;// = 1;
     int size;// = 30;
-
+    
     // Enemy location
     int x;
     int y;
 
-    ImageIcon image;// "Basic_Enemy_Sprite.gif"
+    ImageIcon image;
 
     // Enemy constructor, initialises profile
     public BasicEnemy(int x, int y) {
-        this(x, y, 1, 30, "Basic_Enemy_Sprite.gif");
+        this(x, y, 1, 30, defaultSprite);
     }
 
     public BasicEnemy(int x, int y, int health, int size, String imageName) {

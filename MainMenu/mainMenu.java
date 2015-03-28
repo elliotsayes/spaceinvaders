@@ -13,11 +13,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class mainMenu extends JPanel {
+
     int PLAY_X_START = 300, PLAY_X_END = 500, PLAY_Y_START = 250, PLAY_Y_END = 350;
     String Message = "START";
     int selection = 0;
+    
+    //text position
     int x;
     int y;
+    
     ImageIcon pic = new ImageIcon(getClass().getResource("loading.gif"));
     JLabel label = new JLabel(pic, JLabel.CENTER);
 
