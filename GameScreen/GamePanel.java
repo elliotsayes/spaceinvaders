@@ -112,8 +112,8 @@ public class GamePanel extends JPanel {
                 if (temp2 >= pewpew.size()) {
                     return;
                 }
-                if (((badies.get(temp).getX() - 30) <= pewpew.get(temp2).getx()) & ((badies.get(temp).getX() + 30) >= (pewpew.get(temp2).getx() + 2))) {
-                    if (((badies.get(temp).getY() - 30) <= pewpew.get(temp2).gety()) & ((badies.get(temp).getY() + 30) >= (pewpew.get(temp2).gety() + 2))) {
+                if (((badies.get(temp).getX() - 30) <= pewpew.get(temp2).getX()) & ((badies.get(temp).getX() + 30) >= (pewpew.get(temp2).getX() + 2))) {
+                    if (((badies.get(temp).getY() - 30) <= pewpew.get(temp2).getY()) & ((badies.get(temp).getY() + 30) >= (pewpew.get(temp2).getY() + 2))) {
                         invaders.hit(temp);
                         shooter.hit(temp2);
                         temp -= 1;
@@ -126,11 +126,11 @@ public class GamePanel extends JPanel {
             }
         }
         pewpew = invaders.getAmmo();
-        int x = shooter.getx() + shooter.getWidth()/2;
-        int y = shooter.gety() + shooter.getHeight()/2;
+        int x = shooter.getX() + shooter.getWidth()/2;
+        int y = shooter.getY() + shooter.getHeight()/2;
         for (int k = 0; k != pewpew.size(); k++) {
-            if (((x - shooter.getWidth()/2) <= pewpew.get(k).getx()) & ((x + shooter.getWidth()/2) >= (pewpew.get(k).getx() + 2))) {
-                if ((y <= pewpew.get(k).gety()) & ((y + shooter.getHeight()/2) >= (pewpew.get(k).gety() + 2))) {
+            if (((x - shooter.getWidth()/2) <= pewpew.get(k).getX()) & ((x + shooter.getWidth()/2) >= (pewpew.get(k).getX() + 2))) {
+                if ((y <= pewpew.get(k).getY()) & ((y + shooter.getHeight()/2) >= (pewpew.get(k).getY() + 2))) {
                     shooter.playerHit();
                     pewpew.remove(k);
                 }
@@ -151,6 +151,6 @@ public class GamePanel extends JPanel {
     }
 
     public boolean looser() {
-        return (shooter.health() == 0);
+        return (shooter.getHealth() == 0);
     }
 }

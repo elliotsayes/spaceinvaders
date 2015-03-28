@@ -64,7 +64,7 @@ public class BulletHandler {
     // Removes bullets if they hit top of screen, *******could be moved to collision detection*******
     public void kill(){
         for(int temp = 0;temp!=bullets.size();temp++){
-               if (bullets.get(temp).gety()==0){
+               if (bullets.get(temp).getY()==0){
                    bullets.remove(temp);
                }
                if (bullets.isEmpty()){

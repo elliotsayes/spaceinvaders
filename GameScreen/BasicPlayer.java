@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 public class BasicPlayer {
 
     // co-ordinates of player
-
     int x;
     int y;
 
@@ -49,6 +48,22 @@ public class BasicPlayer {
         fireRate = 1000;
         color = Color.GREEN;
         health = 30;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public int getWidth() {
@@ -104,7 +119,7 @@ public class BasicPlayer {
             move_right = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            bullets.spawnMissile(x + 30, y);
+            bullets.spawnMissile(x + width/2, y);
         }
     }
 
@@ -120,15 +135,15 @@ public class BasicPlayer {
 
     }
 
-    public int gety() {
+    public int getY() {
         return y;
     }
 
-    public int getx() {
+    public int getX() {
         return x;
     }
 
-    int health() {
+    int getHealth() {
         return health;
     }
 
