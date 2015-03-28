@@ -123,15 +123,14 @@ public class GamePanel extends JPanel {
                         }
                     }
                 }
-
             }
         }
         pewpew = invaders.getAmmo();
         int x = shooter.getx() + 30;
         int y = shooter.gety() + 5;
         for (int k = 0; k != pewpew.size(); k++) {
-            if (((x - 30) <= pewpew.get(k).getx()) & ((x + shooter.getWidth()) >= (pewpew.get(k).getx() + shooter.getHeight()))) {
-                if (((y) <= pewpew.get(k).gety()) & ((y + 10) >= (pewpew.get(k).gety() + 2))) {
+            if (((x - 30) <= pewpew.get(k).getx()) & ((x + shooter.getWidth()) >= (pewpew.get(k).getx() + 2))) {
+                if (((y) <= pewpew.get(k).gety()) & ((y + shooter.getHeight()) >= (pewpew.get(k).gety() + 2))) {
                     shooter.playerHit();
                     pewpew.remove(k);
                 }
