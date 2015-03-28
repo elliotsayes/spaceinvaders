@@ -48,7 +48,8 @@ public class EnemyHandler {
                 } 
                 }
                 for(int temp = 0;temp!=enemyArray.size();temp++){
-                    enemyArray.get(temp).move(movePos, y);
+                    IntVector2D tempVector = new IntVector2D(movePos, y);
+                    enemyArray.get(temp).move(tempVector);
 
                     // Spawns enemy bullets
                     int num = ran.nextInt(1000);

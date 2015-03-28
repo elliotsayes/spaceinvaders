@@ -12,9 +12,9 @@ public class BasicEnemy {
     int size;// = 30;
     
     // Enemy location
-    int x;
-    int y;
-
+    IntVector2D coordinates;
+    
+    // Enemy Sprite
     ImageIcon image;
 
     // Enemy constructor, initialises profile
@@ -25,19 +25,18 @@ public class BasicEnemy {
     public BasicEnemy(int x, int y, int health, int size, String imageName) {
         this.health = health;
         this.size = size;
-        this.x = x;
-        this.y = y;
+        this.coordinates = new IntVector2D(x,y);
         this.image = new ImageIcon(getClass().getResource(imageName));
     }
 
     // Returns x pos
     public int getX() {
-        return x;
+        return coordinates.getX();
     }
 
     // Returns y pos
     public int getY() {
-        return y;
+        return coordinates.getY();
     }
 
     public int getHealth() {
@@ -57,11 +56,11 @@ public class BasicEnemy {
     }
 
     public void setX(int x) {
-        this.x = x;
+        this.coordinates.setX(x);
     }
 
     public void setY(int y) {
-        this.y = y;
+        this.coordinates.setY(y);
     }
 
     public void setImage(String imageName) {
@@ -69,14 +68,13 @@ public class BasicEnemy {
     }
 
     // Moves enemy by (x,y)
-    public void move(int d_x, int d_y) {
-        x = x + d_x;
-        y = y + d_y;
+    public void move(IntVector2D velocity) {
+       coordinates.addVector(velocity);
     }
 
     // Paints enemy, controls look of enemy
     public void paint(Graphics2D win) {
-        win.drawImage(image.getImage(), x, y, size, size, null);
+        win.drawImage(image.getImage(), coordinates.getX(), coordinates.getY(), size, size, null);
     }
 
     // Damages enemy and returns 1 if no signs of life
