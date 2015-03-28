@@ -13,35 +13,36 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class BasicPlayer {
+
     // co-ordinates of player
+
     int x;
     int y;
-    
+
     // player size
     int height;
     int width;
-    
+
     int fireRate;
     boolean move_left, move_right;
     Color color;
     int score;
     int health;
     BulletHandler bullets = new BulletHandler(-1, fireRate);
-    
+
     // Unused
     //int xa;
     //ImageIcon image;
-
     // Player constructor
     public BasicPlayer() {
         // call default constructor with default width and height
-        this(30,2);
+        this(60, 10);
     }
 
     public BasicPlayer(int width, int height) {
         this.width = width;
         this.height = height;
-        
+
         // initialise other values
         x = 400;
         y = 460;
@@ -49,8 +50,6 @@ public class BasicPlayer {
         color = Color.GREEN;
         health = 30;
     }
-    
-    
 
     public int getWidth() {
         return width;
@@ -59,24 +58,23 @@ public class BasicPlayer {
     public int getHeight() {
         return height;
     }
-    
+
     // Moves Player as well as bullets
     public void move(JPanel win) {
-        if (move_left && (x - 1 > 0 && x - 1 < win.getWidth() - 60)) {
+        if (move_left && (x - 1 > 0 && x - 1 < win.getWidth() - width)) {
             x += -1;
         }
-        if (move_right && (x + 1 > 0 && x + 1 < win.getWidth() - 60)) {
+        if (move_right && (x + 1 > 0 && x + 1 < win.getWidth() - width)) {
             x += 1;
         }
         bullets.move();
         bullets.kill();
-
     }
 
     // Paints player and bullets, determins look of player
     public void paint(Graphics2D g) {
         g.setColor(color);
-        g.fillRect(x, y, 60, 10);
+        g.fillRect(x, y, width, height);
         bullets.paint(g);
         g.setColor(Color.WHITE);
         g.drawString("Score:", 20, 20);
