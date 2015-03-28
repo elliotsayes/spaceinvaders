@@ -15,41 +15,46 @@ import javax.swing.JPanel;
 public class BasicPlayer {
 
     // co-ordinates of player
-    int x;
-    int y;
+    //int x;
+    //int y;
+    IntVector2D coordinates;
 
     // player size
-    int height;
     int width;
+    int height;
 
     int fireRate;
     boolean move_left, move_right;
     Color color;
     int score;
     int health;
-    BulletHandler bullets = new BulletHandler(-1, fireRate);
+    BulletHandler bullets;// = new BulletHandler(-1, fireRate);
 
     // Unused
     //int xa;
     //ImageIcon image;
     // Player constructor
     public BasicPlayer() {
-        // call default constructor with default width and height
+        // call secondary constructor with default width and height
         this(60, 10);
     }
 
     public BasicPlayer(int width, int height) {
-        this.width = width;
-        this.height = height;
-
-        // initialise other values
-        x = 400;
-        y = 460;
-        fireRate = 1000;
-        color = Color.GREEN;
-        health = 30;
+        // call main constructor with default values
+        this(new IntVector2D(400,460), width, height, 1000, Color.GREEN, 0, 30);
     }
 
+    public BasicPlayer(IntVector2D coordinates, int width, int height, int fireRate, Color color, int score, int health) {
+        this.coordinates = coordinates;
+        this.height = height;
+        this.width = width;
+        this.fireRate = fireRate;
+        this.color = color;
+        this.score = score;
+        this.health = health;
+        this.bullets = new BulletHandler(-1, fireRate);
+    }
+    
     public void setHeight(int height) {
         this.height = height;
     }
@@ -76,11 +81,11 @@ public class BasicPlayer {
 
     // Moves Player as well as bullets
     public void move(JPanel win) {
-        if (move_left && (x - 1 > 0 && x - 1 < win.getWidth() - width)) {
-            x += -1;
+        if (move_left && (coordinates.getX() - 1 > 0 && coordinates.getX() - 1 < win.getWidth() - width)) {
+            coordinates.setX(coordinates.getX() - 1);
         }
-        if (move_right && (x + 1 > 0 && x + 1 < win.getWidth() - width)) {
-            x += 1;
+        if (move_right && (coordinates.getX() + 1 > 0 && coordinates.getY() + 1 < win.getWidth() - width)) {
+            coordinates.setX(coordinates.getX() + 1);
         }
         bullets.move();
         bullets.kill();
@@ -89,7 +94,7 @@ public class BasicPlayer {
     // Paints player and bullets, determins look of player
     public void paint(Graphics2D g) {
         g.setColor(color);
-        g.fillRect(x, y, width, height);
+        g.fillRect(coordinates.getX(), coordinates.getY(), width, height);
         bullets.paint(g);
         g.setColor(Color.WHITE);
         g.drawString("Score:", 20, 20);
@@ -119,7 +124,7 @@ public class BasicPlayer {
             move_right = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            bullets.spawnMissile(x + width/2, y);
+            bullets.spawnMissile(coordinates.getX() + width/2, coordinates.getY());
         }
     }
 
@@ -134,13 +139,13 @@ public class BasicPlayer {
         score = score + 100;
 
     }
-
-    public int getY() {
-        return y;
+    
+    public int getX() {
+        return coordinates.getX();
     }
 
-    public int getX() {
-        return x;
+    public int getY() {
+        return coordinates.getY();
     }
 
     int getHealth() {
@@ -153,7 +158,7 @@ public class BasicPlayer {
     }
 
     public void locationRespawn() {
-        x = 400;
-        y = 460;
+        coordinates.setX(400);
+        coordinates.setY(460);
     }
 }
