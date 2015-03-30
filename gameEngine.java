@@ -25,13 +25,12 @@ public class gameEngine {
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // * Add game panels here *
-        mainMenu MainMenu = new mainMenu(370, 300);
-        GamePanel playScreen = new GamePanel();
+        mainMenu MainMenu ;
+        GamePanel playScreen;
         Winnerr win = new Winnerr();
 
         // Set screens background color
-        playScreen.setBackground(backgroundColor);
-        MainMenu.setBackground(Color.white);
+       
         win.setBackground(backgroundColor);
 
         // Initialise game state
@@ -42,6 +41,8 @@ public class gameEngine {
 
                 case 0: // Main Menu
                     // Add main menu to frame
+                    MainMenu = new mainMenu(370, 300);
+                    MainMenu.setBackground(Color.black);
                     gameWindow.add(MainMenu);
                     gameWindow.validate();
                     MainMenu.repaint();
@@ -56,27 +57,27 @@ public class gameEngine {
                     break;
 
                 case 1: // Play Screen
+                    playScreen   = new GamePanel();
+                    playScreen.setBackground(backgroundColor);
                     gameWindow.add(playScreen);
                     gameWindow.validate();
                     playScreen.requestFocus();
 
                     // Play screen loop
-                    while (!playScreen.winner() & !playScreen.looser()) {
+                    while (playScreen.getSelection() == 1 ) {
                         Thread.sleep(1);
                     }
-
                     // Removes playScreen
+                    game_state = playScreen.getSelection();
+                    playScreen.restart();
                     gameWindow.remove(playScreen);
-                    game_state = 2;
+                    
                     break;
 
                 case 2: // Win Screen
                     gameWindow.add(win);
                     gameWindow.validate();
-                    playScreen.requestFocus();
-                    playScreen.repaint();
-                    Thread.sleep(1000);
-                    playScreen.restart();
+                    Thread.sleep(5000);
                     gameWindow.remove(win);
                     game_state = 0;
                     break;

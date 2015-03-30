@@ -52,7 +52,7 @@ public class EnemyHandler {
                     enemyArray.get(temp).move(tempVector);
 
                     // Spawns enemy bullets
-                    int num = ran.nextInt(1000);
+                    int num = ran.nextInt(5000);
                     if (num<= 1){
                         bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY());
                     }

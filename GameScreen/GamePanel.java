@@ -14,38 +14,41 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel {
 
     JPanel temp_this = this;
+    int selection;
+    boolean pause = false;
     // Game Screen Entities
     EnemyHandler invaders = new EnemyHandler();
     BasicPlayer shooter = new BasicPlayer();
     // Game timer for repaint
     Timer paint_timer, player_timer, enemy_timer;
-    int paint_updateInterval = 1;
-    int player_updateInterval = 5;
-    int enemy_updateInterval = 10;
+    int paint_updateInterval = 300;
+    int player_updateInterval = 250;
+    int enemy_updateInterval = 100;
 
     // gameScreen Constructor
     public GamePanel() {
 
         // ActionListener for time, what happens when timer executes
-        this.paint_timer = new Timer(paint_updateInterval, (new ActionListener() {
+        this.paint_timer = new Timer(1000/paint_updateInterval, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 repaint();
+                checkCollision();
             }
         }));
 
-        this.player_timer = new Timer(player_updateInterval, (new ActionListener() {
+        this.player_timer = new Timer(1000/player_updateInterval, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 shooter.move(temp_this);
             }
         }));
 
-        this.enemy_timer = new Timer(enemy_updateInterval, (new ActionListener() {
+        this.enemy_timer = new Timer(1000/enemy_updateInterval, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invaders.moveArmy(temp_this);
-                checkCollision();
+                
             }
         }));
 
@@ -62,16 +65,29 @@ public class GamePanel extends JPanel {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if (!enemy_timer.isRunning()) {
+                
+                if ((!enemy_timer.isRunning()) & (pause == false)) {
                     if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                         enemy_timer.start();
                         player_timer.start();
                     }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_P) {
-                    enemy_timer.stop();
-                    player_timer.stop();
+                    if(pause == false){
+                        enemy_timer.stop();
+                        player_timer.stop();
+                        pause = true;
+                    }
+                    else{
+                        enemy_timer.start();
+                        player_timer.start();
+                        pause = false;
+                    }
                 }
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
+                    selection = 0;
+                }    
+                
                 if (e.getKeyCode() == KeyEvent.VK_R) {
                     restart();
                 }
@@ -81,6 +97,7 @@ public class GamePanel extends JPanel {
         this.setFocusable(true);
         this.requestFocus();
         paint_timer.start();
+        selection = 1;
     }
 
     @Override
@@ -116,6 +133,9 @@ public class GamePanel extends JPanel {
                     if (((badies.get(temp).getY() - 30) <= pewpew.get(temp2).getY()) & ((badies.get(temp).getY() + 30) >= (pewpew.get(temp2).getY() + 2))) {
                         invaders.hit(temp);
                         shooter.hit(temp2);
+                        if (invaders.getArmy().isEmpty()){
+                            selection = 2;
+                        }
                         temp -= 1;
                         temp2 -= 1;
                         if (temp == -1 | temp2 == -1) {
@@ -128,11 +148,16 @@ public class GamePanel extends JPanel {
         pewpew = invaders.getAmmo();
         int x = shooter.getX() + shooter.getWidth()/2;
         int y = shooter.getY() + shooter.getHeight()/2;
-        for (int k = 0; k != pewpew.size(); k++) {
+        
+        for (int k = 0; k < pewpew.size(); ++k) {
             if (((x - shooter.getWidth()/2) <= pewpew.get(k).getX()) & ((x + shooter.getWidth()/2) >= (pewpew.get(k).getX() + 2))) {
                 if ((y <= pewpew.get(k).getY()) & ((y + shooter.getHeight()/2) >= (pewpew.get(k).getY() + 2))) {
                     shooter.playerHit();
+                    if (shooter.getHealth() == 0){
+                        selection = 0;
+                    }
                     pewpew.remove(k);
+                    k--;
                 }
             }
         }
@@ -144,13 +169,8 @@ public class GamePanel extends JPanel {
         player_timer.stop();
         shooter.locationRespawn();
     }
-
-    // Checks if any enemys are left
-    public boolean winner() {
-        return invaders.getArmy().isEmpty();
-    }
-
-    public boolean looser() {
-        return (shooter.getHealth() == 0);
+    
+    public int getSelection(){
+        return selection;
     }
 }

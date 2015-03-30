@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package GameScreen;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class BasicPlayer {
@@ -41,7 +36,7 @@ public class BasicPlayer {
 
     public BasicPlayer(int width, int height) {
         // call main constructor with default values
-        this(new IntVector2D(400,460), width, height, 1000, Color.GREEN, 0, 30);
+        this(new IntVector2D(400,460), width, height, 1000, Color.GREEN, 0, 3);
     }
 
     public BasicPlayer(IntVector2D coordinates, int width, int height, int fireRate, Color color, int score, int health) {
