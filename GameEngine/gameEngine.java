@@ -29,10 +29,7 @@ public class gameEngine {
         // * Add game panels here *
         mainMenu MainMenu;
         GamePanel playScreen;
-        Winnerr win = new Winnerr();
-
-        // Set screens background color
-        win.setBackground(backgroundColor);
+        Winnerr win;
 
         // Initialise game state
         int game_state = 0;
@@ -74,6 +71,8 @@ public class gameEngine {
                     break;
 
                 case 2: // Win Screen
+                    win = new Winnerr();
+                    win.setBackground(backgroundColor);
                     gameWindow.add(win);
                     gameWindow.validate();
                     Thread.sleep(5000);
