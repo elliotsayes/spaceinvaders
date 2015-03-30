@@ -52,7 +52,7 @@ public class mainMenu extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Sends key position to be checked
-                applyClick(new IntVector2D(e.getX(), e.getY()));
+                actuateMouse(new IntVector2D(e.getX(),e.getY()),true);
             }
         });
         addMouseMotionListener(new MouseMotionListener() {
@@ -60,7 +60,7 @@ public class mainMenu extends JPanel {
             public void mouseDragged(MouseEvent e) {}
             @Override
             public void mouseMoved(MouseEvent e) {
-                applyCursor(new IntVector2D(e.getX(),e.getY()));
+                actuateMouse(new IntVector2D(e.getX(),e.getY()),false);
             }
         });
         this.paintTimer = new Timer(1000/paintUpdateRate, (new ActionListener() {
@@ -117,13 +117,13 @@ public class mainMenu extends JPanel {
         }
     }
     
-    public void applyCursor(IntVector2D mouseLocation) {
+    public void actuateMouse(IntVector2D mouseLocation, boolean clicked) {
         for(i=0;i<buttons.size();i++) {    
             if (    mouseLocation.getX() >= buttons.get(i).boxCoordinates.getX()
                  && mouseLocation.getX() <= (buttons.get(i).boxCoordinates.getX() + buttons.get(i).buttonSize.getX()) 
                  && mouseLocation.getY() >= buttons.get(i).boxCoordinates.getY()
                  && mouseLocation.getY() <= (buttons.get(i).boxCoordinates.getY() + buttons.get(i).buttonSize.getY())) {
-                hoverSelection = i;
+                if(clicked){selection = buttons.get(i).selection;} else {hoverSelection = i;}
             }
         }
     }
