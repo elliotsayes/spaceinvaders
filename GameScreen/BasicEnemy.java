@@ -1,6 +1,7 @@
 package GameScreen;
 
 // Basic enemy class, can be extended for different enemy types
+import GameEngine.IntVector2D;
 import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 
