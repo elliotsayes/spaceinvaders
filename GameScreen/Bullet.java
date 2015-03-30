@@ -1,6 +1,6 @@
 package GameScreen;
 
-import GameScreen.IntVector2D;
+import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import javax.swing.Timer;

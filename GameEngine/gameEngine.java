@@ -1,4 +1,4 @@
-//package pew;
+package GameEngine;
 
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -41,7 +41,7 @@ public class gameEngine {
 
                 case 0: // Main Menu
                     // Add main menu to frame
-                    MainMenu = new mainMenu(370, 300);
+                    MainMenu = new mainMenu();
                     MainMenu.setBackground(Color.black);
                     gameWindow.add(MainMenu);
                     gameWindow.validate();

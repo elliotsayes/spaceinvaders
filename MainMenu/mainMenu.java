@@ -3,36 +3,35 @@
  */
 package MainMenu;
 
+import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class mainMenu extends JPanel {
 
     int PLAY_X_START = 300, PLAY_X_END = 500, PLAY_Y_START = 250, PLAY_Y_END = 350;
-    String Message = "START";
-    int selection = 0;
-    JButton start;
+
     
+    IntVector2D playBoxCoordinates = new IntVector2D(300, 250), playTextOffset = new IntVector2D(70, 50), playButtonSize = new IntVector2D(200, 100);
+    String playMessage = "START";
+    
+    
+    int selection = 0;
+
     //text position
     int x;
     int y;
-    
+
     ImageIcon pic = new ImageIcon(getClass().getResource("loading.gif"));
     JLabel label = new JLabel(pic, JLabel.CENTER);
 
-    public mainMenu(int x, int y) {
-        
-        start = new JButton(Message);
-        
+    public mainMenu() {
         // Adds mouse listener and overides methods
         addMouseListener(new MouseListener() {
 
@@ -61,23 +60,8 @@ public class mainMenu extends JPanel {
                 update(e.getX(), e.getY());
             }
         });
-        this.x = x;
-        this.y = y;
-        //this.add(label);
-        //label.setVerticalAlignment(JLabel.BOTTOM);
-        start.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                selection = 1;
-               
-            }
-        });
-        //start.setLayout(null);
-        //this.setLayout(null);
-        this.add(start);
-        start.setLocation(400, 300);
-        
-        
+        this.add(label);
+        label.setVerticalAlignment(JLabel.BOTTOM);
     }
 
     // Overrides paint method of JPanel, this will control look of panel. Called by repaint method
@@ -90,7 +74,7 @@ public class mainMenu extends JPanel {
         // Text color
         window.setColor(Color.black);
         // Main menu message
-        //window.drawString(Message, x, y);
+        window.drawString(playMessage, x, y);
 
     }
 
