@@ -7,25 +7,29 @@ import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class mainMenu extends JPanel {   
+    final int paintUpdateRate = 1;
+    Timer paintTimer;
+    
     IntVector2D menuSize;
-    
-    String playText;
-    IntVector2D playBoxCoordinates, playTextOffset, playButtonSize;
-    
-    String exitText;
-    IntVector2D exitBoxCoordinates, exitTextOffset, exitButtonSize;
-    
+    ArrayList<Button> buttons;
+    Button tempButton;
     
     int selection = 0, hoverSelection = 0;
-
+    
+    int i;
+    
     ImageIcon pic = new ImageIcon(getClass().getResource("loading.gif"));
     JLabel label = new JLabel(pic, JLabel.CENTER);
 
@@ -48,7 +52,7 @@ public class mainMenu extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Sends key position to be checked
-                applyClick(e.getX(), e.getY());
+                applyClick(new IntVector2D(e.getX(), e.getY()));
             }
         });
         addMouseMotionListener(new MouseMotionListener() {
@@ -59,16 +63,18 @@ public class mainMenu extends JPanel {
                 applyCursor(new IntVector2D(e.getX(),e.getY()));
             }
         });
-        
+        this.paintTimer = new Timer(1000/paintUpdateRate, (new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                repaint();
+            }
+        }));
         menuSize = windowSize;
         
-        // set up buttons
-        playText = "START";
-        playBoxCoordinates = new IntVector2D(300, 250); playTextOffset = new IntVector2D(70, 50); playButtonSize = new IntVector2D(200, 100);
-        
-        exitText = "Exit";
-        exitBoxCoordinates = new IntVector2D(300, 350); exitTextOffset = new IntVector2D(70, 50); exitButtonSize = new IntVector2D(200, 100);
-        
+        buttons = new ArrayList<>();
+        buttons.add(new Button("START", new IntVector2D(300, 250), new IntVector2D(70, 50), new IntVector2D(175, 100),  1));
+        buttons.add(new Button("Exit" , new IntVector2D(300, 350), new IntVector2D(75, 50), new IntVector2D(175, 100), -1));
+                
         // set up background image
         this.add(label);
         label.setVerticalAlignment(JLabel.BOTTOM);
@@ -82,30 +88,43 @@ public class mainMenu extends JPanel {
         
         Graphics2D window = (Graphics2D) win;
         // Text color
-        window.setColor(Color.black);
+        
+        
         // Main menu message
-        window.drawString(playText, 
-                playBoxCoordinates.getX()+playTextOffset.getX(), // x coordinate of text
-                playBoxCoordinates.getY()+playTextOffset.getY());// y coordinate of text
-        window.drawString(exitText, 
-                exitBoxCoordinates.getX()+exitTextOffset.getX(), // x coordinate of text
-                exitBoxCoordinates.getY()+exitTextOffset.getY());// y coordinate of text
-
+        window.setColor(Color.red);
+        window.fillRect(buttons.get(hoverSelection).boxCoordinates.getX(), 
+                        buttons.get(hoverSelection).boxCoordinates.getY(), 
+                        buttons.get(hoverSelection).buttonSize.getX(), 
+                        buttons.get(hoverSelection).buttonSize.getY());
+        
+        for(i=0;i<buttons.size();i++) {
+            //draw button
+            window.setColor(Color.black);
+            window.drawString(buttons.get(i).buttonText, 
+                    buttons.get(i).boxCoordinates.getX()+buttons.get(i).textOffset.getX(), // x coordinate of text
+                    buttons.get(i).boxCoordinates.getY()+buttons.get(i).textOffset.getY());// y coordinate of text
+        }
     }
 
-    public void applyClick(int x, int y) {
-        if (x >= playBoxCoordinates.getX() && x <= (playBoxCoordinates.getX() + playButtonSize.getX()) && y >= playBoxCoordinates.getY() && y <= (playBoxCoordinates.getY() + playButtonSize.getY())) {
-            selection = 1;
-        }else if (x >= exitBoxCoordinates.getX() && x <= (exitBoxCoordinates.getX() + exitButtonSize.getX()) && y >= exitBoxCoordinates.getY() && y <= (exitBoxCoordinates.getY() + exitButtonSize.getY())) {
-            selection = -1;
+    public void applyClick(IntVector2D clickLocation) {
+        for(i=0;i<buttons.size();i++) {
+            if (    clickLocation.getX() >= buttons.get(i).boxCoordinates.getX()
+                 && clickLocation.getX() <= (buttons.get(i).boxCoordinates.getX() + buttons.get(i).buttonSize.getX()) 
+                 && clickLocation.getY() >= buttons.get(i).boxCoordinates.getY() 
+                 && clickLocation.getY() <= (buttons.get(i).boxCoordinates.getY() + buttons.get(i).buttonSize.getY())) {
+                    selection = buttons.get(i).selection;
+            }
         }
     }
     
     public void applyCursor(IntVector2D mouseLocation) {
-        if (mouseLocation.getX() >= playBoxCoordinates.getX() && mouseLocation.getX() <= (playBoxCoordinates.getX() + playButtonSize.getX()) && mouseLocation.getY() >= playBoxCoordinates.getY() && mouseLocation.getY() <= (playBoxCoordinates.getY() + playButtonSize.getY())) {
-            selection = 1;
-        }else if (mouseLocation.getX() >= exitBoxCoordinates.getX() && mouseLocation.getX() <= (exitBoxCoordinates.getX() + exitButtonSize.getX()) && mouseLocation.getY() >= exitBoxCoordinates.getY() && mouseLocation.getY() <= (exitBoxCoordinates.getY() + exitButtonSize.getY())) {
-            selection = -1;
+        for(i=0;i<buttons.size();i++) {    
+            if (    mouseLocation.getX() >= buttons.get(i).boxCoordinates.getX()
+                 && mouseLocation.getX() <= (buttons.get(i).boxCoordinates.getX() + buttons.get(i).buttonSize.getX()) 
+                 && mouseLocation.getY() >= buttons.get(i).boxCoordinates.getY()
+                 && mouseLocation.getY() <= (buttons.get(i).boxCoordinates.getY() + buttons.get(i).buttonSize.getY())) {
+                hoverSelection = i;
+            }
         }
     }
     
