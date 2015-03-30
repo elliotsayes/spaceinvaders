@@ -36,7 +36,7 @@ public class BasicPlayer {
 
     public BasicPlayer(int width, int height) {
         // call main constructor with default values
-        this(new IntVector2D(400,460), width, height, 1000, Color.GREEN, 0, 3);
+        this(new IntVector2D(370,500), width, height, 1000, Color.GREEN, 0, 3);
     }
 
     public BasicPlayer(IntVector2D coordinates, int width, int height, int fireRate, Color color, int score, int health) {
@@ -153,7 +153,6 @@ public class BasicPlayer {
     }
 
     public void locationRespawn() {
-        coordinates.setX(400);
-        coordinates.setY(460);
+        coordinates.setXandY(370, 500);
     }
 }
