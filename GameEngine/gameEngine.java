@@ -11,38 +11,37 @@ import killscreen.Winnerr;
  * Controls JFrame
  */
 public class gameEngine {
-    
+
     // Config
     private static final String windowTitle = "*PewPew*";
     private static final Color backgroundColor = Color.BLACK;
+    private static final IntVector2D windowSize = new IntVector2D(800, //window width
+            600);//window height
 
     public static void main(String[] args) throws InterruptedException {
 
         // Creating Game Window, JFrame
         JFrame gameWindow = new JFrame(windowTitle);
-        gameWindow.setSize(800, 600);
+        gameWindow.setSize(windowSize.getX(), windowSize.getY());
         gameWindow.setVisible(true);
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // * Add game panels here *
-        mainMenu MainMenu ;
+        mainMenu MainMenu;
         GamePanel playScreen;
         Winnerr win = new Winnerr();
 
         // Set screens background color
-       
         win.setBackground(backgroundColor);
 
         // Initialise game state
         int game_state = 0;
         while (game_state != -1) {
-
             switch (game_state) {
-
                 case 0: // Main Menu
                     // Add main menu to frame
-                    MainMenu = new mainMenu();
-                    MainMenu.setBackground(Color.black);
+                    MainMenu = new mainMenu(new IntVector2D(windowSize.getX(), windowSize.getY()));
+                    MainMenu.setBackground(Color.white);
                     gameWindow.add(MainMenu);
                     gameWindow.validate();
                     MainMenu.repaint();
@@ -57,21 +56,21 @@ public class gameEngine {
                     break;
 
                 case 1: // Play Screen
-                    playScreen   = new GamePanel();
+                    playScreen = new GamePanel();
                     playScreen.setBackground(backgroundColor);
                     gameWindow.add(playScreen);
                     gameWindow.validate();
                     playScreen.requestFocus();
 
                     // Play screen loop
-                    while (playScreen.getSelection() == 1 ) {
+                    while (playScreen.getSelection() == 1) {
                         Thread.sleep(1);
                     }
                     // Removes playScreen
                     game_state = playScreen.getSelection();
                     playScreen.restart();
                     gameWindow.remove(playScreen);
-                    
+
                     break;
 
                 case 2: // Win Screen
@@ -83,5 +82,6 @@ public class gameEngine {
                     break;
             }
         }
+        gameWindow.dispose();
     }
 }
