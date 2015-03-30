@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -23,7 +24,7 @@ public class mainMenu extends JPanel {
     IntVector2D exitBoxCoordinates, exitTextOffset, exitButtonSize;
     
     
-    int selection = 0;
+    int selection = 0, hoverSelection = 0;
 
     ImageIcon pic = new ImageIcon(getClass().getResource("loading.gif"));
     JLabel label = new JLabel(pic, JLabel.CENTER);
@@ -33,28 +34,29 @@ public class mainMenu extends JPanel {
         addMouseListener(new MouseListener() {
 
             @Override
-            public void mouseExited(MouseEvent e) {
-            }
+            public void mouseExited(MouseEvent e) {}
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
+            public void mouseReleased(MouseEvent e) {}
 
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
+            public void mousePressed(MouseEvent e) {}
 
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
+            public void mouseEntered(MouseEvent e) {}
 
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Sends key position to be checked
-                getClick(e.getX(), e.getY());
+                applyClick(e.getX(), e.getY());
+            }
+        });
+        addMouseMotionListener(new MouseMotionListener() {
+            @Override 
+            public void mouseDragged(MouseEvent e) {}
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                applyCursor(new IntVector2D(e.getX(),e.getY()));
             }
         });
         
@@ -91,14 +93,22 @@ public class mainMenu extends JPanel {
 
     }
 
-    public void getClick(int x, int y) {
+    public void applyClick(int x, int y) {
         if (x >= playBoxCoordinates.getX() && x <= (playBoxCoordinates.getX() + playButtonSize.getX()) && y >= playBoxCoordinates.getY() && y <= (playBoxCoordinates.getY() + playButtonSize.getY())) {
             selection = 1;
         }else if (x >= exitBoxCoordinates.getX() && x <= (exitBoxCoordinates.getX() + exitButtonSize.getX()) && y >= exitBoxCoordinates.getY() && y <= (exitBoxCoordinates.getY() + exitButtonSize.getY())) {
             selection = -1;
         }
     }
-
+    
+    public void applyCursor(IntVector2D mouseLocation) {
+        if (mouseLocation.getX() >= playBoxCoordinates.getX() && mouseLocation.getX() <= (playBoxCoordinates.getX() + playButtonSize.getX()) && mouseLocation.getY() >= playBoxCoordinates.getY() && mouseLocation.getY() <= (playBoxCoordinates.getY() + playButtonSize.getY())) {
+            selection = 1;
+        }else if (mouseLocation.getX() >= exitBoxCoordinates.getX() && mouseLocation.getX() <= (exitBoxCoordinates.getX() + exitButtonSize.getX()) && mouseLocation.getY() >= exitBoxCoordinates.getY() && mouseLocation.getY() <= (exitBoxCoordinates.getY() + exitButtonSize.getY())) {
+            selection = -1;
+        }
+    }
+    
     public int getSelection() {
         return selection;
     }
