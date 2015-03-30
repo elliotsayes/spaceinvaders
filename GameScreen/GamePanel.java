@@ -67,10 +67,11 @@ public class GamePanel extends JPanel {
             public void keyPressed(KeyEvent e) {
                 
                 if (pause == false) {
-                    shooter.keyPressed(e);
                     if (!(enemy_timer.isRunning()) && e.getKeyCode() == KeyEvent.VK_SPACE) {
                         enemy_timer.start();
                         player_timer.start();
+                    } else {
+                        shooter.keyPressed(e);
                     }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_P) {
