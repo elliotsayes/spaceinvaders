@@ -93,6 +93,12 @@ public class GamePanel extends JPanel {
                 if (e.getKeyCode() == KeyEvent.VK_R) {
                     restart();
                 }
+                if (e.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+                    selection = 2;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
+                    selection = 2;
+                }
                 
             }
         });

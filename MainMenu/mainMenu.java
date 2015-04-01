@@ -98,11 +98,7 @@ public class mainMenu extends JPanel {
                         buttons.get(hoverSelection).buttonSize.getY());
         
         for(i=0;i<buttons.size();i++) {
-            //draw button
-            window.setColor(Color.black);
-            window.drawString(buttons.get(i).buttonText, 
-                    buttons.get(i).boxCoordinates.getX()+buttons.get(i).textOffset.getX(), // x coordinate of text
-                    buttons.get(i).boxCoordinates.getY()+buttons.get(i).textOffset.getY());// y coordinate of text
+            buttons.get(i).paint(window);
         }
     }
 

@@ -6,6 +6,8 @@
 package MainMenu;
 
 import GameEngine.IntVector2D;
+import java.awt.Color;
+import java.awt.Graphics2D;
 
 /**
  *
@@ -22,5 +24,13 @@ public class Button {
         this.textOffset = textOffset;
         this.buttonSize = buttonSize;
         this.selection = selection;
+    }
+    
+    public void paint(Graphics2D window){
+        //draw button
+            window.setColor(Color.black);
+            window.drawString(buttonText, 
+                boxCoordinates.getX()+textOffset.getX(), // x coordinate of text
+                boxCoordinates.getY()+textOffset.getY());// y coordinate of text
     }
 }
