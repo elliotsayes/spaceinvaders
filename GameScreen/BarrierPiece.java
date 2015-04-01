@@ -4,6 +4,7 @@ components making up one barrier.
  */
 package GameScreen;
 
+import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -13,16 +14,14 @@ import java.awt.Graphics2D;
  */
 public class BarrierPiece {
     
-    int size = 4;//size of each barrier component 
+    int size = 2;//size of each barrier component 
     int health = 1;
-    int x,y; 
-    
+    IntVector2D coordinates;
     
     
 //Calling a constructor with default values
-    BarrierPiece(int u, int v) {
-     x = u;
-     y = v;
+    BarrierPiece(IntVector2D coordinates) {
+        this.coordinates = coordinates;
        
     }
 //Calling a constructor
@@ -36,7 +35,7 @@ public class BarrierPiece {
    
    public void piecePaint (Graphics2D barrier){
         barrier.setColor(Color.GREEN);
-        barrier.fill3DRect(x, y, size, size, true);
+        barrier.fill3DRect(coordinates.getX(), coordinates.getY(), size, size, true);
     }
     
   
@@ -48,35 +47,16 @@ public class BarrierPiece {
         }
         return (false);
     }
-    
-    public int getHealth(){
+
+    public int getHealth() {
         return health;
     }
+
+    public IntVector2D getCoordinates() {
+        return coordinates;
+    }
     
-    public int getY(){
-        return y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
+   
     public void setHealth(int health) {
         this.health = health;
     }

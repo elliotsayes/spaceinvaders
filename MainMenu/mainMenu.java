@@ -91,7 +91,7 @@ public class mainMenu extends JPanel {
         
         
         // Main menu message
-        window.setColor(Color.red);
+        window.setColor(Color.cyan);
         window.fillRect(buttons.get(hoverSelection).boxCoordinates.getX(), 
                         buttons.get(hoverSelection).boxCoordinates.getY(), 
                         buttons.get(hoverSelection).buttonSize.getX(), 
