@@ -19,6 +19,7 @@ public class GamePanel extends JPanel {
     // Game Screen Entities
     EnemyHandler invaders = new EnemyHandler();
     BasicPlayer shooter = new BasicPlayer();
+    BarrierHandler barriers = new BarrierHandler();
     // Game timer for repaint
     Timer paint_timer, player_timer, enemy_timer;
     int paint_updateInterval = 300;
@@ -116,6 +117,7 @@ public class GamePanel extends JPanel {
         window.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         invaders.paint(window);
         shooter.paint(window);
+        barriers.piecePaint(window);
     }
 
     // Moves Entities and passes panel information
