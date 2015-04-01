@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class BarrierHandler {
    ArrayList<Barrier> arrayOfBarriers = new ArrayList();
-   IntVector2D coordinates; 
+   //IntVector2D coordinates; 
    
 
     BarrierHandler() {
