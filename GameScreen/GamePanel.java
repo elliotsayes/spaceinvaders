@@ -170,7 +170,26 @@ public class GamePanel extends JPanel {
                     k--;
                 }
             }
-        }
+        }   
+       for (int j = 0; j < pewpew.size(); j++){
+           for (int b = 0; b < barriers.getArraySize() ; b++ ){
+               if( ((pewpew.get(j).getX() <= barriers.getbarriercoordinates(b).getX() + barriers.getBarrierSize(b).getX()) && pewpew.get(j).getX() >= barriers.getbarriercoordinates(b).getX() ) 
+                       && ((pewpew.get(j).getY() <= barriers.getbarriercoordinates(b).getY() + barriers.getBarrierSize(b).getY()) && pewpew.get(j).getY() >= barriers.getbarriercoordinates(b).getY())){
+                   for (int h = 0 ; h < barriers.getPieceArraySize(b); h++){
+                       if( ((pewpew.get(j).getX() <= (barriers.getPiececoordinates(b, h).getX() + 2)) && pewpew.get(j).getX() >= barriers.getPiececoordinates(b, h).getX() ) 
+                               && ( pewpew.get(j).getY() <= barriers.getPiececoordinates(b, h).getY() + 2) && pewpew.get(j).getY() >= barriers.getPiececoordinates(b, h).getY()){
+                           pewpew.remove(j);
+                           barriers.pieceRemove(b, h);
+                           
+                       }
+                       
+                   }
+               }
+                   
+                   
+           }
+       }
+        
     }
 
     public void restart() {
