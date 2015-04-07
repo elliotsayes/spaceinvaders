@@ -14,7 +14,7 @@ public class EnemyHandler {
         int enemyArraySize = 15;
         int fireDelay = 5;
         ArrayList<BasicEnemy> enemyArray;
-        BulletHandler bullets = new BulletHandler(1 , fireDelay);
+        //BulletHandler bullets = new BulletHandler(1 , fireDelay);
         Random ran = new Random();
         
         // EnemyHandler Constructor initialises array setting enemy types and layout 
@@ -35,7 +35,7 @@ public class EnemyHandler {
         }
         
         // Updates enemy position, controls movement pattern
-	void moveArmy(JPanel win) {
+	void moveArmy(JPanel win, BulletHandler bullets) {
                 int y = 0;
                 int sze = enemyArray.size() - 1;
                 // Checks there are enemys and then updates there postion
@@ -55,10 +55,11 @@ public class EnemyHandler {
                     // Spawns enemy bullets
                     int num = ran.nextInt(5000);
                     if (num<= 1){
-                        bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY());
+                        bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1);
                     }
                 }
-            bullets.move();    
+            //bullets.move();
+            //bullets.kill();
 	}
         
         // Calls paint method for each enemy
@@ -66,7 +67,7 @@ public class EnemyHandler {
              for(int temp = 0;temp!=enemyArray.size();temp++){
                     enemyArray.get(temp).paint(win);
             }
-            bullets.paint(win);
+            //bullets.paint(win);
         }
         
         // Returns enemy array
@@ -74,9 +75,9 @@ public class EnemyHandler {
             return enemyArray;
         }
         
-         public ArrayList<Bullet> getAmmo(){
-            return bullets.getbullets();
-        }
+        //public ArrayList<Bullet> getAmmo(){
+        //    return bullets.getbullets();
+        //}
         
         // Hits the enemy then checks for life..
         void hit(int temp) {

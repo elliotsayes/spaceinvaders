@@ -51,4 +51,6 @@ public class Bullet {
         win.fillOval(coordinates.getX(), coordinates.getY(), size, size);
         // Main menu message
     }
+    
+    
 }

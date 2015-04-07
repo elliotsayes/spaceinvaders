@@ -10,12 +10,19 @@ public class BulletHandler {
 
     ArrayList<Bullet> bullets;
     boolean can_shoot = true;
-    Timer fire_timer;
-    int direction;/* -1 for up 1 for down */
+    Timer fire_timer, velocity_timer;
+    int velocity = 300;
 
     // Constructor initialises array of bullets
-    public BulletHandler(int dist, int fire_rate) {
+    public BulletHandler( int fire_rate) {
         bullets = new ArrayList<>();
+        this.velocity_timer = new Timer(1000/velocity, (new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move();
+                kill();
+            }
+        }));
         this.fire_timer = new Timer(fire_rate, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -23,11 +30,10 @@ public class BulletHandler {
                 fire_timer.stop();
             }
         }));
-        direction = dist;
     }
 
     // Adds bullet and (x,y) 
-    public void spawnMissile(int x, int y) {
+    public void spawnMissile(int x, int y, int direction) {
         if (can_shoot) {
             bullets.add(new Bullet(x, y, direction));
             can_shoot = false;
@@ -64,8 +70,12 @@ public class BulletHandler {
 
     // Removes bullets if they hit top of screen, *******could be moved to collision detection*******
     public void kill() {
-        for (int temp = 0; temp != bullets.size(); temp++) {
-            if (bullets.get(temp).getY() == 0) {
+        int boundry;
+        // These values shouldnt be hard coded, temporary
+        for (int temp = 0; temp < bullets.size(); temp++) {
+            //Checks bullet direction
+            if (bullets.get(temp).velocity.getY() > 0){ boundry = 600;}else{ boundry = 0;}
+            if (bullets.get(temp).getY() == boundry) {
                 bullets.remove(temp);
             }
             if (bullets.isEmpty()) {
@@ -77,6 +87,14 @@ public class BulletHandler {
     // Removes bullet from screen and index i
     void remove(int i) {
         bullets.remove(i);
+    }
+    
+    void stop(){
+        velocity_timer.stop();
+    }
+    
+    void start(){
+        velocity_timer.start();
     }
 
 }
