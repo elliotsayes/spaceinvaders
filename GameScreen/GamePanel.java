@@ -145,7 +145,7 @@ public class GamePanel extends JPanel {
                     bullets.getbullets().remove(i);
                     shooter.playerHit();
                     // Changes selection to lose state
-                    if(shooter.getHealth() == 0){selection = 2;}
+                    if(shooter.getHealth() == 0){selection = 3;}
                     System.out.print("DEBUG - 3 \n");
                 }
             }else{

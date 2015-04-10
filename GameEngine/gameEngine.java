@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import MainMenu.mainMenu;
 import GameScreen.GamePanel;
+import killscreen.Loser;
 import killscreen.Winnerr;
 
 /*
@@ -30,8 +31,9 @@ public class gameEngine {
         mainMenu MainMenu;
         GamePanel playScreen;
         Winnerr win;
+        Loser loseWin;
         AudioHandler music = new AudioHandler() ;
-        music.add("battle.mid","battleMusic");
+        music.add("battle_2.mid","battleMusic");
         music.add("TitleScreen.mid","intro");
         music.add("win.mid","win");
         // Initialise game state
@@ -40,12 +42,12 @@ public class gameEngine {
             switch (game_state) {
                 case 0: // Main Menu
                     // Add main menu to frame
+                    music.play("intro");
                     MainMenu = new mainMenu(new IntVector2D(windowSize.getX(), windowSize.getY()));
                     MainMenu.setBackground(Color.white);
                     gameWindow.add(MainMenu);
                     gameWindow.validate();
                     MainMenu.repaint();
-                    music.play("intro");
                     // MainMenu loop Waits for a getSelection to be made
                     while (MainMenu.getSelection() == 0) {
                         Thread.sleep(1);
@@ -84,6 +86,18 @@ public class gameEngine {
                     gameWindow.validate();
                     Thread.sleep(5000);
                     gameWindow.remove(win);
+                    music.stop("win");
+                    game_state = 0;
+                    break;
+                    
+                case 3: // Lose Screen
+                    music.play("win");
+                    loseWin = new Loser();
+                    loseWin.setBackground(backgroundColor);
+                    gameWindow.add(loseWin);
+                    gameWindow.validate();
+                    Thread.sleep(5000);
+                    gameWindow.remove(loseWin);
                     music.stop("win");
                     game_state = 0;
                     break;
