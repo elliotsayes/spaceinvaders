@@ -20,7 +20,6 @@ public class EnemyHandler {
         
         // EnemyHandler Constructor initialises array setting enemy types and layout 
         public EnemyHandler(){
-            
              // Initialises enemys
             enemyArray = new ArrayList<>();
             int x = 20;
@@ -35,6 +34,7 @@ public class EnemyHandler {
             }
             
         }
+        
         
         // Updates enemy position, controls movement pattern
 	void moveArmy(JPanel win, BulletHandler bullets) {
@@ -59,9 +59,13 @@ public class EnemyHandler {
                     enemyArray.get(temp).move(tempVector);
 
                     // Spawns enemy bullets
-                    int num = ran.nextInt(5000);
-                    if (num<= 1){
+                    int num = ran.nextInt(50000);
+                    if (num<= 10){
                         bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1);
+                    }
+                    // Temp way to add different bullet types
+                    if (num<= 5){
+                        bullets.bullets.add(new PowerUp(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1));
                     }
                 }
             //bullets.move();

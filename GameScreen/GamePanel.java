@@ -1,6 +1,7 @@
 package GameScreen;
 
 import GameEngine.AudioHandler;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -16,13 +17,13 @@ public class GamePanel extends JPanel {
 
     JPanel temp_this = this;
     int selection;
-    int fire_rate = 20;
+    int velocity = 300;
     boolean pause = false;
     // Game Screen Entities
     EnemyHandler invaders = new EnemyHandler();
     BasicPlayer shooter = new BasicPlayer();
     BarrierHandler barriers = new BarrierHandler();
-    BulletHandler bullets = new BulletHandler(fire_rate);
+    BulletHandler bullets = new BulletHandler(velocity);
     // Game timer for repaint
     Timer paint_timer, player_timer, enemy_timer;
     int paint_updateInterval = 300;
@@ -142,6 +143,9 @@ public class GamePanel extends JPanel {
                 bullets.getbullets().remove(i);
             }else if(bullets.getbullets().get(i).velocity.getY() > 0){
                 if(hitBox(shooter.getX(),shooter.getY(),shooter.width,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY())){
+                    if(bullets.getbullets().get(i).color == Color.BLUE){
+                        bullets.getbullets().get(i).upgrade(this);
+                    }
                     bullets.getbullets().remove(i);
                     shooter.playerHit();
                     // Changes selection to lose state
@@ -165,7 +169,9 @@ public class GamePanel extends JPanel {
    
 
     public void restart() {
+        velocity += 100;
         invaders = new EnemyHandler();
+        bullets = new BulletHandler(velocity);
         enemy_timer.stop();
         player_timer.stop();
         shooter.locationRespawn();

@@ -11,10 +11,9 @@ public class BulletHandler {
     ArrayList<Bullet> bullets;
     boolean can_shoot = true;
     Timer velocity_timer;
-    int velocity = 300;
 
     // Constructor initialises array of bullets
-    public BulletHandler( int fire_rate) {
+    public BulletHandler( int velocity) {
         bullets = new ArrayList<>();
         this.velocity_timer = new Timer(1000/velocity, (new ActionListener() {
             @Override

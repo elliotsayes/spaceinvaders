@@ -12,10 +12,6 @@ public class Bullet {
     int size;// = 3;
     IntVector2D coordinates, velocity;
     AudioPlayer fire_sound = new AudioPlayer("shoot.wav","shoot");
-    
-    // unused 
-    int x;
-    int y;
 
     // Creates bullet at (x,y) with direction
     public Bullet(int x, int y, int verticalVelocity) {
@@ -49,10 +45,12 @@ public class Bullet {
 
     // Controls what bulllets look like
     public void paint(Graphics2D win) {
-
         win.setColor(color);
         win.fillOval(coordinates.getX(), coordinates.getY(), size, size);
         // Main menu message
+    }
+    
+    public void upgrade(GamePanel g){
     }
     
     
