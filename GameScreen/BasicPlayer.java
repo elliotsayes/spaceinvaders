@@ -1,6 +1,7 @@
 
 package GameScreen;
 
+import GameEngine.AudioHandler;
 import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -31,6 +32,8 @@ public class BasicPlayer {
     Timer fire_timer;
     int fire_rate = 5;
     boolean can_shoot = true;
+    //Entite Audio Handler
+    AudioHandler soundEffects = new AudioHandler();
     // Unused
     //int xa;
     //ImageIcon image;
@@ -46,6 +49,7 @@ public class BasicPlayer {
     }
 
     public BasicPlayer(IntVector2D coordinates, int width, int height, int fireRate, Color color, int score, int health) {
+        soundEffects.add("BananaSlap.wav","hit");
         this.coordinates = coordinates;
         this.height = height;
         this.width = width;
@@ -168,6 +172,7 @@ public class BasicPlayer {
 
     void playerHit() {
         health -= 1;
+        soundEffects.play("hit");
         locationRespawn();
     }
 

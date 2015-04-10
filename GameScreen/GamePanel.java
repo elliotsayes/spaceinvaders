@@ -1,5 +1,6 @@
 package GameScreen;
 
+import GameEngine.AudioHandler;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -27,10 +28,11 @@ public class GamePanel extends JPanel {
     int paint_updateInterval = 300;
     int player_updateInterval = 250;
     int enemy_updateInterval = 100;
-
+    
+    
+    
     // gameScreen Constructor
     public GamePanel() {
-
         // ActionListener for time, what happens when timer executes
         this.paint_timer = new Timer(1000/paint_updateInterval, (new ActionListener() {
             @Override

@@ -1,5 +1,6 @@
 package GameScreen;
 
+import GameEngine.AudioPlayer;
 import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -10,6 +11,7 @@ public class Bullet {
     Color color;// = Color.red;
     int size;// = 3;
     IntVector2D coordinates, velocity;
+    AudioPlayer fire_sound = new AudioPlayer("shoot.wav","shoot");
     
     // unused 
     int x;
@@ -27,6 +29,7 @@ public class Bullet {
         this.velocity = new IntVector2D(0,verticalVelocity);
         this.color = color;
         this.size = size;
+        fire_sound.playSound();
     }
 
     // moves bullet, controls movement pattern 
