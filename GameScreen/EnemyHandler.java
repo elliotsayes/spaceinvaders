@@ -13,6 +13,7 @@ public class EnemyHandler {
         int movePos = 1;
         int enemyArraySize = 15;
         int fireDelay = 5;
+        int horizontalDirection = 10;
         ArrayList<BasicEnemy> enemyArray;
         //BulletHandler bullets = new BulletHandler(1 , fireDelay);
         Random ran = new Random();
@@ -23,7 +24,7 @@ public class EnemyHandler {
              // Initialises enemys
             enemyArray = new ArrayList<>();
             int x = 20;
-            int y = 20;
+            int y = 30;
             for(int temp1 = 0;temp1!=3;temp1++){
                 for(int temp = 0;temp!=enemyArraySize;temp++){
                 enemyArray.add(new BasicEnemy(x,y));
@@ -32,24 +33,29 @@ public class EnemyHandler {
             y += 60;
             x = 20;
             }
+            
         }
         
         // Updates enemy position, controls movement pattern
 	void moveArmy(JPanel win, BulletHandler bullets) {
-                int y = 0;
                 int sze = enemyArray.size() - 1;
+                int shift = 0;
                 // Checks there are enemys and then updates there postion
                 //if (sze == 0){return;}
                 // Checks if they have reached end of screen and inverses movement direction
                 for(int temp1 = 0;temp1 <= sze;temp1++){
+                if(((enemyArray.get(temp1).getY() > win.getHeight() - 30)& horizontalDirection == 10) | ((enemyArray.get(temp1).getY() < 20)& horizontalDirection == -10) ){
+                    horizontalDirection = horizontalDirection * -1;
+                }
                 if ((enemyArray.get(temp1).getX() == win.getWidth() - 30) | (enemyArray.get(temp1).getX() == 0)) {
                     movePos = movePos * -1;
-                    y = 10;
                     temp1 = sze + 1;
-                } 
+                    shift = horizontalDirection;
+                }
+                
                 }
                 for(int temp = 0;temp!=enemyArray.size();temp++){
-                    IntVector2D tempVector = new IntVector2D(movePos, y);
+                    IntVector2D tempVector = new IntVector2D(movePos, shift);
                     enemyArray.get(temp).move(tempVector);
 
                     // Spawns enemy bullets

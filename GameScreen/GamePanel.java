@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
     Timer paint_timer, player_timer, enemy_timer;
     int paint_updateInterval = 300;
     int player_updateInterval = 250;
-    int enemy_updateInterval = 100;
+    int enemy_updateInterval = 200;
     
     
     
@@ -105,7 +105,7 @@ public class GamePanel extends JPanel {
                     selection = 2;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-                    selection = 2;
+                    selection = 3;
                 }
                 
             }
