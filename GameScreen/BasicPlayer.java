@@ -4,9 +4,12 @@ package GameScreen;
 import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class BasicPlayer {
 
@@ -20,12 +23,14 @@ public class BasicPlayer {
     int height;
 
     int fireRate;
-    boolean move_left, move_right;
+    boolean move_left, move_right, shoot;
     Color color;
     int score;
     int health;
     BulletHandler bullets;// = new BulletHandler(-1, fireRate);
-
+    Timer fire_timer;
+    int fire_rate = 5;
+    boolean can_shoot = true;
     // Unused
     //int xa;
     //ImageIcon image;
@@ -48,6 +53,13 @@ public class BasicPlayer {
         this.color = color;
         this.score = score;
         this.health = health;
+         this.fire_timer = new Timer(1000/fire_rate, (new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                can_shoot = true;
+                fire_timer.stop();
+            }
+        }));
         //this.bullets = new BulletHandler(-1, fireRate);
     }
     
@@ -76,12 +88,17 @@ public class BasicPlayer {
     }
 
     // Moves Player as well as bullets
-    public void move(JPanel win) {
+    public void move(JPanel win, BulletHandler bullets) {
         if (move_left && (coordinates.getX() - 1 > 0 && coordinates.getX() - 1 < win.getWidth() - width)) {
             coordinates.setX(coordinates.getX() - 1);
         }
         if (move_right && (coordinates.getX() + 1 > 0 && coordinates.getX() + 1 < win.getWidth() - width)) {
             coordinates.setX(coordinates.getX() + 1);
+        }
+        if (shoot & can_shoot){
+            bullets.spawnMissile(coordinates.getX() + width/2, coordinates.getY(), -1);
+            can_shoot = false;
+            fire_timer.start();
         }
         //bullets.move();
         //bullets.kill();
@@ -107,10 +124,13 @@ public class BasicPlayer {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             move_right = false;
         }
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            shoot = false;
+        }
     }
 
     // Player mechanics
-    public void keyPressed(KeyEvent e, BulletHandler bullets) {
+    public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) //xa = -1;
         {
             move_left = true;
@@ -120,7 +140,7 @@ public class BasicPlayer {
             move_right = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            bullets.spawnMissile(coordinates.getX() + width/2, coordinates.getY(), -1);
+            shoot = true;
         }
     }
 

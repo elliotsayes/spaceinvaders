@@ -10,7 +10,7 @@ public class BulletHandler {
 
     ArrayList<Bullet> bullets;
     boolean can_shoot = true;
-    Timer fire_timer, velocity_timer;
+    Timer velocity_timer;
     int velocity = 300;
 
     // Constructor initialises array of bullets
@@ -23,22 +23,12 @@ public class BulletHandler {
                 kill();
             }
         }));
-        this.fire_timer = new Timer(fire_rate, (new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                can_shoot = true;
-                fire_timer.stop();
-            }
-        }));
+       
     }
 
     // Adds bullet and (x,y) 
     public void spawnMissile(int x, int y, int direction) {
-        if (can_shoot) {
             bullets.add(new Bullet(x, y, direction));
-            can_shoot = false;
-            fire_timer.start();
-        }
     }
 
     // Paints bullets

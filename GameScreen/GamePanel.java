@@ -43,7 +43,7 @@ public class GamePanel extends JPanel {
         this.player_timer = new Timer(1000/player_updateInterval, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                shooter.move(temp_this);
+                shooter.move(temp_this, bullets);
                 
             }
         }));
@@ -75,7 +75,7 @@ public class GamePanel extends JPanel {
                         player_timer.start();
                         bullets.start();
                     } else {
-                        shooter.keyPressed(e, bullets);
+                        shooter.keyPressed(e);
                     }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_P) {
@@ -129,7 +129,7 @@ public class GamePanel extends JPanel {
     // Moves Entities and passes panel information
     public void move() {
         invaders.moveArmy(this,bullets);
-        shooter.move(this);
+        shooter.move(this,bullets);
     }
 
     // Needs to be re-written, messy
@@ -139,15 +139,19 @@ public class GamePanel extends JPanel {
             if(barrierHit(bullets.getbullets().get(i))){
                 bullets.getbullets().remove(i);
             }else if(bullets.getbullets().get(i).velocity.getY() > 0){
-                if(hitBox(shooter.getX(),shooter.getY(),100,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY())){
+                if(hitBox(shooter.getX(),shooter.getY(),shooter.width,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY())){
                     bullets.getbullets().remove(i);
                     shooter.playerHit();
+                    // Changes selection to lose state
+                    if(shooter.getHealth() == 0){selection = 2;}
                     System.out.print("DEBUG - 3 \n");
                 }
             }else{
                 for (int j = 0; j < invaders.enemyArray.size(); j++) {
                     if(hitBox(invaders.enemyArray.get(j).getX(),invaders.enemyArray.get(j).getY(),30,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY())){
                     invaders.hit(j);
+                    // Changes selection to win state
+                    if(invaders.enemyArray.isEmpty()){selection = 2;}
                     shooter.hit();
                     bullets.getbullets().remove(i);
                     j = invaders.enemyArray.size();
