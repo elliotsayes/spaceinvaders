@@ -26,7 +26,8 @@ public class mainMenu extends JPanel {
     ArrayList<Button> buttons;
     Button tempButton;
     
-    int selection = 0, hoverSelection = 0;
+    int selection = 0, selectionCandidate = 0, state = 0;
+    boolean hovered;
     
     int i;
     
@@ -87,41 +88,34 @@ public class mainMenu extends JPanel {
         super.paint(win);
         
         Graphics2D window = (Graphics2D) win;
-        // Text color
-        
-        
-        // Main menu message
-        window.setColor(Color.cyan);
-        window.fillRect(buttons.get(hoverSelection).boxCoordinates.getX(), 
-                        buttons.get(hoverSelection).boxCoordinates.getY(), 
-                        buttons.get(hoverSelection).buttonSize.getX(), 
-                        buttons.get(hoverSelection).buttonSize.getY());
         
         for(i=0;i<buttons.size();i++) {
-            buttons.get(i).paint(window);
+            if(selectionCandidate == i) {
+                if(hovered) {
+                    state = 2; // selected and hovered
+                } else {
+                    state = 1; // selected but not hovered
+                }
+            } else {
+                state = 0; // not selected 
+            }
+            buttons.get(i).paint(window,state);
         }
     }
 
-    public void applyClick(IntVector2D clickLocation) {
-        for(i=0;i<buttons.size();i++) {
-            if (    clickLocation.getX() >= buttons.get(i).boxCoordinates.getX()
-                 && clickLocation.getX() <= (buttons.get(i).boxCoordinates.getX() + buttons.get(i).buttonSize.getX()) 
-                 && clickLocation.getY() >= buttons.get(i).boxCoordinates.getY() 
-                 && clickLocation.getY() <= (buttons.get(i).boxCoordinates.getY() + buttons.get(i).buttonSize.getY())) {
-                    selection = buttons.get(i).selection;
-            }
-        }
-    }
     
     public void actuateMouse(IntVector2D mouseLocation, boolean clicked) {
+        boolean tempHovered = false;
         for(i=0;i<buttons.size();i++) {    
             if (    mouseLocation.getX() >= buttons.get(i).boxCoordinates.getX()
                  && mouseLocation.getX() <= (buttons.get(i).boxCoordinates.getX() + buttons.get(i).buttonSize.getX()) 
                  && mouseLocation.getY() >= buttons.get(i).boxCoordinates.getY()
                  && mouseLocation.getY() <= (buttons.get(i).boxCoordinates.getY() + buttons.get(i).buttonSize.getY())) {
-                if(clicked){selection = buttons.get(i).selection;} else {hoverSelection = i;}
+                tempHovered = true;
+                if(clicked){selection = buttons.get(i).selection;} else {selectionCandidate = i;}
             }
         }
+        hovered = tempHovered;
     }
     
     public int getSelection() {
