@@ -143,11 +143,14 @@ public class GamePanel extends JPanel {
                 bullets.getbullets().remove(i);
             }else if(bullets.getbullets().get(i).velocity.getY() > 0){
                 if(hitBox(shooter.getX(),shooter.getY(),shooter.width,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY())){
-                    if(bullets.getbullets().get(i).color == Color.BLUE){
+                    if(bullets.getbullets().get(i).color != Color.RED){
                         bullets.getbullets().get(i).upgrade(this);
+                        bullets.getbullets().remove(i);
                     }
+                    else {
                     bullets.getbullets().remove(i);
                     shooter.playerHit();
+                    }
                     // Changes selection to lose state
                     if(shooter.getHealth() == 0){selection = 3;}
                     System.out.print("DEBUG - 3 \n");

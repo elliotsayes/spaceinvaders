@@ -26,11 +26,19 @@ public class Button {
         this.selection = selection;
     }
     
-    public void paint(Graphics2D window){
-        //draw button
-            window.setColor(Color.black);
-            window.drawString(buttonText, 
-                boxCoordinates.getX()+textOffset.getX(), // x coordinate of text
-                boxCoordinates.getY()+textOffset.getY());// y coordinate of text
+    public void paint(Graphics2D window, int state){
+        // box color
+        if (state == 1) {window.setColor(Color.blue);} // selected 
+        else if (state == 2) {window.setColor(Color.orange);} //selected + hovered
+        else {window.setColor(Color.gray);} // unselected
+        window.fillRect(boxCoordinates.getX(), 
+                        boxCoordinates.getY(), 
+                        buttonSize.getX(), 
+                        buttonSize.getY());
+        //paint text
+        window.setColor(Color.black);
+        window.drawString(buttonText, 
+            boxCoordinates.getX()+textOffset.getX(), // x coordinate of text
+            boxCoordinates.getY()+textOffset.getY());// y coordinate of text
     }
 }

@@ -60,7 +60,7 @@ public class EnemyHandler {
 
                     // Spawns enemy bullets
                     int num = ran.nextInt(50000);
-                    if (num<= 10){
+                    if (num<= 20 & num>= 10 ){
                         bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1);
                     }
                     // Temp way to add different bullet types
