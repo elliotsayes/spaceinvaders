@@ -19,13 +19,13 @@ public class Barrier {
         this.size = size;
        int x, y;
        
-        for (x = coordinates.getX(); x < coordinates.getX() + size.getX(); x += 2) {
-            for (y = coordinates.getY(); y < coordinates.getY() + size.getY(); y += 2) {
+        for (x = coordinates.getX(); x < coordinates.getX() + size.getX(); x += 4) {
+            for (y = coordinates.getY(); y < coordinates.getY() + size.getY(); y += 4) {
                 if ((x + y > (coordinates.getY() + coordinates.getX() + 10)) && 
                         
-                        (y + (( coordinates.getX() + size.getX() ) - ( x + coordinates.getY() +2 )) > 10) && 
+                        (y + (( coordinates.getX() + size.getX() ) - ( x + coordinates.getY() + 4 )) >= 10 ) && 
                         
-                        (!(x > 18 + (coordinates.getX()) && x < (50+ coordinates.getX()) && y > (10+ coordinates.getY())))) {
+                        (!(x > 18 + (coordinates.getX()) && x < (50 + coordinates.getX()) && y > (10 + coordinates.getY())))) {
                     
                     
                     barrierArray.add(new BarrierPiece(new IntVector2D (x,y)));

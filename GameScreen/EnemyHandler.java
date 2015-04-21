@@ -13,17 +13,17 @@ public class EnemyHandler {
         int movePos = 1;
         int enemyArraySize = 15;
         int fireDelay = 5;
+        int horizontalDirection = 10;
         ArrayList<BasicEnemy> enemyArray;
-        BulletHandler bullets = new BulletHandler(1 , fireDelay);
+        //BulletHandler bullets = new BulletHandler(1 , fireDelay);
         Random ran = new Random();
         
         // EnemyHandler Constructor initialises array setting enemy types and layout 
         public EnemyHandler(){
-            
              // Initialises enemys
             enemyArray = new ArrayList<>();
             int x = 20;
-            int y = 20;
+            int y = 30;
             for(int temp1 = 0;temp1!=3;temp1++){
                 for(int temp = 0;temp!=enemyArraySize;temp++){
                 enemyArray.add(new BasicEnemy(x,y));
@@ -32,33 +32,44 @@ public class EnemyHandler {
             y += 60;
             x = 20;
             }
+            
         }
         
+        
         // Updates enemy position, controls movement pattern
-	void moveArmy(JPanel win) {
-                int y = 0;
+	void moveArmy(JPanel win, BulletHandler bullets) {
                 int sze = enemyArray.size() - 1;
+                int shift = 0;
                 // Checks there are enemys and then updates there postion
                 //if (sze == 0){return;}
                 // Checks if they have reached end of screen and inverses movement direction
                 for(int temp1 = 0;temp1 <= sze;temp1++){
+                if(((enemyArray.get(temp1).getY() > win.getHeight() - 30)& horizontalDirection == 10) | ((enemyArray.get(temp1).getY() < 20)& horizontalDirection == -10) ){
+                    horizontalDirection = horizontalDirection * -1;
+                }
                 if ((enemyArray.get(temp1).getX() == win.getWidth() - 30) | (enemyArray.get(temp1).getX() == 0)) {
                     movePos = movePos * -1;
-                    y = 10;
                     temp1 = sze + 1;
-                } 
+                    shift = horizontalDirection;
+                }
+                
                 }
                 for(int temp = 0;temp!=enemyArray.size();temp++){
-                    IntVector2D tempVector = new IntVector2D(movePos, y);
+                    IntVector2D tempVector = new IntVector2D(movePos, shift);
                     enemyArray.get(temp).move(tempVector);
 
                     // Spawns enemy bullets
-                    int num = ran.nextInt(5000);
-                    if (num<= 1){
-                        bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY());
+                    int num = ran.nextInt(50000);
+                    if (num<= 10){
+                        bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1);
+                    }
+                    // Temp way to add different bullet types
+                    if (num<= 5){
+                        bullets.bullets.add(new PowerUp(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1));
                     }
                 }
-            bullets.move();    
+            //bullets.move();
+            //bullets.kill();
 	}
         
         // Calls paint method for each enemy
@@ -66,7 +77,7 @@ public class EnemyHandler {
              for(int temp = 0;temp!=enemyArray.size();temp++){
                     enemyArray.get(temp).paint(win);
             }
-            bullets.paint(win);
+            //bullets.paint(win);
         }
         
         // Returns enemy array
@@ -74,9 +85,9 @@ public class EnemyHandler {
             return enemyArray;
         }
         
-         public ArrayList<Bullet> getAmmo(){
-            return bullets.getbullets();
-        }
+        //public ArrayList<Bullet> getAmmo(){
+        //    return bullets.getbullets();
+        //}
         
         // Hits the enemy then checks for life..
         void hit(int temp) {

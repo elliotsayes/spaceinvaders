@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
  */
 public class BarrierPiece {
     
-    int size = 2;//size of each barrier component 
+    int size = 4;//size of each barrier component 
     int health = 1;
     IntVector2D coordinates;
     
@@ -35,7 +35,9 @@ public class BarrierPiece {
    
    public void piecePaint (Graphics2D barrier){
         barrier.setColor(Color.GREEN);
-        barrier.fill3DRect(coordinates.getX(), coordinates.getY(), size, size, true);
+        barrier.//fillRect(coordinates.getX(), coordinates.getY(), size, size);//
+                //draw3DRect(coordinates.getX(), coordinates.getY(), size, size, true);
+                fill3DRect(coordinates.getX(), coordinates.getY(), size, size, true);
     }
     
   
@@ -59,6 +61,10 @@ public class BarrierPiece {
    
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public int getSize() {
+        return size;
     }
      
    
