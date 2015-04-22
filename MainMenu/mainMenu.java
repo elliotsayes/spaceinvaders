@@ -65,19 +65,13 @@ public class mainMenu extends JPanel {
                 repaint();
             }
         });
-        this.paintTimer = new Timer(1000/paintUpdateRate, (new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                repaint();
-            }
-        }));
         menuSize = windowSize;
         
         buttons = new ArrayList<>();
         ImageIcon unselected = new ImageIcon(getClass().getResource("unselected.png"));
         ImageIcon selected = new ImageIcon(getClass().getResource("selected.png"));
         ImageIcon hovered = new ImageIcon(getClass().getResource("hovered.png"));
-        buttons.add(new Button("START", new IntVector2D(300, 250), new IntVector2D(67, 40), new IntVector2D(175, 80),  1, unselected, selected, hovered));
+        buttons.add(new Button("START", new IntVector2D(290, 240), new IntVector2D(77, 45), new IntVector2D(195, 90),  1, unselected, selected, hovered));
         buttons.add(new Button("Options", new IntVector2D(300, 330), new IntVector2D(65, 40), new IntVector2D(175, 80),  1, unselected, selected, hovered));
         buttons.add(new Button("Exit" , new IntVector2D(300, 410), new IntVector2D(75, 40), new IntVector2D(175, 80), -1, unselected, selected, hovered));
                 
