@@ -31,8 +31,8 @@ public class mainMenu extends JPanel {
     
     int i;
     
-    ImageIcon pic = new ImageIcon(getClass().getResource("loading.gif"));
-    JLabel label = new JLabel(pic, JLabel.CENTER);
+    //ImageIcon pic = new ImageIcon(getClass().getResource("loading.gif"));
+    //JLabel label = new JLabel(pic, JLabel.CENTER);
 
     public mainMenu(IntVector2D windowSize) {
         // Adds mouse listener and overides methods
@@ -62,6 +62,7 @@ public class mainMenu extends JPanel {
             @Override
             public void mouseMoved(MouseEvent e) {
                 actuateMouse(new IntVector2D(e.getX(),e.getY()),false);
+                repaint();
             }
         });
         this.paintTimer = new Timer(1000/paintUpdateRate, (new ActionListener() {
@@ -76,12 +77,13 @@ public class mainMenu extends JPanel {
         ImageIcon unselected = new ImageIcon(getClass().getResource("unselected.png"));
         ImageIcon selected = new ImageIcon(getClass().getResource("selected.png"));
         ImageIcon hovered = new ImageIcon(getClass().getResource("hovered.png"));
-        buttons.add(new Button("START", new IntVector2D(300, 250), new IntVector2D(70, 50), new IntVector2D(175, 100),  1, unselected, selected, hovered));
-        buttons.add(new Button("Exit" , new IntVector2D(300, 350), new IntVector2D(75, 50), new IntVector2D(175, 100), -1, unselected, selected, hovered));
+        buttons.add(new Button("START", new IntVector2D(300, 250), new IntVector2D(67, 40), new IntVector2D(175, 80),  1, unselected, selected, hovered));
+        buttons.add(new Button("Options", new IntVector2D(300, 330), new IntVector2D(65, 40), new IntVector2D(175, 80),  1, unselected, selected, hovered));
+        buttons.add(new Button("Exit" , new IntVector2D(300, 410), new IntVector2D(75, 40), new IntVector2D(175, 80), -1, unselected, selected, hovered));
                 
         // set up background image
-        this.add(label);
-        label.setVerticalAlignment(JLabel.BOTTOM);
+        //this.add(label);
+        //label.setVerticalAlignment(JLabel.BOTTOM);
     }
 
     // Overrides paint method of JPanel, this will control look of panel. Called by repaint method
@@ -108,17 +110,16 @@ public class mainMenu extends JPanel {
 
     
     public void actuateMouse(IntVector2D mouseLocation, boolean clicked) {
-        boolean tempHovered = false;
+        hovered = false;
         for(i=0;i<buttons.size();i++) {    
             if (    mouseLocation.getX() >= buttons.get(i).boxCoordinates.getX()
                  && mouseLocation.getX() <= (buttons.get(i).boxCoordinates.getX() + buttons.get(i).buttonSize.getX()) 
                  && mouseLocation.getY() >= buttons.get(i).boxCoordinates.getY()
                  && mouseLocation.getY() <= (buttons.get(i).boxCoordinates.getY() + buttons.get(i).buttonSize.getY())) {
-                tempHovered = true;
+                hovered = true;
                 if(clicked){selection = buttons.get(i).selection;} else {selectionCandidate = i;}
             }
         }
-        hovered = tempHovered;
     }
     
     public int getSelection() {

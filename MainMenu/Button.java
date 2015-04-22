@@ -46,7 +46,7 @@ public class Button {
                 case 2  : whichImage = hoveredImage; break;
                 default : whichImage = unselectedImage;
             }
-            window.drawImage(whichImage.getImage(), boxCoordinates.getX(), boxCoordinates.getY(), buttonSize.getX()-1, buttonSize.getY()-1, null);
+            window.drawImage(whichImage.getImage(), boxCoordinates.getX(), boxCoordinates.getY(), buttonSize.getX(), buttonSize.getY(), null);
         } else {            
             switch (state) {
                 case 1  : window.setColor(Color.blue); break;
