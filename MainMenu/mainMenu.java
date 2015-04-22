@@ -73,8 +73,11 @@ public class mainMenu extends JPanel {
         menuSize = windowSize;
         
         buttons = new ArrayList<>();
-        buttons.add(new Button("START", new IntVector2D(300, 250), new IntVector2D(70, 50), new IntVector2D(175, 100),  1));
-        buttons.add(new Button("Exit" , new IntVector2D(300, 350), new IntVector2D(75, 50), new IntVector2D(175, 100), -1));
+        ImageIcon unselected = new ImageIcon(getClass().getResource("unselected.png"));
+        ImageIcon selected = new ImageIcon(getClass().getResource("selected.png"));
+        ImageIcon hovered = new ImageIcon(getClass().getResource("hovered.png"));
+        buttons.add(new Button("START", new IntVector2D(300, 250), new IntVector2D(70, 50), new IntVector2D(175, 100),  1, unselected, selected, hovered));
+        buttons.add(new Button("Exit" , new IntVector2D(300, 350), new IntVector2D(75, 50), new IntVector2D(175, 100), -1, unselected, selected, hovered));
                 
         // set up background image
         this.add(label);
