@@ -11,33 +11,44 @@ import java.awt.Graphics2D;
 import GameScreen.BulletHandler;
 import java.util.ArrayList;
 import java.awt.Transparency;
+import java.util.Random;
 
 /**
  *
- * @author Owner
+ * Creates FireWorks with tails and sets each colour of the tails and firework 
  */
 public class FireWork {
     int temp = 0; 
+    boolean test = false;
+    int tailLength = 5;
+    Random crazyJoe = new Random();
 
     Color colour = Color.magenta; 
+    Color TailColor = Color.WHITE;
     ArrayList<IntVector2D> particleCoordinates = new ArrayList<>(); 
+   ArrayList<IntVector2D> blowingUp = new ArrayList<>();
     IntVector2D coordinates, velocity, acceleration, size, sample;
 
     
     FireWork(IntVector2D coordinates, IntVector2D velocity){
-        this(coordinates, velocity, new IntVector2D(0,0));
+        this(coordinates, velocity, 5);
     }
-    FireWork(IntVector2D coordinates, IntVector2D velocity, IntVector2D acceleration){
-        this(coordinates, velocity, acceleration, Color.RED, 8 , 8);
+     FireWork(IntVector2D coordinates, IntVector2D velocity, int tailLength){
+        this(coordinates, velocity, tailLength, new IntVector2D(0,0));
+    }
+    FireWork(IntVector2D coordinates, IntVector2D velocity, int tailLength, IntVector2D acceleration){
+        this(coordinates, velocity, tailLength,acceleration, Color.RED, 8 , 8, Color.WHITE);
     }
     
-    FireWork(IntVector2D coordinates, IntVector2D velocity, IntVector2D acceleration, Color colour, int sizeX, int sizeY){
+    FireWork(IntVector2D coordinates, IntVector2D velocity, int tailLength ,IntVector2D acceleration, Color colour, int sizeX, int sizeY, Color TailColor){
         
        this.coordinates = coordinates;
        this.velocity = velocity;
        this.acceleration = acceleration;
        this.size = new IntVector2D(sizeX, sizeY);
        this.colour = colour;
+       this.tailLength = tailLength;
+       this.TailColor = TailColor;
     }
     
     public void fireworkPaint(Graphics2D firework){
@@ -47,9 +58,9 @@ public class FireWork {
         
         for(int i = 0; i < particleCoordinates.size(); i++){
             if( i == 4){
-                //firework.setColor(Color.TRANSLUCENT);
+               
                 
-            firework.setColor(Color.WHITE);
+            firework.setColor(TailColor);
             }
             if(i == 3){
                 firework.setColor(Color.YELLOW);
@@ -76,9 +87,7 @@ public class FireWork {
         return size;
     }
 
-   // public ArrayList<IntVector2D> getParticleCoordinates() {
-     //   return particleCoordinates;
-   // }
+  
 
     public IntVector2D getCoordinates() {
         return coordinates;
@@ -96,23 +105,29 @@ public class FireWork {
         coordinates.addVector(velocity);
         velocity.addVector(acceleration);
         temp++;
+        
+   
+       
         if (temp == 2){
            makeParticle( new IntVector2D (coordinates.getX(),coordinates.getY()));
            removeOldestParticle();
             temp = 0;
        }
-       if(coordinates.getY() >= 400){
-           
-       }
+       
     }
     
     void makeParticle(IntVector2D coordinates){
-        particleCoordinates.add(0, coordinates);
+        particleCoordinates.add(0,coordinates);
     }
     
     void removeOldestParticle(){
-        if (particleCoordinates.size() > 5){
-            particleCoordinates.remove(5);
+        if (particleCoordinates.size() > tailLength){
+            particleCoordinates.remove(tailLength);
         }
     }
+  
+
+   
+
+   
 }
