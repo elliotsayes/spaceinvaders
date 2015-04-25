@@ -23,6 +23,7 @@ public class mainMenu extends JPanel {
     Timer paintTimer;
     
     IntVector2D menuSize;
+    ImageIcon BackgroundImage, BannerImage;
     ArrayList<Button> buttons;
     Button tempButton;
     
@@ -67,10 +68,14 @@ public class mainMenu extends JPanel {
         });
         menuSize = windowSize;
         
+        BackgroundImage = new ImageIcon(getClass().getResource("background.png"));
+        BannerImage = new ImageIcon(getClass().getResource("logo.png"));
+        
         buttons = new ArrayList<>();
         ImageIcon unselected = new ImageIcon(getClass().getResource("unselected.png"));
         ImageIcon selected = new ImageIcon(getClass().getResource("selected.png"));
         ImageIcon hovered = new ImageIcon(getClass().getResource("hovered.png"));
+        
         buttons.add(new Button("START", new IntVector2D(290, 240), new IntVector2D(77, 45), new IntVector2D(195, 90),  1, unselected, selected, hovered));
         buttons.add(new Button("Options", new IntVector2D(300, 330), new IntVector2D(65, 40), new IntVector2D(175, 80),  1, unselected, selected, hovered));
         buttons.add(new Button("Exit" , new IntVector2D(300, 410), new IntVector2D(75, 40), new IntVector2D(175, 80), -1, unselected, selected, hovered));
@@ -88,6 +93,11 @@ public class mainMenu extends JPanel {
         
         Graphics2D window = (Graphics2D) win;
         
+        // draw background
+        window.drawImage(BackgroundImage.getImage(), 0, 0, 800, 600, null);
+        window.drawImage(BannerImage.getImage(), 100, 50, BannerImage.getIconWidth(), BannerImage.getIconHeight(), null);
+        
+        // draw buttons
         for(i=0;i<buttons.size();i++) {
             if(selectionCandidate == i) {
                 if(hovered) {
