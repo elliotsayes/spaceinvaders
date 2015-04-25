@@ -177,6 +177,7 @@ public class BasicPlayer {
     }
 
     public void locationRespawn() {
-        coordinates.setXandY(370, 500);
+        coordinates.setX(370);
+        coordinates.setY(500);
     }
 }
