@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -19,6 +20,8 @@ public class GamePanel extends JPanel {
     boolean pause = false;
     int velocity = 300;
     int level = 1;
+    ImageIcon pauseImage = new ImageIcon(getClass().getResource("Paused.png"));
+    ImageIcon helpPage = new ImageIcon(getClass().getResource("startMenu.png"));
     
     // Menu Numbers
     int mainMenu = 0;
@@ -136,6 +139,8 @@ public class GamePanel extends JPanel {
         window.setColor(Color.white);
         window.drawString("Level:", 500, 20);
         window.drawString(String.valueOf(level), 580, 20);
+        if (pause){window.drawImage(pauseImage.getImage(), 200, 150, 400, 300, null);}
+        if (!pause & !enemy_timer.isRunning()){window.drawImage(helpPage.getImage(), 200, 150, 400, 300, null);}
     }
 
     // Moves Entities and passes panel information
