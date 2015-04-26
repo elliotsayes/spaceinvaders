@@ -88,9 +88,9 @@ public class gameEngine {
                     while(win.getSelection()== 0){
                         Thread.sleep(1);
                     }
+                    game_state = win.getSelection();
                     gameWindow.remove(win);
                     music.stop("win");
-                    game_state = 0;
                     break;
                     
                 case 3: // Lose Screen
