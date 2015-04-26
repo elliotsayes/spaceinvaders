@@ -150,7 +150,7 @@ public class GamePanel extends JPanel {
             if(barrierHit(bullets.getbullets().get(i))){
                 bullets.getbullets().remove(i);
             }else if(bullets.getbullets().get(i).velocity.getY() > 0){
-                if(hitBox(shooter.getX(),shooter.getY(),shooter.width,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY())){
+                if(hitBox(shooter.getX(),shooter.getY(),shooter.width,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
                     if(bullets.getbullets().get(i).color != Color.RED){
                         bullets.getbullets().get(i).upgrade(this);
                         bullets.getbullets().remove(i);
@@ -165,7 +165,7 @@ public class GamePanel extends JPanel {
                 }
             }else{
                 for (int j = 0; j < invaders.enemyArray.size(); j++) {
-                    if(hitBox(invaders.enemyArray.get(j).getX(),invaders.enemyArray.get(j).getY(),30,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY())){
+                    if(hitBox(invaders.enemyArray.get(j).getX(),invaders.enemyArray.get(j).getY(),30,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
                     invaders.hit(j);
                     // Changes selection to win state
                     if(invaders.enemyArray.isEmpty()){
@@ -199,24 +199,36 @@ public class GamePanel extends JPanel {
         return selection;
     }
     
-    public boolean hitBox(int x, int y, int size, int u, int v){
-        if (u < x+size & u > x){
-            if (v < y+size & v > y){
-                return true;
+    public boolean hitBox(int x, int y, int size, int u, int v, int size2) {    
+            if (u < x + size & u > x) {
+                if ((v < (y + size)) & (v > y)) {
+                    System.out.print("DEBUG - hit 1 \n");
+                    return true;
+                }else if (((v + size2) < (y + size)) & (v + size2 > y)) {
+                    System.out.print("DEBUG - hit 2 \n");
+                    return true;
+                }
+            } else if (u + size2 < x + size & u + size2 > x){
+                if ((v < (y + size)) & (v > y)) {
+                    System.out.print("DEBUG - hit 3 \n");
+                    return true;
+                }else if (((v + size2) < (y + size2)) & (v + size2 > y)) {
+                    System.out.print("DEBUG - hit 4 \n");
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
-    }
     
     public boolean barrierHit(Bullet bull){
         
         for (int k = 0; k < barriers.arrayOfBarriers.size();k++){
             Barrier temp = barriers.arrayOfBarriers.get(k);
-            if (hitBox(temp.coordinates.getX(),temp.coordinates.getY(),100,bull.getX(),bull.getY())){
+            if (hitBox(temp.coordinates.getX(),temp.coordinates.getY(),100,bull.getX(),bull.getY(),bull.size)){
                 System.out.print("DEBUG - 2 \n");
                 for(int v = 0; v < temp.barrierArray.size(); v++){
                     BarrierPiece temp2 = temp.barrierArray.get(v);
-                    if (hitBox(temp2.coordinates.getX(),temp2.coordinates.getY(), 10,bull.getX(),bull.getY())){
+                    if (hitBox(temp2.coordinates.getX(),temp2.coordinates.getY(), 10,bull.getX(),bull.getY(),bull.size)){
                         temp.removePiece(v);
                         System.out.print("DEBUG - 1 \n");
                         return true;
