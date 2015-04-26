@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class mainMenu extends JPanel {   
+public class mainMenu extends JPanel {
     final int paintUpdateRate = 1;
     Timer paintTimer;
     

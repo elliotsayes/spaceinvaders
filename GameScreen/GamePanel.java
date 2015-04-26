@@ -171,7 +171,7 @@ public class GamePanel extends JPanel {
     }
    
 
-    public void restart() {
+    public void restart() { 
         velocity += 100;
         invaders = new EnemyHandler();
         bullets = new BulletHandler(velocity);
