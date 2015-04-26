@@ -154,7 +154,7 @@ public class GamePanel extends JPanel {
     public void checkCollision() {
         
         for (int i = 0; i < bullets.getbullets().size(); i++) {
-            if(barrierHit(bullets.getbullets().get(i))){
+            if(barrierHit(bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
                 bullets.getbullets().remove(i);
             }else if(bullets.getbullets().get(i).velocity.getY() > 0){
                 if(hitBox(shooter.getX(),shooter.getY(),shooter.width,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
@@ -187,9 +187,14 @@ public class GamePanel extends JPanel {
                     bullets.getbullets().remove(i);
                     j = invaders.enemyArray.size();
                     }
+                    
+                        
+                    
                 }
             }
         }
+        for (int j = 0; j < invaders.enemyArray.size(); j++) {
+        boolean temp = barrierHit(invaders.enemyArray.get(j).getX(),invaders.enemyArray.get(j).getY(),invaders.enemyArray.get(j).size);}
     }
    
     public void restart() {
@@ -227,15 +232,14 @@ public class GamePanel extends JPanel {
             return false;
         }
     
-    public boolean barrierHit(Bullet bull){
-        
+    public boolean barrierHit(int x, int y, int size){
         for (int k = 0; k < barriers.arrayOfBarriers.size();k++){
             Barrier temp = barriers.arrayOfBarriers.get(k);
-            if (hitBox(temp.coordinates.getX(),temp.coordinates.getY(),100,bull.getX(),bull.getY(),bull.size)){
+            if (hitBox(temp.coordinates.getX(),temp.coordinates.getY(),100,x,y,size)){
                 System.out.print("DEBUG - 2 \n");
                 for(int v = 0; v < temp.barrierArray.size(); v++){
                     BarrierPiece temp2 = temp.barrierArray.get(v);
-                    if (hitBox(temp2.coordinates.getX(),temp2.coordinates.getY(), 10,bull.getX(),bull.getY(),bull.size)){
+                    if (hitBox(temp2.coordinates.getX(),temp2.coordinates.getY(), 10,x,y,size)){
                         temp.removePiece(v);
                         System.out.print("DEBUG - 1 \n");
                         return true;
