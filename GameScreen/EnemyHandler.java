@@ -64,8 +64,8 @@ public class EnemyHandler {
                         bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1);
                     }
                     // Temp way to add different bullet types
-                    if (num<= 5){
-                        bullets.bullets.add(new PowerUp(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1));
+                    if (num<= 1){
+                        bullets.bullets.add(new HealthPowerUp(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1));
                     }
                 }
             //bullets.move();

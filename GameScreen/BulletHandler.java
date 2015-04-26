@@ -9,7 +9,7 @@ import javax.swing.Timer;
 public class BulletHandler {
 
     ArrayList<Bullet> bullets;
-    boolean can_shoot = true;
+    //boolean can_shoot = true;
     Timer velocity_timer;
 
     // Constructor initialises array of bullets

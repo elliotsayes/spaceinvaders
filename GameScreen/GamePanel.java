@@ -1,6 +1,6 @@
 package GameScreen;
 
-import GameEngine.AudioHandler;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -17,20 +16,27 @@ public class GamePanel extends JPanel {
 
     JPanel temp_this = this;
     int selection;
-    int velocity = 300;
     boolean pause = false;
+    int velocity = 300;
+    int level = 1;
+    
+    // Menu Numbers
+    int mainMenu = 0;
+    int winScreen = 2;
+    int loseScreen = 3;
+    int options = 4;
+    
     // Game Screen Entities
     EnemyHandler invaders = new EnemyHandler();
     BasicPlayer shooter = new BasicPlayer();
     BarrierHandler barriers = new BarrierHandler();
     BulletHandler bullets = new BulletHandler(velocity);
+    
     // Game timer for repaint
     Timer paint_timer, player_timer, enemy_timer;
     int paint_updateInterval = 300;
     int player_updateInterval = 250;
     int enemy_updateInterval = 200;
-    
-    
     
     // gameScreen Constructor
     public GamePanel() {
@@ -96,17 +102,17 @@ public class GamePanel extends JPanel {
                     }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
-                    selection = 0;
+                    selection = mainMenu;
                 }    
                 
                 if (e.getKeyCode() == KeyEvent.VK_R) {
                     restart();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-                    selection = 2;
+                    selection = winScreen;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-                    selection = 3;
+                    selection = loseScreen;
                 }
                 
             }
@@ -127,6 +133,9 @@ public class GamePanel extends JPanel {
         shooter.paint(window);
         barriers.piecePaint(window);
         bullets.paint(window);
+        window.setColor(Color.white);
+        window.drawString("Level:", 500, 20);
+        window.drawString(String.valueOf(level), 580, 20);
     }
 
     // Moves Entities and passes panel information
@@ -135,7 +144,6 @@ public class GamePanel extends JPanel {
         shooter.move(this,bullets);
     }
 
-    // Needs to be re-written, messy
     public void checkCollision() {
         
         for (int i = 0; i < bullets.getbullets().size(); i++) {
@@ -152,7 +160,7 @@ public class GamePanel extends JPanel {
                     shooter.playerHit();
                     }
                     // Changes selection to lose state
-                    if(shooter.getHealth() == 0){selection = 3;}
+                    if(shooter.getHealth() == 0){selection = loseScreen;}
                     System.out.print("DEBUG - 3 \n");
                 }
             }else{
@@ -160,7 +168,14 @@ public class GamePanel extends JPanel {
                     if(hitBox(invaders.enemyArray.get(j).getX(),invaders.enemyArray.get(j).getY(),30,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY())){
                     invaders.hit(j);
                     // Changes selection to win state
-                    if(invaders.enemyArray.isEmpty()){selection = 2;}
+                    if(invaders.enemyArray.isEmpty()){
+                        if (shooter.score > 10000){
+                            selection = winScreen;
+                        }else{
+                            restart();
+                            return;
+                        }
+                    }
                     shooter.hit();
                     bullets.getbullets().remove(i);
                     j = invaders.enemyArray.size();
@@ -170,14 +185,14 @@ public class GamePanel extends JPanel {
         }
     }
    
-
     public void restart() {
-        velocity += 100;
         invaders = new EnemyHandler();
         bullets = new BulletHandler(velocity);
+        barriers = new BarrierHandler();
         enemy_timer.stop();
         player_timer.stop();
         shooter.locationRespawn();
+        level += 1;
     }
     
     public int getSelection(){
