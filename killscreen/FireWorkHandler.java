@@ -64,7 +64,7 @@ public class FireWorkHandler {
     Timer fireWorkTimer;
     Timer BlowyUpyTimer;
     int Update = 5 ;
-    int BlowyUpdate = 10;
+    int BlowyUpdate = 15;
     Random crazyJoe = new Random();
    // AudioPlayer sound = new AudioPlayer("shoot.wav", "firework");
  
@@ -75,7 +75,7 @@ public class FireWorkHandler {
      
         
         for(int i= 50; i <= 770; i = i + 75 ){
-            fireworks.add(new FireWork(new IntVector2D(i,500), new IntVector2D(0,crazyJoe.nextInt(3)-4)));
+            fireworks.add(new FireWork(new IntVector2D(i,500), new IntVector2D(0,crazyJoe.nextInt(2)-3)));
             }
         
      

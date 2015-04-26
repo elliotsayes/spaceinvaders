@@ -80,11 +80,13 @@ public class gameEngine {
 
                 case 2: // Win Screen
                     music.play("win");
-                    win = new Winnerr();
+                    win = new Winnerr(new IntVector2D(windowSize.getX(), windowSize.getY()));
                     win.setBackground(backgroundColor);
                     gameWindow.add(win);
                     gameWindow.validate();
-                    Thread.sleep(5000);
+                    while(win.getSelection()== 0){
+                        Thread.sleep(1);
+                    }
                     gameWindow.remove(win);
                     music.stop("win");
                     game_state = 0;
