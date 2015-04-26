@@ -3,6 +3,7 @@ package GameScreen;
 // Basic enemy class, can be extended for different enemy types
 import GameEngine.IntVector2D;
 import java.awt.Graphics2D;
+import java.util.Random;
 import javax.swing.ImageIcon;
 
 public class BasicEnemy {
@@ -11,6 +12,7 @@ public class BasicEnemy {
     //  Enemy parameters
     int health;// = 1;
     int size;// = 30;
+    Random ran = new Random();
     
     // Enemy location
     IntVector2D coordinates;
@@ -69,8 +71,16 @@ public class BasicEnemy {
     }
 
     // Moves enemy by (x,y)
-    public void move(IntVector2D velocity) {
+    public void move(IntVector2D velocity, BulletHandler bullets) {
        coordinates.addVector(velocity);
+       int num = ran.nextInt(50000);
+                    if (num<= 20 & num>= 10 ){
+                        bullets.spawnMissile(getX(), getY(), 1);
+                    }
+                    // Temp way to add different bullet types
+                    if (num<= 1){
+                        bullets.bullets.add(new HealthPowerUp(getX(), getY(), 1));
+                    }
     }
 
     // Paints enemy, controls look of enemy

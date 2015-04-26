@@ -56,17 +56,17 @@ public class EnemyHandler {
                 }
                 for(int temp = 0;temp!=enemyArray.size();temp++){
                     IntVector2D tempVector = new IntVector2D(movePos, shift);
-                    enemyArray.get(temp).move(tempVector);
+                    enemyArray.get(temp).move(tempVector,bullets);
 
                     // Spawns enemy bullets
-                    int num = ran.nextInt(50000);
+                    /*int num = ran.nextInt(50000);
                     if (num<= 20 & num>= 10 ){
                         bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1);
                     }
                     // Temp way to add different bullet types
                     if (num<= 1){
                         bullets.bullets.add(new HealthPowerUp(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1));
-                    }
+                    }*/
                 }
             //bullets.move();
             //bullets.kill();
