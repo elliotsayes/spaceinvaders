@@ -30,6 +30,14 @@ public class AudioHandler {
         }
     }
     
+    public void loop(String find_name){
+        for (int i = 0;i < sounds.size();i++){
+            if (sounds.get(i).name == find_name){
+                sounds.get(i).Loop();
+            }
+        }
+    }
+    
     public void stop(String find_name){
         for (int i = 0;i < sounds.size();i++){
             if (sounds.get(i).name == find_name){

@@ -22,6 +22,7 @@ public class GamePanel extends JPanel {
     int level = 1;
     ImageIcon pauseImage = new ImageIcon(getClass().getResource("Paused.png"));
     ImageIcon helpPage = new ImageIcon(getClass().getResource("startMenu.png"));
+    ImageIcon nextLevel = new ImageIcon(getClass().getResource("nextLevel.png"));
     
     // Menu Numbers
     int mainMenu = 0;
@@ -140,7 +141,8 @@ public class GamePanel extends JPanel {
         window.drawString("Level:", 500, 20);
         window.drawString(String.valueOf(level), 580, 20);
         if (pause){window.drawImage(pauseImage.getImage(), 200, 150, 400, 300, null);}
-        if (!pause & !enemy_timer.isRunning()){window.drawImage(helpPage.getImage(), 200, 150, 400, 300, null);}
+        if (!pause & !enemy_timer.isRunning() & level == 1){window.drawImage(helpPage.getImage(), 200, 150, 400, 300, null);}
+        if(!pause & !enemy_timer.isRunning() & level != 1){window.drawImage(nextLevel.getImage(), 200, 150, 400, 300, null);}
     }
 
     // Moves Entities and passes panel information

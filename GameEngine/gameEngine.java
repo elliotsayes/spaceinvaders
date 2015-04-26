@@ -33,6 +33,7 @@ public class gameEngine {
         Winnerr win;
         Loser loseWin;
         AudioHandler music = new AudioHandler() ;
+        music.add("pacman_death.wav","death");
         music.add("battle_2.mid","battleMusic");
         music.add("TitleScreen.mid","intro");
         music.add("win.mid","win");
@@ -42,7 +43,7 @@ public class gameEngine {
             switch (game_state) {
                 case 0: // Main Menu
                     // Add main menu to frame
-                    music.play("intro");
+                    music.loop("intro");
                     MainMenu = new mainMenu(new IntVector2D(windowSize.getX(), windowSize.getY()));
                     MainMenu.setBackground(Color.white);
                     gameWindow.add(MainMenu);
@@ -60,7 +61,7 @@ public class gameEngine {
 
                 case 1: // Play Screen
                      // Plays sound
-                    music.play("battleMusic");
+                    music.loop("battleMusic");
                     playScreen = new GamePanel();
                     playScreen.setBackground(backgroundColor);
                     gameWindow.add(playScreen);
@@ -79,7 +80,7 @@ public class gameEngine {
                     break;
 
                 case 2: // Win Screen
-                    music.play("win");
+                    music.loop("win");
                     win = new Winnerr(new IntVector2D(windowSize.getX(), windowSize.getY()));
                     win.setBackground(backgroundColor);
                     gameWindow.add(win);
@@ -93,14 +94,14 @@ public class gameEngine {
                     break;
                     
                 case 3: // Lose Screen
-                    music.play("win");
-                    loseWin = new Loser();
+                    music.loop("death");
+                    loseWin = new Loser(new IntVector2D(windowSize.getX(), windowSize.getY()));
                     loseWin.setBackground(backgroundColor);
                     gameWindow.add(loseWin);
                     gameWindow.validate();
                     Thread.sleep(5000);
                     gameWindow.remove(loseWin);
-                    music.stop("win");
+                    music.stop("death");
                     game_state = 0;
                     break;
             }
