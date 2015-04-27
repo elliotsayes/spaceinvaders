@@ -21,12 +21,19 @@ public class Button {
     public boolean useImages;
     public ImageIcon unselectedImage, selectedImage, hoveredImage;
     
-    public Button(String buttonText, IntVector2D boxCoordinates, IntVector2D textOffset, IntVector2D buttonSize, int selection, ImageIcon unselectedImage, ImageIcon selectedImage, ImageIcon hoveredImage) {
+    public int clickAction; 
+    // 0 - change gamestate
+    // 1 - sound variable
+    // 2 - shooter type change
+    // 3+- ???
+    
+    public Button(String buttonText, IntVector2D boxCoordinates, IntVector2D textOffset, IntVector2D buttonSize, int selection, ImageIcon unselectedImage, ImageIcon selectedImage, ImageIcon hoveredImage, int clickAction) {
         this(buttonText, boxCoordinates, textOffset, buttonSize, selection);
         this.useImages          = true;
         this.unselectedImage    = unselectedImage;
         this.selectedImage      = selectedImage;
         this.hoveredImage       = hoveredImage;
+        this.clickAction        = clickAction;
     }
     
     public Button(String buttonText, IntVector2D boxCoordinates, IntVector2D textOffset, IntVector2D buttonSize, int selection) {

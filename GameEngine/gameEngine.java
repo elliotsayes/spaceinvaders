@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import MainMenu.mainMenu;
 import GameScreen.GamePanel;
+import MainMenu.OptionsScreen;
 import killscreen.Loser;
 import killscreen.Winnerr;
 
@@ -28,7 +29,8 @@ public class gameEngine {
         gameWindow.setVisible(true);
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // * Add game panels here *
-        mainMenu MainMenu;
+        /**/mainMenu MainMenu;
+        OptionsScreen optionsScreen;
         GamePanel playScreen;
         Winnerr win;
         Loser loseWin;
@@ -44,7 +46,7 @@ public class gameEngine {
                 case 0: // Main Menu
                     // Add main menu to frame
                     music.loop("intro");
-                    MainMenu = new mainMenu(new IntVector2D(windowSize.getX(), windowSize.getY()));
+                    MainMenu = new mainMenu(windowSize);
                     MainMenu.setBackground(Color.white);
                     gameWindow.add(MainMenu);
                     gameWindow.validate();
@@ -103,6 +105,23 @@ public class gameEngine {
                     gameWindow.remove(loseWin);
                     music.stop("death");
                     game_state = 0;
+                    break;
+                case 4: // Main Menu
+                    // Add main menu to frame
+                    music.loop("intro");
+                    optionsScreen = new /**/OptionsScreen(windowSize);
+                    optionsScreen.setBackground(Color.white);
+                    gameWindow.add(optionsScreen);
+                    gameWindow.validate();
+                    optionsScreen.repaint();
+                    // MainMenu loop Waits for a getSelection to be made
+                    while (optionsScreen.getSelection() == 0) {
+                        Thread.sleep(1);
+                    }
+                    // Removes MainMenu 
+                    music.stop("intro");
+                    gameWindow.remove(optionsScreen);
+                    game_state = optionsScreen.getSelection();
                     break;
             }
         }
