@@ -20,11 +20,11 @@ import javax.swing.Timer;
 public class Winnerr extends JPanel {
     Timer paint_timer, firework_rate,test;
     int paint_updatePS = 60;
-    int x = 500, selection = 0, selectionCandidate = 0, state = 0, i= -1,j;
-    boolean hovered;
+    int x = 500, selection = 0, selectionCandidate = 0, state = 0, i= -1;
+    boolean hovered ;
     final int paintUpdateRate = 1;
     Timer paintTimer;
-    boolean temp = false;
+    boolean temp = false, temp1 = false;
     
     IntVector2D menuSize;
     ArrayList<Button> buttons;
@@ -69,9 +69,12 @@ public class Winnerr extends JPanel {
             }
         });
         menuSize = windowSize;
-        ImageIcon pic = new ImageIcon(getClass().getResource("winner.jpg"));
+        ImageIcon pic = new ImageIcon(getClass().getResource("Winner.PNG"));
         JLabel label = new JLabel(pic, JLabel.CENTER);
         this.add(label);
+        ImageIcon pic2 = new ImageIcon(getClass().getResource("Dim.png"));
+        JLabel label2 = new JLabel(pic2, JLabel.CENTER);
+        
         this.paint_timer = new Timer(1000/paint_updatePS, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,8 +109,11 @@ public class Winnerr extends JPanel {
         this.test = new Timer(5000, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                
+//                IJLabel label = new JLabel(pic, JLabel.CENTER);
+//                add(label);mageIcon pic = new ImageIcon(getClass().getResource("Dim.png"));
+//                JLabel label = new JLabel(pic, JLabel.CENTER);
+//                add(label);
+                add(label2);
                 temp = true;
                 buttons = new ArrayList<>();
                 ImageIcon unselected = new ImageIcon(getClass().getResource("unselected.png"));
@@ -131,8 +137,8 @@ public class Winnerr extends JPanel {
         firework2.Paint(window);
     
         if (temp == true){
-          for( j=0;j<buttons.size();j++) {
-            if(selectionCandidate == j) {
+          for( int h=0;h<buttons.size();h++) {
+            if(selectionCandidate == h) {
                 if(hovered) {
                     state = 2; // selected and hovered
                     }
@@ -143,14 +149,14 @@ public class Winnerr extends JPanel {
                 else {
                     state = 0; // not selected 
                 }
-            buttons.get(j).paint(window,state);
+            buttons.get(h).paint(window,state);
             }     
         }
     } 
      
       public void actuateMouse(IntVector2D mouseLocation, boolean clicked) {
         hovered = false;
-        for( j=0;j<buttons.size();j++) {    
+        for( int j=0;j<buttons.size();j++) {    
             if (    mouseLocation.getX() >= buttons.get(j).boxCoordinates.getX()
                  && mouseLocation.getX() <= (buttons.get(j).boxCoordinates.getX() + buttons.get(j).buttonSize.getX()) 
                  && mouseLocation.getY() >= buttons.get(j).boxCoordinates.getY()
