@@ -31,13 +31,13 @@ public class GamePanel extends JPanel {
     int options = 4;
     
     // Game Screen Entities
-    EnemyHandler invaders = new EnemyHandler();
+    EnemyHandler invaders = new bossMan();
     BasicPlayer shooter = new BasicPlayer();
     BarrierHandler barriers = new BarrierHandler();
     BulletHandler bullets = new BulletHandler(velocity);
     
     // Game timer for repaint
-    Timer paint_timer, player_timer, enemy_timer;
+    Timer paint_timer, player_timer, enemy_timer, powerUpTimer;
     int paint_updateInterval = 300;
     int player_updateInterval = 250;
     int enemy_updateInterval = 200;
@@ -198,13 +198,16 @@ public class GamePanel extends JPanel {
     }
    
     public void restart() {
-        invaders = new EnemyHandler();
+        level += 1;
+        if(level < 3){invaders = new EnemyHandler();}else{
+            invaders = new bossMan();
+        }
         bullets = new BulletHandler(velocity);
         barriers = new BarrierHandler();
         enemy_timer.stop();
         player_timer.stop();
         shooter.locationRespawn();
-        level += 1;
+        
     }
     
     public int getSelection(){

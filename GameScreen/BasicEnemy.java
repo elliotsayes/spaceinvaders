@@ -81,6 +81,9 @@ public class BasicEnemy {
                     if (num<= 1){
                         bullets.bullets.add(new HealthPowerUp(getX(), getY(), 1));
                     }
+                    if (num<= 4 & num >= 3){
+                        bullets.bullets.add(new SpeedPowerUp(getX(), getY(), 1));
+                    }
     }
 
     // Paints enemy, controls look of enemy

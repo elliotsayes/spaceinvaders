@@ -91,6 +91,11 @@ public class EnemyHandler {
         
         // Hits the enemy then checks for life..
         void hit(int temp) {
+            System.out.print("Enemy : ");
+            System.out.print(temp);
+            System.out.print(" Health: ");
+            System.out.print(enemyArray.get(temp).health);
+            System.out.print("\n");
         if(enemyArray.get(temp).hit(1)){
            enemyArray.remove(temp); 
         }

@@ -50,9 +50,9 @@ public class bossMan extends EnemyHandler {
        
        super(); 
        enemyArray = new ArrayList<>();
-       this.Boss = new BasicEnemy(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),1,size,CthuluDarkLord);
-       this.Bossleg1 = new BasicEnemy(BOSSstartCoordinates.getX()+50,BOSSstartCoordinates.getY()+155,1,80,CthuluDarkLordLeg1);
-       this.Bossleg2 = new BasicEnemy(BOSSstartCoordinates.getX()+85,BOSSstartCoordinates.getY()+160,1,90,CthuluDarkLordLeg2);
+       this.Boss = new BasicEnemy(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),5,size,CthuluDarkLord);
+       this.Bossleg1 = new BasicEnemy(BOSSstartCoordinates.getX()+50,BOSSstartCoordinates.getY()+155,5,80,CthuluDarkLordLeg1);
+       this.Bossleg2 = new BasicEnemy(BOSSstartCoordinates.getX()+85,BOSSstartCoordinates.getY()+160,5,90,CthuluDarkLordLeg2);
        enemyArray.add(Boss);
        enemyArray.add(Bossleg1);
        enemyArray.add(Bossleg2);
@@ -68,7 +68,7 @@ public class bossMan extends EnemyHandler {
     }
     if (enemyArray.get(0).getY() < 25){
         for (int k = 0; k < enemyArray.size();k++){
-     enemyArray.get(k).coordinates.addVector(velocity1);
+            enemyArray.get(k).coordinates.addVector(velocity1);
 //     enemyArray.get(0).coordinates.addVector(velocity1);
         }
      
@@ -100,6 +100,17 @@ public class bossMan extends EnemyHandler {
 //           Boss.paint(win);
 //       
 //    }
-       
+    @Override
+void hit(int temp) {
+            System.out.print("Enemy : ");
+            System.out.print(temp);
+            System.out.print(" Health: ");
+            System.out.print(enemyArray.get(temp).health);
+            System.out.print("\n");
+        if((temp == 0) & enemyArray.size() != 1 ){return;}    
+        if(enemyArray.get(temp).hit(1)){
+           enemyArray.remove(temp); 
+        }       
     
+}
 }
