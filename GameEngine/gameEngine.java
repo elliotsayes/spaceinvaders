@@ -4,6 +4,8 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import MainMenu.mainMenu;
 import GameScreen.GamePanel;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import killscreen.Loser;
 import killscreen.Winnerr;
 
@@ -20,7 +22,7 @@ public class gameEngine {
             600);//window height
     
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException, URISyntaxException {
 
         // Creating Game Window, JFrame
         JFrame gameWindow = new JFrame(windowTitle);
