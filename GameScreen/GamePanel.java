@@ -31,7 +31,7 @@ public class GamePanel extends JPanel {
     int options = 4;
     
     // Game Screen Entities
-    EnemyHandler invaders = new bossMan();
+    EnemyHandler invaders = new EnemyHandler();
     BasicPlayer shooter = new BasicPlayer();
     BarrierHandler barriers = new BarrierHandler();
     BulletHandler bullets = new BulletHandler(velocity);
