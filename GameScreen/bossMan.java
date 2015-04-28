@@ -9,6 +9,7 @@ import GameEngine.AudioHandler;
 import GameEngine.AudioPlayer;
 import GameEngine.IntVector2D;
 import MainMenu.Button;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -109,4 +110,14 @@ void hit(int temp) {
         }       
     
 }
+ public void paint(Graphics2D win) {
+        win.setColor(Color.red);
+       
+        win.drawString("HEALTH: ", 20, 40);
+        for (int i = 0; i<enemyArray.size();i++){
+            enemyArray.get(i).paint(win);
+            win.fillRect(80, 40 + (i*20), enemyArray.get(i).health*10, 10);
+        }
+    }
+    
 }
