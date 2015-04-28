@@ -113,8 +113,8 @@ public class Winnerr extends JPanel {
                 ImageIcon unselected = new ImageIcon(getClass().getResource("unselected.png"));
                 ImageIcon selected = new ImageIcon(getClass().getResource("selected.png"));
                 ImageIcon hovered = new ImageIcon(getClass().getResource("hovered.png"));
-                buttons.add(new Button("EXIT", new IntVector2D(300, 480), new IntVector2D(60, 40), new IntVector2D(175, 80),  -1, unselected, selected, hovered));
-                buttons.add(new Button("PLAY AGAIN" , new IntVector2D(300, 390), new IntVector2D(75, 40), new IntVector2D(175, 80), 1, unselected, selected, hovered));
+                buttons.add(new Button("EXIT", new IntVector2D(300, 480), new IntVector2D(60, 40), new IntVector2D(175, 80),  -1, unselected, selected, hovered,0));
+                buttons.add(new Button("PLAY AGAIN" , new IntVector2D(300, 390), new IntVector2D(75, 40), new IntVector2D(175, 80), 1, unselected, selected, hovered,0));
                 
             }
         }));
