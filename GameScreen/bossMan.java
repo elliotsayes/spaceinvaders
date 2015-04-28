@@ -30,14 +30,14 @@ public class bossMan extends EnemyHandler {
     BasicEnemy Bossleg1;
     BasicEnemy Bossleg2;
     boolean reached ;
-    int HorizontalSpeed = -3;
+    int HorizontalSpeed = 1;
     
     Random CrazyMike = new Random();
-    int Horizontal = 800, Vertical = 200; 
-   IntVector2D velocity1 = new IntVector2D(0,3) ;
-   IntVector2D velocity2 = new IntVector2D(3,0);
-   IntVector2D velocity3 = new IntVector2D(-3,0);
-    ImageIcon image = new ImageIcon("BossMan.png")  ;
+    int Horizontal = 800, Vertical = 200;
+    IntVector2D velocity;
+    IntVector2D velocity1 = new IntVector2D(0,3) ;
+    IntVector2D velocity2 = new IntVector2D(1,0) ;
+    IntVector2D velocity3 = new IntVector2D(-1,0) ;
     
     int size = 300, bossStartY = -295;
     IntVector2D BOSSstartCoordinates = new IntVector2D(250,-295);
@@ -57,50 +57,38 @@ public class bossMan extends EnemyHandler {
        enemyArray.add(Bossleg1);
        enemyArray.add(Bossleg2);
 //        this.coordinates = new IntVector2D (200,-100);
-    }
-    @Override
-    public void moveArmy(JPanel win, BulletHandler bullets){  
-     if(enemyArray.get(0).getX()<=0){
-         HorizontalSpeed = 3;
-    }
-    if (enemyArray.get(0).getX() >= 500){
-        HorizontalSpeed = -3;
-    }
-    if (enemyArray.get(0).getY() < 25){
-        for (int k = 0; k < enemyArray.size();k++){
-            enemyArray.get(k).coordinates.addVector(velocity1);
-//     enemyArray.get(0).coordinates.addVector(velocity1);
-        }
-     
- 
-    }
-     else{
-         this.Boss_timer = new Timer(5000, (new ActionListener() {
+       this.Boss_timer = new Timer(5000, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-               for (int i = 0; i < enemyArray.size(); i++){
-               enemyArray.get(i).coordinates.addVector(new IntVector2D(HorizontalSpeed,0));
-               // enemyArray.get(i).coordinates.addVector(new IntVector2D(HorizontalSpeed,0));
                music.playSound();
-                }
-                
+               Boss_timer.stop();
+                } 
+            }));
+       Boss_timer.start();
+    }
+    @Override
+    public void moveArmy(JPanel win, BulletHandler bullets){
+        if (enemyArray.get(0).getY() < 25){velocity = velocity1;}else{
+            if(HorizontalSpeed == 1){velocity = velocity2;}else{
+                velocity = velocity3;
             }
-        }));
-     Boss_timer.start();
+        }
+    
+        for (int k = 0; k < enemyArray.size();k++){
+            enemyArray.get(k).coordinates.addVector(velocity);
+        }
+       
+            
+        if(enemyArray.get(0).getX()<=0){
+            HorizontalSpeed = 1;
+        }
+        if (enemyArray.get(0).getX() >= 500){
+            HorizontalSpeed = -1;
+        }
     }
   
-    
-   
-    }
-//    @Override
-//       public void paint(Graphics2D win) {
-//           for (int i = 0; i < enemyArray.
-//           Bossleg1.paint(win);
-//           Boss.paint(win);
-//       
-//    }
-    @Override
+
+@Override
 void hit(int temp) {
             System.out.print("Enemy : ");
             System.out.print(temp);
