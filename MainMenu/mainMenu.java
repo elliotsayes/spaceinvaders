@@ -87,7 +87,7 @@ public class mainMenu extends JPanel {
         drawButtons(window);
     }
     
-    public void makeMenuButtons() {
+    protected void makeMenuButtons() {
         buttons = new ArrayList<>();
         ImageIcon unselectedImg = new ImageIcon(getClass().getResource("unselected.png"));
         ImageIcon selectedImg = new ImageIcon(getClass().getResource("selected.png"));
@@ -108,7 +108,7 @@ public class mainMenu extends JPanel {
                  && mouseLocation.getY() <= (buttons.get(i).boxCoordinates.getY() + buttons.get(i).buttonSize.getY())) {
                 hovered = true;
                 if (clicked) {
-                    executeClick(0,buttons.get(i).selection);
+                    executeClick(buttons.get(i).clickAction,buttons.get(i).selection);
                 } else {
                     selectionCandidate = i;
                 }
@@ -120,11 +120,11 @@ public class mainMenu extends JPanel {
         return selection;
     }
     
-    public void executeClick(int selectionType, int buttonSelection) {
+    protected void executeClick(int selectionType, int buttonSelection) {
         this.selection = buttonSelection;
     }
     
-    public void drawButtons(Graphics2D window) {
+    protected void drawButtons(Graphics2D window) {
         int i;
         for(i=0;i<buttons.size();i++) {
             if(selectionCandidate == i) {

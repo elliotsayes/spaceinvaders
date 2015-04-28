@@ -115,7 +115,7 @@ public class gameEngine {
                     gameWindow.validate();
                     optionsScreen.repaint();
                     // MainMenu loop Waits for a getSelection to be made
-                    while (optionsScreen.getSelection() == 0) {
+                    while (optionsScreen.getSelection() == 4) {
                         Thread.sleep(1);
                     }
                     // Removes MainMenu 
