@@ -94,15 +94,18 @@ public class gameEngine {
                     break;
                     
                 case 3: // Lose Screen
-                    music.loop("death");
+                    music.play("death");
                     loseWin = new Loser(new IntVector2D(windowSize.getX(), windowSize.getY()));
                     loseWin.setBackground(backgroundColor);
                     gameWindow.add(loseWin);
                     gameWindow.validate();
-                    Thread.sleep(5000);
+                    while(loseWin.getSelection()== 0){
+                        Thread.sleep(1);
+                    }
+                    game_state = loseWin.getSelection();
                     gameWindow.remove(loseWin);
                     music.stop("death");
-                    game_state = 0;
+                    
                     break;
             }
         }

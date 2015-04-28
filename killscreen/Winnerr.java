@@ -20,14 +20,14 @@ import javax.swing.Timer;
 public class Winnerr extends JPanel {
     Timer paint_timer, firework_rate,test;
     int paint_updatePS = 60;
-    int x = 500, selection = 0, selectionCandidate = 0, state = 0, i= -1,j;
+    int x = 500, selection = 0, selectionCandidate = 0, state = 0, i= -1, j=0;
     boolean hovered;
     final int paintUpdateRate = 1;
     Timer paintTimer;
     boolean temp = false;
     
     IntVector2D menuSize;
-    ArrayList<Button> buttons;
+    ArrayList<Button> buttons = new ArrayList();
     Button tempButton;
     
  
@@ -69,7 +69,7 @@ public class Winnerr extends JPanel {
             }
         });
         menuSize = windowSize;
-        ImageIcon pic = new ImageIcon(getClass().getResource("winner.jpg"));
+        ImageIcon pic = new ImageIcon(getClass().getResource("Winner.PNG"));
         JLabel label = new JLabel(pic, JLabel.CENTER);
         this.add(label);
         this.paint_timer = new Timer(1000/paint_updatePS, (new ActionListener() {
@@ -150,7 +150,7 @@ public class Winnerr extends JPanel {
      
       public void actuateMouse(IntVector2D mouseLocation, boolean clicked) {
         hovered = false;
-        for( j=0;j<buttons.size();j++) {    
+        for(j=0;j<buttons.size();j++) {    
             if (    mouseLocation.getX() >= buttons.get(j).boxCoordinates.getX()
                  && mouseLocation.getX() <= (buttons.get(j).boxCoordinates.getX() + buttons.get(j).buttonSize.getX()) 
                  && mouseLocation.getY() >= buttons.get(j).boxCoordinates.getY()

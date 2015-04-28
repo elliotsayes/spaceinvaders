@@ -27,7 +27,7 @@ public class Loser extends JPanel {
     boolean temp = false;
     
     IntVector2D menuSize;
-    ArrayList<Button> buttons;
+    ArrayList<Button> buttons = new ArrayList<>();;
     Button tempButton;
     
  
@@ -39,7 +39,7 @@ public class Loser extends JPanel {
 
 
     public Loser(IntVector2D windowSize) {
-         buttons = new ArrayList<>();
+//         buttons = new ArrayList<>();
             addMouseListener(new MouseListener() {
 
             @Override
@@ -75,36 +75,7 @@ public class Loser extends JPanel {
         this.add(label);   ImageIcon pic1 = new ImageIcon(getClass().getResource("DIED_1.PNG"));
         JLabel label1 = new JLabel(pic1, JLabel.CENTER);
         this.add(label1);
-//        this.paint_timer = new Timer(1000/paint_updatePS, (new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                
-//                firework.move();
-//                firework2.move();
-//                
-//                
-//                repaint();   
-//            }
-//        }));
-        
-//        this.firework_rate = new Timer(2000, (new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if(i == 1){
-//                    firework = new FireWorkHandler();
-//                }
-//                else{
-//                    firework2 = new FireWorkHandler();
-//                    
-//                }
-//                i = i*-1;
-//                
-//            }
-//        }));
-       
-       // paint_timer.start();
-        //firework_rate.start();
-       // paint_timer.setRepeats(true);
+
         
         this.test = new Timer(5000, (new ActionListener() {
             @Override
