@@ -17,6 +17,7 @@ public class MarloEnemy extends BasicEnemy {
     spriteHandler temp;
     Image pic;
     Timer animator;
+    int dir = 1;
     
     public MarloEnemy(int x, int y) throws IOException, URISyntaxException {
         super(x, y);
@@ -44,9 +45,12 @@ public class MarloEnemy extends BasicEnemy {
     
     @Override
      public void move(IntVector2D velocity, BulletHandler bullets) {
-       coordinates.addVector(velocity);
+       
        int num = ran.nextInt(50000);
-                    if (num<= 200 & num>= 10 ){
+       
+       coordinates.addVector(new IntVector2D(velocity.getX()*dir,0));
+       
+                    if (num<= 700 & num>= 10 ){
                         bullets.spawnMissile(getX(), getY(), 1);
                         pic = temp.getImage(1);
                         animator.start();
@@ -57,6 +61,12 @@ public class MarloEnemy extends BasicEnemy {
                     }
                     if (num<= 4 & num >= 3){
                         bullets.bullets.add(new SpeedPowerUp(getX(), getY(), 1));
+                    }
+                    if (num<= 5000 & num >= 50){
+                        coordinates.addVector(new IntVector2D(velocity.getX()*dir,0));
+                    }
+                    if (num<= 1200 & num >= 1000){
+                        dir*=-1;
                     }
     }
     

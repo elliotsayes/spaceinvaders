@@ -38,6 +38,12 @@ public class EnemyHandler {
             
         }
         
+         public EnemyHandler(int level){
+             int temp = level * ran.nextInt(level);
+             if(temp == 0){temp = level*level;}
+             
+         }
+        
         
         // Updates enemy position, controls movement pattern
 	void moveArmy(JPanel win, BulletHandler bullets) {
