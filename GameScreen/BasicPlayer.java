@@ -178,6 +178,6 @@ public class BasicPlayer {
 
     public void locationRespawn() {
         coordinates.setX(370);
-        coordinates.setY(500);
+        //coordinates.setY(500);
     }
 }

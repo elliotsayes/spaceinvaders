@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -43,7 +47,7 @@ public class GamePanel extends JPanel {
     int enemy_updateInterval = 200;
     
     // gameScreen Constructor
-    public GamePanel() {
+    public GamePanel() throws IOException, URISyntaxException {
         // ActionListener for time, what happens when timer executes
         this.paint_timer = new Timer(1000/paint_updateInterval, (new ActionListener() {
             @Override
@@ -117,6 +121,15 @@ public class GamePanel extends JPanel {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
                     selection = loseScreen;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_M) {
+                    try {
+                        shooter = new PlayerMarlo();
+                    } catch (IOException ex) {
+                        Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (URISyntaxException ex) {
+                        Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 
             }
