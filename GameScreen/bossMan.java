@@ -38,7 +38,9 @@ public class bossMan extends EnemyHandler {
    IntVector2D velocity3 = new IntVector2D(-3,0);
     ImageIcon image = new ImageIcon("BossMan.png")  ;
     
-    int size = 300;
+    int size = 300, bossStartY = -295;
+    IntVector2D BOSSstartCoordinates = new IntVector2D(250,-295);
+//    IntVector2D LEG1startCoordinates = new IntVector2D(250,-295);
     static String CthuluDarkLordLeg1 = "Tenticle 1 move.gif";
     static String CthuluDarkLord = "BossMan_1.png";
 
@@ -46,8 +48,8 @@ public class bossMan extends EnemyHandler {
        
        super(); 
        enemyArray = new ArrayList<>();
-       this.Boss = new BasicEnemy(250,-295,1,size,CthuluDarkLord);
-       this.Bossleg1 = new BasicEnemy(300,-150,1,80,CthuluDarkLordLeg1);
+       this.Boss = new BasicEnemy(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),1,size,CthuluDarkLord);
+       this.Bossleg1 = new BasicEnemy(BOSSstartCoordinates.getX()+50,BOSSstartCoordinates.getY()+155,1,80,CthuluDarkLordLeg1);
        enemyArray.add(Boss);
        enemyArray.add(Bossleg1);
 //        this.coordinates = new IntVector2D (200,-100);
@@ -61,8 +63,10 @@ public class bossMan extends EnemyHandler {
         HorizontalSpeed = -3;
     }
     if (enemyArray.get(0).getY() < 25){
-     enemyArray.get(0).coordinates.addVector(velocity1);
-     enemyArray.get(0).coordinates.addVector(velocity1);
+        for (int k = 0; k < enemyArray.size();k++){
+     enemyArray.get(k).coordinates.addVector(velocity1);
+//     enemyArray.get(0).coordinates.addVector(velocity1);
+        }
      
  
     }
@@ -71,9 +75,9 @@ public class bossMan extends EnemyHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                if(enemyArray.size() ==2){
-               enemyArray.get(0).coordinates.addVector(new IntVector2D(HorizontalSpeed,0));
-                enemyArray.get(1).coordinates.addVector(new IntVector2D(HorizontalSpeed,0));
+               for (int i = 0; i < enemyArray.size(); i++){
+               enemyArray.get(i).coordinates.addVector(new IntVector2D(HorizontalSpeed,0));
+               // enemyArray.get(i).coordinates.addVector(new IntVector2D(HorizontalSpeed,0));
                music.playSound();
                 }
                 
