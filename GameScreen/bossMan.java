@@ -30,6 +30,7 @@ public class bossMan extends EnemyHandler {
     BasicEnemy Bossleg1;
     boolean reached ;
     int HorizontalSpeed = -3;
+    
     Random CrazyMike = new Random();
     int Horizontal = 800, Vertical = 200; 
    IntVector2D velocity1 = new IntVector2D(0,3) ;
@@ -43,21 +44,25 @@ public class bossMan extends EnemyHandler {
 
     public bossMan() {
        
-         
-        this.Boss = new BasicEnemy(250,-295,1,size,CthuluDarkLord);
+       super(); 
+       enemyArray = new ArrayList<>();
+       this.Boss = new BasicEnemy(250,-295,1,size,CthuluDarkLord);
        this.Bossleg1 = new BasicEnemy(300,-150,1,80,CthuluDarkLordLeg1);
+       enemyArray.add(Boss);
+       enemyArray.add(Bossleg1);
 //        this.coordinates = new IntVector2D (200,-100);
     }
-    public void move(){  System.out.println("test");
-     if(Boss.coordinates.getX()<=0){
+    @Override
+    public void moveArmy(JPanel win, BulletHandler bullets){  
+     if(enemyArray.get(0).getX()<=0){
          HorizontalSpeed = 3;
     }
-    if (Boss.coordinates.getX() >= 500){
+    if (enemyArray.get(0).getX() >= 500){
         HorizontalSpeed = -3;
     }
-    if (Boss.coordinates.getY() < 25){
-     Boss.coordinates.addVector(velocity1);
-     Bossleg1.coordinates.addVector(velocity1);
+    if (enemyArray.get(0).getY() < 25){
+     enemyArray.get(0).coordinates.addVector(velocity1);
+     enemyArray.get(0).coordinates.addVector(velocity1);
      
  
     }
@@ -66,10 +71,11 @@ public class bossMan extends EnemyHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                
-               Boss.coordinates.addVector(new IntVector2D(HorizontalSpeed,0));
-               Bossleg1.coordinates.addVector(new IntVector2D(HorizontalSpeed,0));
+                if(enemyArray.size() ==2){
+               enemyArray.get(0).coordinates.addVector(new IntVector2D(HorizontalSpeed,0));
+                enemyArray.get(1).coordinates.addVector(new IntVector2D(HorizontalSpeed,0));
                music.playSound();
+                }
                 
             }
         }));
@@ -79,9 +85,13 @@ public class bossMan extends EnemyHandler {
     
    
     }
-       public void bossPaint(Graphics2D win) {
-           Bossleg1.paint(win);
-           Boss.paint(win);
+//    @Override
+//       public void paint(Graphics2D win) {
+//           for (int i = 0; i < enemyArray.
+//           Bossleg1.paint(win);
+//           Boss.paint(win);
+//       
+//    }
        
-    }
+    
 }
