@@ -28,6 +28,7 @@ public class bossMan extends EnemyHandler {
     Timer Boss_timer;
     BasicEnemy Boss;
     BasicEnemy Bossleg1;
+    BasicEnemy Bossleg2;
     boolean reached ;
     int HorizontalSpeed = -3;
     
@@ -42,7 +43,8 @@ public class bossMan extends EnemyHandler {
     IntVector2D BOSSstartCoordinates = new IntVector2D(250,-295);
 //    IntVector2D LEG1startCoordinates = new IntVector2D(250,-295);
     static String CthuluDarkLordLeg1 = "Tenticle 1 move.gif";
-    static String CthuluDarkLord = "BossMan_1.png";
+    static String CthuluDarkLord = "BossMan2.png";
+    static String CthuluDarkLordLeg2 = "Tentacle2_move.gif";
 
     public bossMan() {
        
@@ -50,8 +52,10 @@ public class bossMan extends EnemyHandler {
        enemyArray = new ArrayList<>();
        this.Boss = new BasicEnemy(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),1,size,CthuluDarkLord);
        this.Bossleg1 = new BasicEnemy(BOSSstartCoordinates.getX()+50,BOSSstartCoordinates.getY()+155,1,80,CthuluDarkLordLeg1);
+       this.Bossleg2 = new BasicEnemy(BOSSstartCoordinates.getX()+85,BOSSstartCoordinates.getY()+160,1,90,CthuluDarkLordLeg2);
        enemyArray.add(Boss);
        enemyArray.add(Bossleg1);
+       enemyArray.add(Bossleg2);
 //        this.coordinates = new IntVector2D (200,-100);
     }
     @Override
