@@ -13,8 +13,8 @@ public class spriteHandler {
     static String imageName = "test.png";
     BufferedImage image;
     
-    public spriteHandler() throws IOException, URISyntaxException{
-        image = ImageIO.read(new File(getClass().getResource(imageName).toURI()));
+    public spriteHandler(String x) throws IOException, URISyntaxException{
+        image = ImageIO.read(new File(getClass().getResource(x).toURI()));
         
     }
     

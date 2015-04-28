@@ -3,6 +3,8 @@ package GameScreen;
 
 import GameEngine.IntVector2D;
 import java.awt.Graphics2D;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
@@ -19,14 +21,15 @@ public class EnemyHandler {
         Random ran = new Random();
         
         // EnemyHandler Constructor initialises array setting enemy types and layout 
-        public EnemyHandler(){
+        public EnemyHandler() throws IOException, URISyntaxException{
              // Initialises enemys
             enemyArray = new ArrayList<>();
             int x = 20;
             int y = 30;
             for(int temp1 = 0;temp1!=3;temp1++){
                 for(int temp = 0;temp!=enemyArraySize;temp++){
-                enemyArray.add(new BasicEnemy(x,y));
+                  enemyArray.add(new BasicEnemy(x,y));
+                  //enemyArray.add(new beyonceEnemy(x,y));
                 x = x + 40;
                 }
             y += 60;

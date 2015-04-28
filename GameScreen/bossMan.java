@@ -12,6 +12,8 @@ import MainMenu.Button;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import static java.nio.file.Files.size;
 import java.util.ArrayList;
 import java.util.Random;
@@ -48,7 +50,7 @@ public class bossMan extends EnemyHandler {
     static String CthuluDarkLordLeg2 = "Tentacle2_move.gif";
     static String CthuluDarkLordLeg3 = "Tenticle3_fast.gif";
 
-    public bossMan() {
+    public bossMan() throws IOException, URISyntaxException {
        
        super(); 
        enemyArray = new ArrayList<>();

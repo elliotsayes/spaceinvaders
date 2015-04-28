@@ -53,7 +53,13 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 repaint();
-                checkCollision();    
+                try {    
+                    checkCollision();
+                } catch (IOException ex) {
+                    Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }));
 
@@ -114,7 +120,13 @@ public class GamePanel extends JPanel {
                 }    
                 
                 if (e.getKeyCode() == KeyEvent.VK_R) {
-                    restart();
+                    try {
+                        restart();
+                    } catch (IOException ex) {
+                        Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (URISyntaxException ex) {
+                        Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_PAGE_UP) {
                     selection = winScreen;
@@ -125,6 +137,8 @@ public class GamePanel extends JPanel {
                 if (e.getKeyCode() == KeyEvent.VK_M) {
                     try {
                         shooter = new PlayerMarlo();
+                        invaders.enemyArray.clear();
+                        invaders.enemyArray.add(new MarloEnemy(80,80));
                     } catch (IOException ex) {
                         Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (URISyntaxException ex) {
@@ -164,7 +178,7 @@ public class GamePanel extends JPanel {
         shooter.move(this,bullets);
     }
 
-    public void checkCollision() {
+    public void checkCollision() throws IOException, URISyntaxException {
         
         for (int i = 0; i < bullets.getbullets().size(); i++) {
             if(barrierHit(bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
@@ -185,7 +199,7 @@ public class GamePanel extends JPanel {
                 }
             }else{
                 for (int j = 0; j < invaders.enemyArray.size(); j++) {
-                    if(hitBox(invaders.enemyArray.get(j).getX(),invaders.enemyArray.get(j).getY(),30,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
+                    if(hitBox(invaders.enemyArray.get(j).getX(),invaders.enemyArray.get(j).getY(),invaders.enemyArray.get(j).size,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
                     invaders.hit(j);
                     // Changes selection to win state
                     if(invaders.enemyArray.isEmpty()){
@@ -210,7 +224,7 @@ public class GamePanel extends JPanel {
         boolean temp = barrierHit(invaders.enemyArray.get(j).getX(),invaders.enemyArray.get(j).getY(),invaders.enemyArray.get(j).size);}
     }
    
-    public void restart() {
+    public void restart() throws IOException, URISyntaxException {
         level += 1;
         if(level < 3){invaders = new EnemyHandler();}else{
             invaders = new bossMan();
