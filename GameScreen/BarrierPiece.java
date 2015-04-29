@@ -35,9 +35,7 @@ public class BarrierPiece {
    
    public void piecePaint (Graphics2D barrier){
         barrier.setColor(Color.GREEN);
-        barrier.//fillRect(coordinates.getX(), coordinates.getY(), size, size);//
-                //draw3DRect(coordinates.getX(), coordinates.getY(), size, size, true);
-                fill3DRect(coordinates.getX(), coordinates.getY(), size, size, true);
+        barrier.fill3DRect(coordinates.getX(), coordinates.getY(), size, size, true);
     }
     
   
