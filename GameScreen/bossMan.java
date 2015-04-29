@@ -28,7 +28,7 @@ import javax.swing.Timer;
  */
 public class bossMan extends EnemyHandler {
     AudioPlayer music = new AudioPlayer("boss.mid", "BossMusic") ;
-    Timer Boss_timer, Test_timer;
+    Timer Boss_timer, Test_timer, Another_timer;
     BasicEnemy Boss;
     BasicEnemy Bossleg1;
     BasicEnemy Bossleg2;
@@ -91,16 +91,30 @@ public class bossMan extends EnemyHandler {
                 } 
             }));
        Boss_timer.start();
+      
+    
+//             this.Another_timer = new Timer(5000, (new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//              // music.playSound();
+//               Another_timer.stop();
+//              
+//                } 
+//            }));
+            
+      
     }
     @Override
     public void moveArmy(JPanel win, BulletHandler bullets){
     if (enemyArray.size() != 0 ){
-        if (enemyArray.get(0).getY() < 25){velocity = velocity1;}else{
+        if (enemyArray.get(0).getY() < 25){velocity = velocity1;}else{  Another_timer.start();
             if(HorizontalSpeed == 1){velocity = velocity2;}else{
                 velocity = velocity3;
+              
             }
         }
-    
+        
+          
         for (int k = 0; k < enemyArray.size();k++){
             enemyArray.get(k).coordinates.addVector(velocity);
         }
@@ -114,6 +128,7 @@ public class bossMan extends EnemyHandler {
         }
     }
     }
+    
   
 
 @Override
@@ -123,6 +138,7 @@ void hit(int temp) {
             System.out.print(" Health: ");
             System.out.print(enemyArray.get(temp).health);
             System.out.print("\n");
+        if(Boss.coordinates.getY()<25){return;}    
         if((temp == 0) & enemyArray.size() != 1 ){return;}    
         if(enemyArray.get(temp).hit(1)){
            enemyArray.remove(temp); 
@@ -135,18 +151,18 @@ void hit(int temp) {
         
         win.drawString("HEALTH: ", 20, 40);
         for (int i = 0; i<enemyArray.size();i++){
-            if(enemyArray.get(i).health < 3){
-                win.setColor(Color.red);
-            }
-            enemyArray.get(i).paint(win);
-         if ((int) (enemyArray.get(i).health*k) < enemyArray.get(i).health*2){
-              win.setColor(Color.red);
-         }
-                // (double)enemyArray.get(i).health;
-                win.fillRect(80, 40 + (i*20),(int) (enemyArray.get(i).health*k), 10);
-                 Test_timer.start();
            
+                enemyArray.get(i).paint(win);
+            if ((int) (enemyArray.get(i).health*k) < enemyArray.get(i).health*2){
+                win.setColor(Color.red); 
+                }
+                // (double)enemyArray.get(i).health; 
+             if(enemyArray.get(i).health < 5){win.setColor(Color.red);}
+        win.fillRect(80, 40 + (i*20),(int) (enemyArray.get(i).health*k), 10);
+                win.setColor(Color.green);
+        Test_timer.start();
            
+            
         
         }
     }
