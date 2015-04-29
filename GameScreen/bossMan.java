@@ -28,11 +28,12 @@ import javax.swing.Timer;
  */
 public class bossMan extends EnemyHandler {
     AudioPlayer music = new AudioPlayer("boss.mid", "BossMusic") ;
-    Timer Boss_timer;
+    Timer Boss_timer, Test_timer;
     BasicEnemy Boss;
     BasicEnemy Bossleg1;
     BasicEnemy Bossleg2;
     BasicEnemy Bossleg3;
+    BasicEnemy Bossleg4;
     boolean reached ;
     int HorizontalSpeed = 1;
     
@@ -42,33 +43,51 @@ public class bossMan extends EnemyHandler {
     IntVector2D velocity1 = new IntVector2D(0,3) ;
     IntVector2D velocity2 = new IntVector2D(1,0) ;
     IntVector2D velocity3 = new IntVector2D(-1,0) ;
-    
-    int size = 300, bossStartY = -295;
+    double k = 0;
+    int size =200, bossStartY = -295;
     IntVector2D BOSSstartCoordinates = new IntVector2D(250,-295);
+    IntVector2D Tenticles = new IntVector2D(205,-280);
 //    IntVector2D LEG1startCoordinates = new IntVector2D(250,-295);
     static String CthuluDarkLordLeg1 = "Tenticle 1 move.gif";
-    static String CthuluDarkLord = "BossManFix.png";
+    static String CthuluDarkLord = "BossManFinal.png";
     static String CthuluDarkLordLeg2 = "Tentacle2_move.gif";
     static String CthuluDarkLordLeg3 = "Tenticle3_fast.gif";
+    static String CthuluDarkLordLeg4 = "Tenticle4.gif";
+    static String CthulhuLogo = "Cthulhu lgo.png";
 
     public bossMan() throws IOException, URISyntaxException {
        
        super(); 
        enemyArray = new ArrayList<>();
-       this.Boss = new BasicEnemy(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),5,size,CthuluDarkLord);
-       this.Bossleg1 = new BasicEnemy(BOSSstartCoordinates.getX()+50,BOSSstartCoordinates.getY()+155,5,80,CthuluDarkLordLeg1);
-       this.Bossleg2 = new BasicEnemy(BOSSstartCoordinates.getX()+85,BOSSstartCoordinates.getY()+160,5,90,CthuluDarkLordLeg2);
-        this.Bossleg3 = new BasicEnemy(BOSSstartCoordinates.getX()+ 135,BOSSstartCoordinates.getY()+165,5,80,CthuluDarkLordLeg3);
+    
+       this.Boss = new BasicEnemy(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),100,size,CthuluDarkLord);
+       this.Bossleg1 = new BasicEnemy(Tenticles.getX()+50,Tenticles.getY()+155,10,70,CthuluDarkLordLeg1);
+       this.Bossleg2 = new BasicEnemy(Tenticles.getX()+85,Tenticles.getY()+160,10,80,CthuluDarkLordLeg2);
+       this.Bossleg3 = new BasicEnemy(Tenticles.getX()+ 135,Tenticles.getY()+159,10,70,CthuluDarkLordLeg3);
+       this.Bossleg4 = new BasicEnemy(Tenticles.getX()+ 170,Tenticles.getY()+160,10,70,CthuluDarkLordLeg4);
        enemyArray.add(Boss);
        enemyArray.add(Bossleg1);
        enemyArray.add(Bossleg2);
        enemyArray.add(Bossleg3);
+       enemyArray.add(Bossleg4);
+            this.Test_timer = new Timer(10,(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        if(k < 5){
+                             k = k + 0.01;
+                        }
+                    }
+                    
+                }));
+             // Test_timer.start();
+            
 //        this.coordinates = new IntVector2D (200,-100);
        this.Boss_timer = new Timer(5000, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                music.playSound();
                Boss_timer.stop();
+              
                 } 
             }));
        Boss_timer.start();
@@ -111,12 +130,24 @@ void hit(int temp) {
     
 }
  public void paint(Graphics2D win) {
-        win.setColor(Color.red);
-       
+        win.setColor(Color.green);
+     
+        
         win.drawString("HEALTH: ", 20, 40);
         for (int i = 0; i<enemyArray.size();i++){
+            if(enemyArray.get(i).health < 3){
+                win.setColor(Color.red);
+            }
             enemyArray.get(i).paint(win);
-            win.fillRect(80, 40 + (i*20), enemyArray.get(i).health*10, 10);
+         if ((int) (enemyArray.get(i).health*k) < enemyArray.get(i).health*2){
+              win.setColor(Color.red);
+         }
+                // (double)enemyArray.get(i).health;
+                win.fillRect(80, 40 + (i*20),(int) (enemyArray.get(i).health*k), 10);
+                 Test_timer.start();
+           
+           
+        
         }
     }
     
