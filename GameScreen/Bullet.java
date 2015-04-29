@@ -11,7 +11,7 @@ public class Bullet {
     Color color;// = Color.red;
     int size;// = 3;
     IntVector2D coordinates, velocity;
-    AudioPlayer fire_sound = new AudioPlayer("shoot.wav","shoot");
+    //AudioPlayer fire_sound = new AudioPlayer("shoot.wav","shoot");
 
     // Creates bullet at (x,y) with direction
     public Bullet(int x, int y, int verticalVelocity) {
@@ -25,7 +25,7 @@ public class Bullet {
         this.velocity = new IntVector2D(0,verticalVelocity);
         this.color = color;
         this.size = size;
-        fire_sound.playSound();
+        //fire_sound.playSound();
     }
 
     // moves bullet, controls movement pattern 

@@ -1,6 +1,7 @@
 
 package GameScreen;
 
+import GameEngine.AudioPlayer;
 import GameEngine.IntVector2D;
 import java.awt.Graphics2D;
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class EnemyHandler {
         }
         public EnemyHandler(int level) throws IOException, URISyntaxException{
              // Initialises enemys
+            
             enemyArray = new ArrayList<>();
             int x = 20;
             int y = 30;
@@ -34,9 +36,10 @@ public class EnemyHandler {
              if(hp == 0){hp = level*level;}
              x = (30+(5*hp))/2;
              if(x >= 30){
-                 enemyArray.add(new MarloEnemy(x,y));
+                 enemyArray.add(new AdvancedEnemy(x,y));
                  y+= 90;
                  hp = 1;
+                 level = 1;
                  x = (30+(5*hp))/2;
                  temp1++;
              }

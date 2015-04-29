@@ -38,6 +38,7 @@ public class AudioPlayer {
     }
     
     public void playSound(){
+        clip.setFramePosition(0);  // Must always rewind!
         clip.start();
      }
     
@@ -47,6 +48,10 @@ public class AudioPlayer {
     
     public void Loop(){
         clip.loop(300);
+     }
+    
+    public void close(){
+        clip.close();
      }
     
 }

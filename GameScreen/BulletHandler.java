@@ -1,5 +1,6 @@
 package GameScreen;
 
+import GameEngine.AudioPlayer;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ public class BulletHandler {
     ArrayList<Bullet> bullets;
     //boolean can_shoot = true;
     Timer velocity_timer;
+    AudioPlayer fire_sound = new AudioPlayer("shoot.wav","shoot");
 
     // Constructor initialises array of bullets
     public BulletHandler( int velocity) {
@@ -28,6 +30,7 @@ public class BulletHandler {
     // Adds bullet and (x,y) 
     public void spawnMissile(int x, int y, int direction) {
             bullets.add(new Bullet(x, y, direction));
+            fire_sound.playSound();
     }
 
     // Paints bullets
