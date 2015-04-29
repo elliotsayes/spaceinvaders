@@ -74,7 +74,7 @@ public class BasicEnemy {
     public void move(IntVector2D velocity, BulletHandler bullets) {
        coordinates.addVector(velocity);
        int num = ran.nextInt(50000);
-                    if (num<= 20 & num>= 10 ){
+                    if (num<= 50 & num>= 10 ){
                         bullets.spawnMissile(getX(), getY(), 1);
                     }
                     // Temp way to add different bullet types
@@ -94,6 +94,7 @@ public class BasicEnemy {
     // Damages enemy and returns 1 if no signs of life
     public boolean hit(int damage) {
         health -= damage;
+        size -= 5;
         if (health == 0) {
             return (true);
         }

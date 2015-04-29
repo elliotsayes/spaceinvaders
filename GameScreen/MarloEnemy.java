@@ -24,7 +24,7 @@ public class MarloEnemy extends BasicEnemy {
         this.temp = new spriteHandler("test.png");
         pic = temp.getImage(0);
         this.health = 50;
-        this.size = 90;
+        this.size = 80;
         animator = new Timer(800, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,7 +48,9 @@ public class MarloEnemy extends BasicEnemy {
        
        int num = ran.nextInt(50000);
        
-       coordinates.addVector(new IntVector2D(velocity.getX()*dir,0));
+       if(coordinates.getX()+velocity.getX()*dir > 0 & coordinates.getX()+velocity.getX()*dir < 710){
+        coordinates.addVector(new IntVector2D(velocity.getX()*dir,0));
+       }
        
                     if (num<= 700 & num>= 10 ){
                         bullets.spawnMissile(getX(), getY(), 1);

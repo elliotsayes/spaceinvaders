@@ -20,29 +20,38 @@ public class EnemyHandler {
         //BulletHandler bullets = new BulletHandler(1 , fireDelay);
         Random ran = new Random();
         
-        // EnemyHandler Constructor initialises array setting enemy types and layout 
+        // EnemyHandler Constructor initialises array setting enemy types and layout
         public EnemyHandler() throws IOException, URISyntaxException{
+            this(1);
+        }
+        public EnemyHandler(int level) throws IOException, URISyntaxException{
              // Initialises enemys
             enemyArray = new ArrayList<>();
             int x = 20;
             int y = 30;
             for(int temp1 = 0;temp1!=3;temp1++){
-                for(int temp = 0;temp!=enemyArraySize;temp++){
-                  enemyArray.add(new BasicEnemy(x,y));
+             int hp = level * ran.nextInt(level);
+             if(hp == 0){hp = level*level;}
+             x = (30+(5*hp))/2;
+             if(x >= 30){
+                 enemyArray.add(new MarloEnemy(x,y));
+                 y+= 90;
+                 hp = 1;
+                 x = (30+(5*hp))/2;
+                 temp1++;
+             }
+                for(int temp = 0;temp!=400/(30+(5*hp));temp++){
+                  enemyArray.add(new BasicEnemy(x,y,hp,(30+(5*hp)),"Basic_Enemy_Sprite.gif"));
                   //enemyArray.add(new beyonceEnemy(x,y));
-                x = x + 40;
+                x = x + ((30+(5*hp)));
                 }
-            y += 60;
+            y += (30+(5*hp)) + (30+(5*hp))/2;
             x = 20;
             }
             
         }
         
-         public EnemyHandler(int level){
-             int temp = level * ran.nextInt(level);
-             if(temp == 0){temp = level*level;}
-             
-         }
+         
         
         
         // Updates enemy position, controls movement pattern
