@@ -107,7 +107,7 @@ public class bossMan extends EnemyHandler {
     @Override
     public void moveArmy(JPanel win, BulletHandler bullets){
     if (enemyArray.size() != 0 ){
-        if (enemyArray.get(0).getY() < 25){velocity = velocity1;}else{  Another_timer.start();
+        if (enemyArray.get(0).getY() < 25){velocity = velocity1;}else{ // Another_timer.start();
             if(HorizontalSpeed == 1){velocity = velocity2;}else{
                 velocity = velocity3;
               
