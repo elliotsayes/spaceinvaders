@@ -42,8 +42,8 @@ public class GamePanel extends JPanel {
     
     // Game timer for repaint
     Timer paint_timer, player_timer, enemy_timer, powerUpTimer;
-    int paint_updateInterval = 120;
-    int player_updateInterval = 250;
+    int paint_updateInterval = 300;
+    int player_updateInterval = 300;
     int enemy_updateInterval = 200;
     
     // gameScreen Constructor
@@ -190,8 +190,9 @@ public class GamePanel extends JPanel {
                         bullets.getbullets().remove(i);
                     }
                     else {
-                    bullets.getbullets().remove(i);
                     shooter.playerHit();
+                    bullets.getbullets().get(i).upgrade(this); 
+                    bullets.getbullets().remove(i);
                     }
                     // Changes selection to lose state
                     if(shooter.getHealth() == 0){selection = loseScreen;}

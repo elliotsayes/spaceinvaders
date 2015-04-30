@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 
 public class HealthPowerUp extends Bullet {
-     ImageIcon Health          = new ImageIcon(getClass().getResource("HealthImage.png"));
+     ImageIcon Health          = new ImageIcon(getClass().getResource("SpeedPowerUp.png"));
 
     public HealthPowerUp(int x, int y, int verticalVelocity) {
         super(x, y, verticalVelocity, Color.BLUE, 3);

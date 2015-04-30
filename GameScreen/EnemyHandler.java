@@ -37,7 +37,7 @@ public class EnemyHandler {
              int hp = level * ran.nextInt(level);
              if(hp == 0){hp = level*level;}
              x = (30+(5*hp))/2;
-             if(x >= 30){
+             if((x >= 30)&(temp1 == 0)){
                  enemyArray.add(new AdvancedEnemy(300,y));
                  y+= 70;
                  //hp = 1;

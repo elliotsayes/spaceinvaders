@@ -4,6 +4,8 @@ import GameEngine.AudioPlayer;
 import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class Bullet {
@@ -51,7 +53,21 @@ public class Bullet {
     }
     
     public void upgrade(GamePanel g){
+        g.shooter.color = Color.WHITE;
+        g.shooter.invincible = true;
+
+        g.powerUpTimer = new Timer(1500, (new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                g.powerUpTimer.stop();
+                g.shooter.color = Color.GREEN;
+                g.shooter.invincible = false;
+            }
+        }));
+        g.powerUpTimer.start();
     }
+    
+
     
     
 }

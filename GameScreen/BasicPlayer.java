@@ -34,6 +34,7 @@ public class BasicPlayer {
     boolean can_shoot = true;
     //Entite Audio Handler
     AudioHandler soundEffects = new AudioHandler();
+    boolean invincible = false;
     // Unused
     //int xa;
     //ImageIcon image;
@@ -171,9 +172,11 @@ public class BasicPlayer {
     }
 
     void playerHit() {
+        if(!invincible){
         health -= 1;
         soundEffects.play("hit");
         locationRespawn();
+        }
     }
 
     public void locationRespawn() {
