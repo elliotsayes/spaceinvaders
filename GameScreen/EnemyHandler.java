@@ -42,9 +42,10 @@ public class EnemyHandler {
                  y+= 70;
                  //hp = 1;
                  //level = 1;
-                 x = (30+(5*hp))/2;
                  continue;
              }
+             if(hp > 10){hp = ran.nextInt(8);}
+             x = (30+(5*hp))/2;
                 for(int temp = 0;temp<=400/(30+(5*hp));temp++){
                   enemyArray.add(new BasicEnemy(x,y,hp,(30+(5*hp)),"Basic_Enemy_Sprite.gif"));
                   //enemyArray.add(new beyonceEnemy(x,y));
