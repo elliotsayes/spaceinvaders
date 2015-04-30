@@ -35,7 +35,7 @@ public class bossMan extends EnemyHandler {
     // Initialising the boss Music
     AudioPlayer music = new AudioPlayer("boss.mid", "BossMusic") ;
     // Initialising the Timers 
-    Timer BossMusic_timer, Health_timer, Fade_timer;
+    Timer BossMusic_timer, Health_timer, Fade_timer, BossMovement_timer;
     
     //Initialising the Boss components to Enemys
     BasicEnemy Boss;
@@ -45,13 +45,14 @@ public class bossMan extends EnemyHandler {
     BasicEnemy Bossleg4;
 
     IntVector2D velocity;
-    IntVector2D velocity1            = new IntVector2D(0,3);
+    IntVector2D velocity1            = new IntVector2D(0,1);
     IntVector2D velocity2            = new IntVector2D(1,0);
     IntVector2D velocity3            = new IntVector2D(-1,0);
     double k = 0;
     int size =200;
     int r = 0 ;
     int HorizontalSpeed = 1;
+    boolean toMove = false;
     //Adding the image for the health bar
     ImageIcon CthulhuLogo            = new ImageIcon(getClass().getResource("Cthulhu logo.png"));  
     // Adding each image with different opacities
@@ -65,8 +66,8 @@ public class bossMan extends EnemyHandler {
     ImageIcon CthulhuTitle7          = new ImageIcon(getClass().getResource("TheDarkLordCthulhu7.png"));
     ImageIcon CthulhuTitle8          = new ImageIcon(getClass().getResource("TheDarkLordCthulhu8.png"));
     ImageIcon CthulhuTitle9          = new ImageIcon(getClass().getResource("TheDarkLordCthulhu9.png"));
-    IntVector2D BOSSstartCoordinates = new IntVector2D(250,-295);
-    IntVector2D Tenticles            = new IntVector2D(205,-280);
+    IntVector2D BOSSstartCoordinates = new IntVector2D(275,-295);
+    IntVector2D Tenticles            = new IntVector2D(BOSSstartCoordinates.getX()-45,BOSSstartCoordinates.getY()+15);
     
     // Adding each gif name into a string to use in the Basic Enemy contructor
     static String CthuluDarkLordLeg1 = "Tenticle 1 move.gif";
@@ -95,7 +96,7 @@ public class bossMan extends EnemyHandler {
                     @Override
                     public void actionPerformed(ActionEvent e){
                         if(k < 5){
-                             k = k + 0.01;
+                             k = k + 0.05;
                         }
                     }
                     
@@ -104,48 +105,71 @@ public class bossMan extends EnemyHandler {
        this.BossMusic_timer = new Timer(5000, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               music.playSound();
+              if(!toMove){
+                   music.playSound();
+              } 
                BossMusic_timer.stop();
-               
-               
-               
                 
                 } 
             }));
-       BossMusic_timer.start();
-      
+       
      //This Timer determines when to switch the image for the title
             this.Fade_timer = new Timer(150, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+               
                 if (r < 8){
                     r++;
                     }
-                else{
-                    r = 9;
+                    else{
+                        r = 9;
+                   
                     Fade_timer.stop();
                     }
-                             
-            }
+                }           
+            
             }));
             
+            this.BossMovement_timer = new Timer(5000, (new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+              toMove = true;
+               BossMovement_timer.stop();
+              
+                         
+            }
+            }));
+//            BossMovement_timer.start();
       
     }
     // moveArmy is from the Enemy Handler, but Overwritten here for the boss movment 
     @Override
     public void moveArmy(JPanel win, BulletHandler bullets){
     if (enemyArray.size() != 0 ){
-        if (enemyArray.get(0).getY() < 25){
+        
+        if (enemyArray.get(0).getY() <= 25){
+            
+          
             velocity = velocity1;
+             BossMusic_timer.start();
+             BossMovement_timer.start();
          }
         
-        else{ //Fade_timer.start();
+        else if(!toMove) { 
+            velocity = new IntVector2D(0,0) ;
             
-            if(HorizontalSpeed == 1){
-            velocity = velocity2;}
-            else{
-                velocity = velocity3;
+        }
+           
+        else{
+                
+                if(HorizontalSpeed == 1){
+                 velocity = velocity2;}
+                else{
+                //BossMovement_timer.start();
+                    velocity = velocity3;
                 }   
+            }
         }
         
           
@@ -157,11 +181,11 @@ public class bossMan extends EnemyHandler {
         if(enemyArray.get(0).getX()<=0){
             HorizontalSpeed = 1;
         }
-        if (enemyArray.get(0).getX() >= 500){
+        if (enemyArray.get(0).getX() >= 600){
             HorizontalSpeed = -1;
         }
     }
-    }
+    
     
   
 // The hit function determines if the boss is below a certain y coordinate it is invulnerable to hits, 
@@ -174,7 +198,7 @@ void hit(int temp) {
             System.out.print(" Health: ");
             System.out.print(enemyArray.get(temp).health);
             System.out.print("\n");
-        if(Boss.coordinates.getY()<25){return;}    
+        if(!toMove){return;}    
         if((temp == 0) & enemyArray.size() != 1 ){return;}    
         if(enemyArray.get(temp).hit(1)){
            enemyArray.remove(temp); 
@@ -186,31 +210,38 @@ void hit(int temp) {
         win.setColor(Color.green);
         
 //        Another_timer.start();
-        if(enemyArray.get(0).getY() < 25){
-//            for (int r = 3; r >= 0 ; r--){
-                
-                   //String test = new String("CthulhuTitle"+Integer.toString(r)+".png");
+        if(enemyArray.get(0).coordinates.getY() >= 24 && enemyArray.get(0).coordinates.getY() <= 26){
+           if(!toMove){
                    ImageIcon DrawImage = new ImageIcon(getClass().getResource("TheDarkLordCthulhu"+Integer.toString(r)+".png"));
+                  
                    Fade_timer.start();
-                   win.drawImage(DrawImage.getImage(), 100, 300, null);
                    
-//            }
+                   win.drawImage(DrawImage.getImage(), 100, 300, null);
+           }
+                   
+                   
         }
-        win.drawImage(CthulhuLogo.getImage(), 20, 40, null);
+        
+        
        // This determines whether the health of a certain figure is below a certain point - after that turns the
         // health bar red. But is otherwise green
         for (int i = 0; i<enemyArray.size();i++){
+           
            
                 enemyArray.get(i).paint(win);
             if ((int) (enemyArray.get(i).health*k) < enemyArray.get(i).health*2){
                 win.setColor(Color.red); 
                 }
                 // (double)enemyArray.get(i).health; 
+             if(toMove){
+                 win.drawImage(CthulhuLogo.getImage(), 20, 40, null);
              if(enemyArray.get(i).health < 5){win.setColor(Color.red);}
                      win.fill3DRect(80, 40 + (i*20),(int) (enemyArray.get(i).health*k), 10,true);
                      win.setColor(Color.green);
                      // Starting the timer for updated paints on the health bar so it is a smooth opening
+                     
                      Health_timer.start();
+                     }
           
             
         
@@ -218,3 +249,5 @@ void hit(int temp) {
     }
     
 }
+
+
