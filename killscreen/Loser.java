@@ -29,7 +29,10 @@ public class Loser extends JPanel {
     IntVector2D menuSize;
     ArrayList<Button> buttons = new ArrayList<>();;
     Button tempButton;
-    
+    ImageIcon Background = new ImageIcon(getClass().getResource("stars.gif"));
+    ImageIcon Explosion  = new ImageIcon(getClass().getResource("TESTGIF.gif"));
+    ImageIcon Banner     = new ImageIcon(getClass().getResource("DIED_1.PNG"));
+    ImageIcon Banner2    = new ImageIcon(getClass().getResource("Game Over_1.PNG"));
  
     
     
@@ -70,15 +73,7 @@ public class Loser extends JPanel {
             }
         });
         menuSize = windowSize;
-        ImageIcon pic = new ImageIcon(getClass().getResource("Game Over_1.PNG"));
-        JLabel label = new JLabel(pic, JLabel.CENTER);
-        this.add(label);  
-        ImageIcon pic1 = new ImageIcon(getClass().getResource("DIED_1.PNG"));
-        JLabel label1 = new JLabel(pic1, JLabel.CENTER);
-        this.add(label1);
-        ImageIcon pic2 = new ImageIcon(getClass().getResource("TESTGIF.gif"));
-        JLabel label2 = new JLabel(pic2, JLabel.CENTER);
-        this.add(label2);
+    
 
         
         this.test = new Timer(500, (new ActionListener() {
@@ -105,6 +100,10 @@ public class Loser extends JPanel {
         super.paint(win);
         Graphics2D window = (Graphics2D) win;
         window.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        win.drawImage(Background.getImage(), -5, -5, 800, 600, this);
+         win.drawImage(Explosion.getImage(), 200, 130, this);
+          win.drawImage(Banner.getImage(), 75, 0, this);
+           win.drawImage(Banner2.getImage(), 150, 100, this);
        // firework.Paint(window);
         //firework2.Paint(window);
     

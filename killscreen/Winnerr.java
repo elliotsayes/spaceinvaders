@@ -25,6 +25,8 @@ public class Winnerr extends JPanel {
     final int paintUpdateRate = 1;
     Timer paintTimer;
     boolean temp = false;
+    ImageIcon Banner = new ImageIcon(getClass().getResource("Winner.PNG"));
+    ImageIcon Background = new ImageIcon(getClass().getResource("Stars.gif"));
     
     IntVector2D menuSize;
     ArrayList<Button> buttons = new ArrayList();
@@ -69,9 +71,9 @@ public class Winnerr extends JPanel {
             }
         });
         menuSize = windowSize;
-        ImageIcon pic = new ImageIcon(getClass().getResource("Winner.PNG"));
-        JLabel label = new JLabel(pic, JLabel.CENTER);
-        this.add(label);
+       
+       
+         
         this.paint_timer = new Timer(1000/paint_updatePS, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -127,6 +129,9 @@ public class Winnerr extends JPanel {
         super.paint(win);
         Graphics2D window = (Graphics2D) win;
         window.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        win.drawImage(Background.getImage(), -5, -5, 800, 600, this);
+        win.drawImage(Banner.getImage(), 125, 0, this);
+      
         firework.Paint(window);
         firework2.Paint(window);
     
