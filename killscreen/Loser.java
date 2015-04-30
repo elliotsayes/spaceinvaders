@@ -72,9 +72,13 @@ public class Loser extends JPanel {
         menuSize = windowSize;
         ImageIcon pic = new ImageIcon(getClass().getResource("Game Over_1.PNG"));
         JLabel label = new JLabel(pic, JLabel.CENTER);
-        this.add(label);   ImageIcon pic1 = new ImageIcon(getClass().getResource("DIED_1.PNG"));
+        this.add(label);  
+        ImageIcon pic1 = new ImageIcon(getClass().getResource("DIED_1.PNG"));
         JLabel label1 = new JLabel(pic1, JLabel.CENTER);
         this.add(label1);
+        ImageIcon pic2 = new ImageIcon(getClass().getResource("TESTGIF.gif"));
+        JLabel label2 = new JLabel(pic2, JLabel.CENTER);
+        this.add(label2);
 
         
         this.test = new Timer(500, (new ActionListener() {
