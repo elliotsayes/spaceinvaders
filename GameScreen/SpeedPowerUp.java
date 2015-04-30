@@ -1,16 +1,19 @@
 package GameScreen;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 
 public class SpeedPowerUp extends Bullet {
-
+ImageIcon Speed          = new ImageIcon(getClass().getResource("SpeedPowerUp.png"));
     public SpeedPowerUp(int x, int y, int verticalVelocity) {
         super(x, y, verticalVelocity, Color.GREEN, 3);
         color = Color.GREEN;   
+        size = 20;
     }
     
     @Override
@@ -44,4 +47,9 @@ public class SpeedPowerUp extends Bullet {
         }));
         g.powerUpTimer.start();
     }
+    @Override
+    public void paint (Graphics2D win){
+        win.drawImage(Speed.getImage(), coordinates.getX(), coordinates.getY(), size, size + 10, null);
+    }
+            
 }
