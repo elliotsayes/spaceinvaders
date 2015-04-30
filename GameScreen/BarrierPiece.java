@@ -17,6 +17,7 @@ public class BarrierPiece {
     int size = 4;//size of each barrier component 
     int health = 1;
     IntVector2D coordinates;
+    Color pieceColor = Color.GREEN;
     
     
 //Calling a constructor with default values
@@ -34,7 +35,7 @@ public class BarrierPiece {
    
    
    public void piecePaint (Graphics2D barrier){
-        barrier.setColor(Color.GREEN);
+        //barrier.setColor(pieceColor);
         barrier.fill3DRect(coordinates.getX(), coordinates.getY(), size, size, true);
     }
     

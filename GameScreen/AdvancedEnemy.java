@@ -26,8 +26,8 @@ public class AdvancedEnemy extends BasicEnemy{
     
     public AdvancedEnemy(int x, int y){
         super(x, y);
-        this.health = 20;
-        this.size = 80;
+        this.health = 10;
+        this.size = 60;
         animator = new Timer(800, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,7 +41,7 @@ public class AdvancedEnemy extends BasicEnemy{
     public void paint(Graphics2D win) {
         win.setColor(Color.red);
         win.drawImage(image.getImage(), coordinates.getX(), coordinates.getY(), size, size, null);
-        win.fillRect(this.getX()+10, this.getY(), health*2, 5);
+        win.fillRect(this.getX()+10, this.getY(), health*2, 3);
     }
     
     @Override

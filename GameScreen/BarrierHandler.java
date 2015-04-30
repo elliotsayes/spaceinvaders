@@ -4,6 +4,7 @@
 package GameScreen;
 
 import GameEngine.IntVector2D;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ int height = 40;
        }
     }
  public void piecePaint(Graphics2D barrier) {
-        
+        barrier.setColor(Color.GREEN);
         for (int i = 0 ; i < arrayOfBarriers.size(); i++  ){
             arrayOfBarriers.get(i).piecePaint(barrier);
         }

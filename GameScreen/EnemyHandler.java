@@ -31,19 +31,19 @@ public class EnemyHandler {
             enemyArray = new ArrayList<>();
             int x = 20;
             int y = 30;
-            for(int temp1 = 0;temp1!=3;temp1++){
+            for(int temp1 = 0;temp1<=3;temp1++){
              int hp = level * ran.nextInt(level);
              if(hp == 0){hp = level*level;}
              x = (30+(5*hp))/2;
              if(x >= 30){
                  enemyArray.add(new AdvancedEnemy(x,y));
-                 y+= 90;
+                 y+= 70;
                  hp = 1;
-                 level = 1;
+                 //level = 1;
                  x = (30+(5*hp))/2;
                  temp1++;
              }
-                for(int temp = 0;temp!=400/(30+(5*hp));temp++){
+                for(int temp = 0;temp<=400/(30+(5*hp));temp++){
                   enemyArray.add(new BasicEnemy(x,y,hp,(30+(5*hp)),"Basic_Enemy_Sprite.gif"));
                   //enemyArray.add(new beyonceEnemy(x,y));
                 x = x + ((30+(5*hp)));

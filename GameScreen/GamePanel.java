@@ -42,7 +42,7 @@ public class GamePanel extends JPanel {
     
     // Game timer for repaint
     Timer paint_timer, player_timer, enemy_timer, powerUpTimer;
-    int paint_updateInterval = 300;
+    int paint_updateInterval = 120;
     int player_updateInterval = 250;
     int enemy_updateInterval = 200;
     
@@ -230,7 +230,7 @@ public class GamePanel extends JPanel {
             invaders = new bossMan();
         }
         bullets = new BulletHandler(velocity);
-        barriers = new BarrierHandler();
+        //barriers = new BarrierHandler();
         enemy_timer.stop();
         player_timer.stop();
         shooter.locationRespawn();
