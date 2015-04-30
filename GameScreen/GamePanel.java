@@ -226,7 +226,7 @@ public class GamePanel extends JPanel {
    
     public void restart() throws IOException, URISyntaxException {
         level += 1;
-        if(level < 6){invaders = new EnemyHandler(level);}else{
+        if(level < 100){invaders = new EnemyHandler(level);}else{
             invaders = new bossMan();
         }
         bullets = new BulletHandler(velocity);

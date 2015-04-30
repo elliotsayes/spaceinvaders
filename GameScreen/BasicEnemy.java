@@ -12,6 +12,7 @@ public class BasicEnemy {
     //  Enemy parameters
     int health;// = 1;
     int size;// = 30;
+    int type = 0;
     Random ran = new Random();
     
     // Enemy location
@@ -74,7 +75,7 @@ public class BasicEnemy {
     public void move(IntVector2D velocity, BulletHandler bullets) {
        coordinates.addVector(velocity);
        int num = ran.nextInt(50000);
-                    if (num<= 50 & num>= 10 ){
+                    if (num<= 20 & num>= 10 ){
                         bullets.spawnMissile(getX(), getY(), 1);
                     }
                     // Temp way to add different bullet types

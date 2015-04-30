@@ -28,6 +28,7 @@ public class AdvancedEnemy extends BasicEnemy{
         super(x, y);
         this.health = 10;
         this.size = 60;
+        type = 2;
         animator = new Timer(800, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,13 +50,14 @@ public class AdvancedEnemy extends BasicEnemy{
        
        int num = ran.nextInt(50000);
        
-       if(coordinates.getX()+velocity.getX()*dir < 0){
-        coordinates.addVector(new IntVector2D(3,0));
-       }else if(coordinates.getX()+velocity.getX()*dir > 710){
-        coordinates.addVector(new IntVector2D(-3,0));   
-       }else{
-        coordinates.addVector(new IntVector2D(velocity.getX()*dir,0));   
-       }
+       //if(coordinates.getX()+velocity.getX()*dir < 0){
+       // dir = 1;
+       //}else if(coordinates.getX()+velocity.getX()*dir > 710){
+       //dir = -1; 
+       //}
+       if(velocity.getX() != 0){ dir = velocity.getX();}
+        coordinates.addVector(new IntVector2D(dir,velocity.getY()));   
+       
        
                     if (num<= 700 & num>= 10 ){
                         bullets.spawnMissile(getX(), getY(), 1);
@@ -71,7 +73,7 @@ public class AdvancedEnemy extends BasicEnemy{
                     if (num<= 5000 & num >= 50){
                         coordinates.addVector(new IntVector2D(velocity.getX()*dir,0));
                     }
-                    if (num<= 1200 & num >= 1000){
+                    if (num<= 1010 & num >= 1000){
                         dir*=-1;
                     }
     }

@@ -13,13 +13,15 @@ import javax.swing.JPanel;
 public class EnemyHandler {
         
         // Enemy config
-        int movePos = 1;
+        int movePos = 1; 
+        int movePos2 = 1;
         int enemyArraySize = 15;
         int fireDelay = 5;
-        int horizontalDirection = 10;
+        int verticleMovement  = 10;
         ArrayList<BasicEnemy> enemyArray;
         //BulletHandler bullets = new BulletHandler(1 , fireDelay);
         Random ran = new Random();
+        IntVector2D tempVector = new IntVector2D(1,0);
         
         // EnemyHandler Constructor initialises array setting enemy types and layout
         public EnemyHandler() throws IOException, URISyntaxException{
@@ -36,12 +38,12 @@ public class EnemyHandler {
              if(hp == 0){hp = level*level;}
              x = (30+(5*hp))/2;
              if(x >= 30){
-                 enemyArray.add(new AdvancedEnemy(x,y));
+                 enemyArray.add(new AdvancedEnemy(300,y));
                  y+= 70;
-                 hp = 1;
+                 //hp = 1;
                  //level = 1;
                  x = (30+(5*hp))/2;
-                 temp1++;
+                 continue;
              }
                 for(int temp = 0;temp<=400/(30+(5*hp));temp++){
                   enemyArray.add(new BasicEnemy(x,y,hp,(30+(5*hp)),"Basic_Enemy_Sprite.gif"));
@@ -65,32 +67,45 @@ public class EnemyHandler {
                 //if (sze == 0){return;}
                 // Checks if they have reached end of screen and inverses movement direction
                 for(int temp1 = 0;temp1 <= sze;temp1++){
-                if(((enemyArray.get(temp1).getY() > win.getHeight() - 30)& horizontalDirection == 10) | ((enemyArray.get(temp1).getY() < 20)& horizontalDirection == -10) ){
-                    horizontalDirection = horizontalDirection * -1;
+                if(enemyArray.get(temp1).type == 0){
+                if(((enemyArray.get(temp1).getY() > win.getHeight() - enemyArray.get(temp1).size)& verticleMovement == 10) | ((enemyArray.get(temp1).getY() < 20)& verticleMovement == -10) ){
+                    verticleMovement = verticleMovement * -1;
                 }
-                if ((enemyArray.get(temp1).getX() == win.getWidth() - 30) | (enemyArray.get(temp1).getX() == 0)) {
+                if ((enemyArray.get(temp1).getX() == win.getWidth() - enemyArray.get(temp1).size) | (enemyArray.get(temp1).getX() == 0)) {
                     movePos = movePos * -1;
                     temp1 = sze + 1;
-                    shift = horizontalDirection;
+                    tempVector.setY(verticleMovement);
                 }
                 
+                }else{
+                if (enemyArray.get(temp1).getX() == win.getWidth() - enemyArray.get(temp1).size){
+                    movePos2 = -1;
+                }else if(enemyArray.get(temp1).getX() == 0){
+                    movePos2 = 1;                  
+                }else{
+                    movePos2 = 0;
                 }
+                tempVector.setX(movePos2);
+                enemyArray.get(temp1).move(tempVector,bullets);
+                    
+                
+                     
+                }
+                }
+                
+                
                 for(int temp = 0;temp!=enemyArray.size();temp++){
-                    IntVector2D tempVector = new IntVector2D(movePos, shift);
+                    if( enemyArray.get(temp).type == 0){
+                    tempVector.setX(movePos);
                     enemyArray.get(temp).move(tempVector,bullets);
-
-                    // Spawns enemy bullets
-                    /*int num = ran.nextInt(50000);
-                    if (num<= 20 & num>= 10 ){
-                        bullets.spawnMissile(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1);
                     }
-                    // Temp way to add different bullet types
-                    if (num<= 1){
-                        bullets.bullets.add(new HealthPowerUp(enemyArray.get(temp).getX(), enemyArray.get(temp).getY(), 1));
-                    }*/
+                        
+                    
+                    
+                    
                 }
-            //bullets.move();
-            //bullets.kill();
+                tempVector.setY(0);
+  
 	}
         
         // Calls paint method for each enemy

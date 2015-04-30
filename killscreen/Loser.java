@@ -77,7 +77,7 @@ public class Loser extends JPanel {
         this.add(label1);
 
         
-        this.test = new Timer(5000, (new ActionListener() {
+        this.test = new Timer(500, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
@@ -89,7 +89,7 @@ public class Loser extends JPanel {
                 ImageIcon hovered = new ImageIcon(getClass().getResource("hovered.png"));
                 buttons.add(new Button("EXIT", new IntVector2D(300, 480), new IntVector2D(60, 40), new IntVector2D(175, 80),  -1, unselected, selected, hovered,0));
                 buttons.add(new Button("PLAY AGAIN" , new IntVector2D(300, 390), new IntVector2D(75, 40), new IntVector2D(175, 80), 1, unselected, selected, hovered,0));
-                
+                repaint();
             }
         }));
         test.start();
