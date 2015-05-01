@@ -181,20 +181,15 @@ public class GamePanel extends JPanel {
     public void checkCollision() throws IOException, URISyntaxException {
         
         for (int i = 0; i < bullets.getbullets().size(); i++) {
-            if(barrierHit(bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
+            if(bullets.getbullets().get(i).color == Color.red){
+                if(barrierHit(bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
                 bullets.getbullets().remove(i);
-            }else if(bullets.getbullets().get(i).velocity.getY() > 0){
+                continue;
+                }
+            }if(bullets.getbullets().get(i).velocity.getY() > 0){
                 if(hitBox(shooter.getX(),shooter.getY(),shooter.width,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
-                    //if(bullets.getbullets().get(i).color != Color.RED){
                         bullets.getbullets().get(i).upgrade(this);
                         bullets.getbullets().remove(i);
-                    //}
-                    //else {
-                    //shooter.playerHit();
-                    //bullets.getbullets().get(i).upgrade(this); 
-                    //bullets.getbullets().remove(i);
-                    //}
-                    // Changes selection to lose state
                     if(shooter.getHealth() == 0){selection = loseScreen;}
                     System.out.print("DEBUG - 3 \n");
                 }

@@ -48,13 +48,15 @@ public class EnemyHandler {
             }
             if (hp > 10) {
                 hp = ran.nextInt(8);
+                hp++;
+                size = (30 + (5 * hp));
             }
             x = size / 2;
             for (int temp = 0; temp <= 400 / (30 + (5 * hp)); temp++) {
                 enemyArray.add(new BasicEnemy(x, y, hp, (30 + (5 * hp)), "Basic_Enemy_Sprite.gif", ran.nextInt(hp), ran.nextInt(hp), ran.nextInt(hp)));
                 x = x + ((30 + (5 * hp)));
             }
-            y += size + size / 2;
+            y += size ;
         }
 
     }
