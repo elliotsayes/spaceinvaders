@@ -27,6 +27,7 @@ public class gameEngine {
         JFrame gameWindow = new JFrame(windowTitle);
         gameWindow.setSize(windowSize.getX(), windowSize.getY());
         gameWindow.setVisible(true);
+        gameWindow.setResizable(false);
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // * Add game panels here *
