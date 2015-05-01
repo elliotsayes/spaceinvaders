@@ -49,7 +49,7 @@ public class bossMan extends EnemyHandler {
     IntVector2D velocity2            = new IntVector2D(1,0);
     IntVector2D velocity3            = new IntVector2D(-1,0);
     double k = 0;
-    int size =200;
+    int size = 200;
     int r = 0 ;
     int HorizontalSpeed = 1;
     boolean toMove = false;
@@ -75,6 +75,10 @@ public class bossMan extends EnemyHandler {
     static String CthuluDarkLordLeg2 = "Tentacle2_move.gif";
     static String CthuluDarkLordLeg3 = "Tenticle3_fast.gif";
     static String CthuluDarkLordLeg4 = "Tenticle4.gif";
+    
+    int bulletCooldown = 0, bulletAngle = 0;
+    
+    Random bulletRandomizer = new Random();
     
 
     public bossMan() throws IOException, URISyntaxException {
@@ -183,6 +187,33 @@ public class bossMan extends EnemyHandler {
         }
         if (enemyArray.get(0).getX() >= 600){
             HorizontalSpeed = -1;
+        }
+        
+        //bullet spawning
+        int i;
+        
+        if(toMove) {
+            if(enemyArray.size() != 1) { // first phase
+                if(bulletCooldown >= 125) {
+                    for(i=1;i<enemyArray.size();i++) {
+                        bullets.spawnComplexMissle( new IntVector2D(enemyArray.get(i).getX()+25,enemyArray.get(i).getY()+30), // coordinates 
+                                                    new IntVector2D((float)HorizontalSpeed/4,1), //velocity
+                                                    new IntVector2D( (bulletRandomizer.nextInt(2)>0)?0.002f:-0.002f, 0), //acceleration
+                                                    Color.CYAN, 3);
+                        bulletAngle = bulletRandomizer.nextInt(180);
+                        bulletCooldown = 0;
+                    }
+                } 
+            }
+            else if(bulletCooldown >= 25) { // second phase
+                    bullets.spawnComplexMissle( new IntVector2D(enemyArray.get(1).getX()+100,enemyArray.get(1).getY()+50), // coordinates 
+                                                new IntVector2D( (float)Math.cos((bulletAngle)), (float)Math.abs(Math.sin(bulletAngle)) ), //velocity
+                                                new IntVector2D(0f,0.005f), //acceleration
+                                                Color.WHITE, 5);
+                    bulletAngle = (bulletAngle+6)%400;
+                    bulletCooldown = 0;
+                }
+            bulletCooldown++;
         }
     }
     

@@ -45,7 +45,8 @@ public class BasicPlayer {
     boolean invincible = false;
     static ImageIcon Lives;
     spriteHandler playerSprites;
-    Image player; 
+    Image player;
+    ImageIcon shield;
     // Unused
     //int xa;
     //ImageIcon image;
@@ -81,6 +82,7 @@ public class BasicPlayer {
         Lives = new ImageIcon(getClass().getResource("HealthImage.png"));
         this.playerSprites = new spriteHandler("playerSpriteSheet.png",150,130);
         this.player = playerSprites.getImage(0);
+        this.shield = new ImageIcon(getClass().getResource("shield.png"));
     }
     
     public void setHeight(int height) {
@@ -133,6 +135,7 @@ public class BasicPlayer {
         //g.fillRect(coordinates.getX(), coordinates.getY(), width, height);
         //bullets.paint(g);
         g.drawImage(player, coordinates.getX(), coordinates.getY(), size, size, null);
+        if(invincible){g.drawImage(shield.getImage(), coordinates.getX(), coordinates.getY(), size, size, null);}
         g.setColor(Color.WHITE);
         g.drawString("Score:", 20, 20);
         g.drawString(String.valueOf(score), 100, 20);
@@ -206,6 +209,7 @@ public class BasicPlayer {
 
     public void locationRespawn() {
         coordinates.setX(370);
+        
         //coordinates.setY(500);
     }
     

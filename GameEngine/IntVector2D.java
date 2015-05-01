@@ -10,7 +10,6 @@ public class IntVector2D {
     private float x, y; // x precise, y precise;
     
     // Constructors
-    
     public IntVector2D() {
         this(0,0);
     }
@@ -26,7 +25,6 @@ public class IntVector2D {
     }
     
     // Getters
-    
     public int getX() {
         return (int)x;
     }
@@ -44,7 +42,6 @@ public class IntVector2D {
     }
     
     // Setters
-    
     public void setX(int x) {
         this.x = (float)x;
     }
@@ -62,7 +59,6 @@ public class IntVector2D {
     }
     
     // Operations
-    
     public void addVector(IntVector2D vector2) {
         x += vector2.getXPrecise();
         y += vector2.getYPrecise();

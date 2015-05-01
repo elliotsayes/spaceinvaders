@@ -1,6 +1,8 @@
 package GameScreen;
 
 import GameEngine.AudioPlayer;
+import GameEngine.IntVector2D;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,8 +31,12 @@ public class BulletHandler {
 
     // Adds bullet and (x,y) 
     public void spawnMissile(int x, int y, int direction) {
-            bullets.add(new Bullet(x, y, direction));
+            bullets.add(new Bullet(new IntVector2D(x,y), new IntVector2D(0,direction)));
             fire_sound.playSound();
+    }
+    
+    public void spawnComplexMissle(IntVector2D coordinates, IntVector2D velocity, IntVector2D acceleration, Color color, int size) {
+        bullets.add(new Bullet(coordinates, velocity, acceleration, color, size));
     }
 
     // Paints bullets

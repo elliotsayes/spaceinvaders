@@ -1,6 +1,7 @@
 package GameScreen;
 
 
+import MainMenu.OptionsInfo;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -47,7 +48,7 @@ public class GamePanel extends JPanel {
     static int enemy_updateInterval = 200;
     
     // gameScreen Constructor
-    public GamePanel() throws IOException, URISyntaxException {
+    public GamePanel(OptionsInfo globalOptions) throws IOException, URISyntaxException {
         // ActionListener for time, what happens when timer executes
         this.paint_timer = new Timer(1000/paint_updateInterval, (new ActionListener() {
             @Override

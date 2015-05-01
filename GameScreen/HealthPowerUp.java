@@ -1,6 +1,7 @@
 
 package GameScreen;
 
+import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
@@ -10,7 +11,7 @@ public class HealthPowerUp extends Bullet {
      ImageIcon Health          = new ImageIcon(getClass().getResource("HealthImage.png"));
 
     public HealthPowerUp(int x, int y, int verticalVelocity) {
-        super(x, y, verticalVelocity, Color.BLUE, 3);
+        super(new IntVector2D(x,y), new IntVector2D(0,verticalVelocity), new IntVector2D(), Color.BLUE, 3);
         color = Color.BLUE;   
         size = 20;
     }

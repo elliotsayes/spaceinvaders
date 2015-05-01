@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import MainMenu.mainMenu;
 import GameScreen.GamePanel;
+import MainMenu.OptionsInfo;
 import MainMenu.OptionsScreen;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -47,6 +48,7 @@ public class gameEngine {
         
         // Initialise game state
         int game_state = 0;
+        OptionsInfo myOptions = new OptionsInfo();
         while (game_state != -1) {
             switch (game_state) {
                 case 0: // Main Menu
@@ -70,7 +72,7 @@ public class gameEngine {
                 case 1: // Play Screen
                     // Plays sound
                     music.play("battleMusic");
-                    playScreen = new GamePanel();
+                    playScreen = new GamePanel(myOptions);
                     playScreen.setBackground(backgroundColor);
                     gameWindow.add(playScreen);
                     gameWindow.validate();
@@ -115,19 +117,20 @@ public class gameEngine {
                     music.stop("death");
 
                     break;
-                case 4: // Main Menu
-                    // Add main menu to frame
+                case 4: // Options
+                    // Add options to frame
                     music.play("intro");
                     optionsScreen = new /**/ OptionsScreen(windowSize);
                     optionsScreen.setBackground(Color.white);
                     gameWindow.add(optionsScreen);
                     gameWindow.validate();
                     optionsScreen.repaint();
-                    // MainMenu loop Waits for a getSelection to be made
+                    // Options loop Waits for a getSelection to be made
                     while (optionsScreen.getSelection() == 4) {
                         Thread.sleep(1);
                     }
-                    // Removes MainMenu 
+                    // Removes options
+                    myOptions = optionsScreen.workingOptions;
                     music.stop("intro");
                     gameWindow.remove(optionsScreen);
                     game_state = optionsScreen.getSelection();

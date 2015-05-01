@@ -12,20 +12,25 @@ public class Bullet {
 
     Color color;// = Color.red;
     int size;// = 3;
-    IntVector2D coordinates, velocity;
+    IntVector2D coordinates, velocity, acceleration;
     int damage = 1;
     //AudioPlayer fire_sound = new AudioPlayer("shoot.wav","shoot");
-
+    
+    public Bullet(IntVector2D coordinates, IntVector2D velocity) {
+        this(coordinates,velocity,new IntVector2D());
+    }
+    
     // Creates bullet at (x,y) with direction
-    public Bullet(int x, int y, int verticalVelocity) {
+    public Bullet(IntVector2D coordinates, IntVector2D velocity, IntVector2D acceleration) {
         //ititialise with default colour and size
-        this(x, y, verticalVelocity, Color.red, 3);
+        this(coordinates, velocity, acceleration, Color.red, 3);
     }
 
     // general constructor;
-    public Bullet(int x, int y, int verticalVelocity, Color color, int size) {
-        this.coordinates = new IntVector2D(x,y);
-        this.velocity = new IntVector2D(0,verticalVelocity);
+    public Bullet(IntVector2D coordinates, IntVector2D velocity, IntVector2D acceleration, Color color, int size) {
+        this.coordinates = coordinates;
+        this.velocity = velocity;
+        this.acceleration = acceleration;
         this.color = color;
         this.size = size;
         //fire_sound.playSound();
@@ -34,6 +39,7 @@ public class Bullet {
     // moves bullet, controls movement pattern 
     void move() {
         coordinates.addVector(velocity);
+        velocity.addVector(acceleration);
     }
 
     // Returns x position
@@ -55,8 +61,8 @@ public class Bullet {
     
     public void upgrade(GamePanel g){
         g.shooter.color = Color.WHITE;
+        if(!g.shooter.invincible)g.shooter.health -= damage;
         g.shooter.invincible = true;
-        g.shooter.health -= damage;
         
         g.powerUpTimer = new Timer(1500, (new ActionListener() {
             @Override

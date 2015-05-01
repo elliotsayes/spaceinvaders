@@ -82,10 +82,10 @@ public class OptionsScreen extends mainMenu {
     
     private void updateButtons() {
         if(workingOptions.soundData){
-            buttons.get(0).buttonText = "Music: On";
+            buttons.get(0).buttonText = "Sound: On";
             buttons.get(0).selection = 0;
         } else {
-            buttons.get(0).buttonText = "Music: Off";
+            buttons.get(0).buttonText = "Sound: Off";
             buttons.get(0).selection = 1;
         }
         buttons.get(1).selection = (workingOptions.shooterData-1)%shooterPreviews.size();

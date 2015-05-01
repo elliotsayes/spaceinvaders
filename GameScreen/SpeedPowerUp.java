@@ -1,5 +1,6 @@
 package GameScreen;
 
+import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -11,7 +12,7 @@ import javax.swing.Timer;
 public class SpeedPowerUp extends Bullet {
 ImageIcon Speed          = new ImageIcon(getClass().getResource("SpeedPowerUp.png"));
     public SpeedPowerUp(int x, int y, int verticalVelocity) {
-        super(x, y, verticalVelocity, Color.GREEN, 3);
+        super(new IntVector2D(x,y), new IntVector2D(0,verticalVelocity), new IntVector2D(), Color.GREEN, 3);
         color = Color.GREEN;   
         size = 20;
     }
