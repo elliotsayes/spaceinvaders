@@ -174,14 +174,17 @@ public class GamePanel extends JPanel {
     }
 
     public void checkCollision() throws IOException, URISyntaxException {
-        
+        Color Red = Color.red;
+        Color Cyan = Color.CYAN;
+        Color White = Color.WHITE;
+                
         for (int i = 0; i < bullets.getbullets().size(); i++) {
-            if(bullets.getbullets().get(i).color == Color.red){
+            if(bullets.getbullets().get(i).color == Red ||bullets.getbullets().get(i).color == Cyan | bullets.getbullets().get(i).color ==White){
                 if(barrierHit(bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
                 bullets.getbullets().remove(i);
                 continue;
                 }
-            }if(bullets.getbullets().get(i).velocity.getY() > 0){
+            }if(bullets.getbullets().get(i).velocity.getY() >= 0){
                 if(hitBox(shooter.getX(),shooter.getY(),shooter.width,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
                         bullets.getbullets().get(i).upgrade(this);
                         bullets.getbullets().remove(i);
@@ -194,7 +197,7 @@ public class GamePanel extends JPanel {
                     invaders.hit(j);
                     // Changes selection to win state
                     if(invaders.enemyArray.isEmpty()){
-                        if (shooter.score > 20000){
+                        if (shooter.score > 800000){
                             selection = winScreen;
                         }else{
                             restart();
