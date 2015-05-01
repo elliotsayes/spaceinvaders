@@ -185,15 +185,15 @@ public class GamePanel extends JPanel {
                 bullets.getbullets().remove(i);
             }else if(bullets.getbullets().get(i).velocity.getY() > 0){
                 if(hitBox(shooter.getX(),shooter.getY(),shooter.width,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
-                    if(bullets.getbullets().get(i).color != Color.RED){
+                    //if(bullets.getbullets().get(i).color != Color.RED){
                         bullets.getbullets().get(i).upgrade(this);
                         bullets.getbullets().remove(i);
-                    }
-                    else {
-                    shooter.playerHit();
-                    bullets.getbullets().get(i).upgrade(this); 
-                    bullets.getbullets().remove(i);
-                    }
+                    //}
+                    //else {
+                    //shooter.playerHit();
+                    //bullets.getbullets().get(i).upgrade(this); 
+                    //bullets.getbullets().remove(i);
+                    //}
                     // Changes selection to lose state
                     if(shooter.getHealth() == 0){selection = loseScreen;}
                     System.out.print("DEBUG - 3 \n");
@@ -227,7 +227,7 @@ public class GamePanel extends JPanel {
    
     public void restart() throws IOException, URISyntaxException {
         level += 1;
-        if(level < 100){invaders = new EnemyHandler(level);}else{
+        if(level < 6){invaders = new EnemyHandler(level);}else{
             invaders = new bossMan();
         }
         bullets = new BulletHandler(velocity);
@@ -235,6 +235,7 @@ public class GamePanel extends JPanel {
         enemy_timer.stop();
         player_timer.stop();
         shooter.locationRespawn();
+        shooter.reset();
         
     }
     

@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 
 public class HealthPowerUp extends Bullet {
-     ImageIcon Health          = new ImageIcon(getClass().getResource("SpeedPowerUp.png"));
+     ImageIcon Health          = new ImageIcon(getClass().getResource("HealthImage.png"));
 
     public HealthPowerUp(int x, int y, int verticalVelocity) {
         super(x, y, verticalVelocity, Color.BLUE, 3);
@@ -17,6 +17,8 @@ public class HealthPowerUp extends Bullet {
     
     @Override
     public void upgrade(GamePanel g){
+        if (g.shooter.health >= 5){return;}
+      
         g.shooter.health += 1;
         //g.shooter.width += 30;
     }

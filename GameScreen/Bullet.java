@@ -13,6 +13,7 @@ public class Bullet {
     Color color;// = Color.red;
     int size;// = 3;
     IntVector2D coordinates, velocity;
+    int damage = 1;
     //AudioPlayer fire_sound = new AudioPlayer("shoot.wav","shoot");
 
     // Creates bullet at (x,y) with direction
@@ -55,7 +56,8 @@ public class Bullet {
     public void upgrade(GamePanel g){
         g.shooter.color = Color.WHITE;
         g.shooter.invincible = true;
-
+        g.shooter.health -= damage;
+        
         g.powerUpTimer = new Timer(1500, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

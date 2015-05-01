@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -22,7 +23,8 @@ public class BasicPlayer {
     // player size
     int width;
     int height;
-
+    // health coordinates
+    IntVector2D healthCoord = new IntVector2D(250,5);
     int fireRate;
     boolean move_left, move_right, shoot;
     Color color;
@@ -35,6 +37,7 @@ public class BasicPlayer {
     //Entite Audio Handler
     AudioHandler soundEffects = new AudioHandler();
     boolean invincible = false;
+     ImageIcon Lives          = new ImageIcon(getClass().getResource("HealthImage.png"));
     // Unused
     //int xa;
     //ImageIcon image;
@@ -118,7 +121,10 @@ public class BasicPlayer {
         g.drawString("Score:", 20, 20);
         g.drawString(String.valueOf(score), 100, 20);
         g.drawString("Health:", 200, 20);
-        g.drawString(String.valueOf(health), 280, 20);
+       // g.drawString(String.valueOf(health), 280, 20);
+        for ( int test = 0; test < health; test++ ){
+            g.drawImage(Lives.getImage(), healthCoord.getX()+(test*20) ,healthCoord.getY(), 20, 20, null);
+        }
     }
 
     // Player mechanics
@@ -182,5 +188,11 @@ public class BasicPlayer {
     public void locationRespawn() {
         coordinates.setX(370);
         //coordinates.setY(500);
+    }
+    
+    public void reset() {
+        move_left = false;
+        move_right = false;
+        shoot = false;
     }
 }
