@@ -20,7 +20,7 @@ public class BasicEnemy {
     IntVector2D coordinates;
     
     // Enemy Sprite (MAKING THIS STATIC USE LESS MEMORY?)
-    ImageIcon image;
+    public ImageIcon image;
 
     // Enemy constructor, initialises profile
     public BasicEnemy(int x, int y) {

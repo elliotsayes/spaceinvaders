@@ -38,11 +38,11 @@ public class bossMan extends EnemyHandler {
     Timer BossMusic_timer, Health_timer, Fade_timer, BossMovement_timer;
     
     //Initialising the Boss components to Enemys
-    BasicEnemy Boss;
-    BasicEnemy Bossleg1;
-    BasicEnemy Bossleg2;
-    BasicEnemy Bossleg3;
-    BasicEnemy Bossleg4;
+   EnemyBoss Boss;
+   EnemyBoss Bossleg1;
+   EnemyBoss Bossleg2;
+   EnemyBoss Bossleg3;
+   EnemyBoss Bossleg4;
 
     IntVector2D velocity;
     IntVector2D velocity1            = new IntVector2D(0,1);
@@ -70,11 +70,12 @@ public class bossMan extends EnemyHandler {
     IntVector2D Tenticles            = new IntVector2D(BOSSstartCoordinates.getX()-45,BOSSstartCoordinates.getY()+15);
     
     // Adding each gif name into a string to use in the Basic Enemy contructor
-    static String CthuluDarkLordLeg1 = "Tenticle 1 move.gif";
-    static String CthuluDarkLord     = "BossManFinal.png";
-    static String CthuluDarkLordLeg2 = "Tentacle2_move.gif";
-    static String CthuluDarkLordLeg3 = "Tenticle3_fast.gif";
-    static String CthuluDarkLordLeg4 = "Tenticle4.gif";
+    static String CthuluDarkLordLeg1    = "Tenticle 1 move.gif";
+    static String CthuluDarkLord        = "BossManFinal.png";
+    static String CthuluDarkLordLeg2    = "Tentacle2_move.gif";
+    static String CthuluDarkLordLeg3    = "Tenticle3_fast.gif";
+    static String CthuluDarkLordLeg4    = "Tenticle4.gif";
+    static String CthulhuDarkLordEnrage = "Boss_stage 2.gif";
     
     int bulletCooldown = 0, bulletAngle = 0;
     
@@ -86,11 +87,11 @@ public class bossMan extends EnemyHandler {
        super(); 
        enemyArray = new ArrayList<>();
     
-       this.Boss = new BasicEnemy(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),100,size,CthuluDarkLord,1,1,1);
-       this.Bossleg1 = new BasicEnemy(Tenticles.getX()+50,Tenticles.getY()+155,10,70,CthuluDarkLordLeg1,1,1,1);
-       this.Bossleg2 = new BasicEnemy(Tenticles.getX()+85,Tenticles.getY()+160,10,80,CthuluDarkLordLeg2,1,1,1);
-       this.Bossleg3 = new BasicEnemy(Tenticles.getX()+ 135,Tenticles.getY()+159,10,70,CthuluDarkLordLeg3,1,1,1);
-       this.Bossleg4 = new BasicEnemy(Tenticles.getX()+ 170,Tenticles.getY()+160,10,70,CthuluDarkLordLeg4,1,1,1);
+       this.Boss = new EnemyBoss(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),20,size,CthuluDarkLord,1,1,1);
+       this.Bossleg1 = new EnemyBoss(Tenticles.getX()+50,Tenticles.getY()+155,1,70,CthuluDarkLordLeg1,1,1,1);
+       this.Bossleg2 = new EnemyBoss(Tenticles.getX()+85,Tenticles.getY()+160,1,80,CthuluDarkLordLeg2,1,1,1);
+       this.Bossleg3 = new EnemyBoss(Tenticles.getX()+ 135,Tenticles.getY()+159,1,70,CthuluDarkLordLeg3,1,1,1);
+       this.Bossleg4 = new EnemyBoss(Tenticles.getX()+ 170,Tenticles.getY()+160,1,70,CthuluDarkLordLeg4,1,1,1);
        enemyArray.add(Boss);
        enemyArray.add(Bossleg1);
        enemyArray.add(Bossleg2);
@@ -150,7 +151,7 @@ public class bossMan extends EnemyHandler {
     // moveArmy is from the Enemy Handler, but Overwritten here for the boss movment 
     @Override
     public void moveArmy(JPanel win, BulletHandler bullets){
-    if (enemyArray.size() != 0 ){
+    if (true){//enemyArray.size() != 0 ){
         
         if (enemyArray.get(0).getY() <= 25){
             
@@ -205,9 +206,14 @@ public class bossMan extends EnemyHandler {
                     }
                 } 
             }
-            else if(bulletCooldown >= 25) { // second phase
-                    bullets.spawnComplexMissle( new IntVector2D(enemyArray.get(1).getX()+100,enemyArray.get(1).getY()+50), // coordinates 
+            else if(bulletCooldown >= 30) {// second phase
+               
+                    bullets.spawnComplexMissle( new IntVector2D(enemyArray.get(0).getX()+90,enemyArray.get(0).getY()+140), // coordinates 
                                                 new IntVector2D( (float)Math.cos((bulletAngle)), (float)Math.abs(Math.sin(bulletAngle)) ), //velocity
+                                                new IntVector2D(0f,0.005f), //acceleration
+                                                Color.WHITE, 5);
+                    bullets.spawnComplexMissle( new IntVector2D(enemyArray.get(0).getX()+110,enemyArray.get(0).getY()+140), // coordinates 
+                                                new IntVector2D( -(float)Math.cos((bulletAngle)), (float)Math.abs(Math.sin(bulletAngle)) ), //velocity
                                                 new IntVector2D(0f,0.005f), //acceleration
                                                 Color.WHITE, 5);
                     bulletAngle = (bulletAngle+6)%400;
@@ -233,7 +239,8 @@ void hit(int temp) {
         if((temp == 0) & enemyArray.size() != 1 ){return;}    
         if(enemyArray.get(temp).hit(1)){
            enemyArray.remove(temp); 
-        }       
+        }
+        if(enemyArray.size()==1){enemyArray.get(0).image = new ImageIcon(getClass().getResource("BossManEyes.gif"));}
     
 }
 // Paints everything on ghte scneen
