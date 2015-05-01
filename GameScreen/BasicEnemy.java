@@ -13,24 +13,28 @@ public class BasicEnemy {
     int health;
     int size;
     int type = 0;
+    int fireChance, healthChance, speedChance;
     Random ran = new Random();
     
     // Enemy location
     IntVector2D coordinates;
     
-    // Enemy Sprite
-    static ImageIcon image;
+    // Enemy Sprite (MAKING THIS STATIC USE LESS MEMORY?)
+    ImageIcon image;
 
     // Enemy constructor, initialises profile
     public BasicEnemy(int x, int y) {
-        this(x, y, 1, 30, defaultSprite);
+        this(x, y, 1, 30, defaultSprite,10,1,3);
     }
 
-    public BasicEnemy(int x, int y, int health, int size, String imageName) {
+    public BasicEnemy(int x, int y, int health, int size, String imageName,int fireC,int healthC,int speedC) {
         this.health = health;
         this.size = size;
         this.coordinates = new IntVector2D(x,y);
         this.image = new ImageIcon(getClass().getResource(imageName));
+        this.fireChance = fireC;
+        this.healthChance = healthC;
+        this.speedChance = speedC;
     }
 
     // Returns x pos
@@ -43,10 +47,12 @@ public class BasicEnemy {
         return coordinates.getY();
     }
 
+    // Returns Health
     public int getHealth() {
         return health;
     }
 
+    // Returns Size
     public int getSize() {
         return size;
     }
@@ -74,17 +80,16 @@ public class BasicEnemy {
     // Moves enemy by (x,y)
     public void move(IntVector2D velocity, BulletHandler bullets) {
        coordinates.addVector(velocity);
-       int num = ran.nextInt(50000);
-                    if (num<= 20 & num>= 10 ){
-                        bullets.spawnMissile(getX(), getY(), 1);
-                    }
-                    // Temp way to add different bullet types
-                    if (num<= 1){
-                        bullets.bullets.add(new HealthPowerUp(getX(), getY(), 1));
-                    }
-                    if (num<= 110 & num >= 100){
-                        bullets.bullets.add(new SpeedPowerUp(getX(), getY(), 1));
-                    }
+      
+       if (ran.nextInt(10000) <= fireChance){
+            bullets.spawnMissile(getX(), getY(), 1);
+        }
+       if (ran.nextInt(70000) <= healthChance){
+            bullets.bullets.add(new HealthPowerUp(getX(), getY(), 1));
+        }
+       if (ran.nextInt(90000) <= speedChance){
+           bullets.bullets.add(new SpeedPowerUp(getX(), getY(), 1));
+        }
     }
 
     // Paints enemy, controls look of enemy

@@ -37,7 +37,7 @@ public class BasicPlayer {
     //Entite Audio Handler
     AudioHandler soundEffects = new AudioHandler();
     boolean invincible = false;
-     ImageIcon Lives          = new ImageIcon(getClass().getResource("HealthImage.png"));
+    static ImageIcon Lives;
     // Unused
     //int xa;
     //ImageIcon image;
@@ -68,6 +68,7 @@ public class BasicPlayer {
                 fire_timer.stop();
             }
         }));
+        Lives = new ImageIcon(getClass().getResource("HealthImage.png"));
         //this.bullets = new BulletHandler(-1, fireRate);
     }
     
