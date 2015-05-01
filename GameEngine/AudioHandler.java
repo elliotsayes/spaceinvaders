@@ -8,7 +8,7 @@ public class AudioHandler {
 
     ArrayList<AudioPlayer> playList = new ArrayList();
     Random ran = new Random();
-    boolean canPlay = true;
+    
 
     public AudioHandler() {
     }
@@ -28,22 +28,22 @@ public class AudioHandler {
 
     // Plays specified song
     public void play(String find_name) {
-        if(canPlay){
+ 
         int i = findTrack(find_name);
         if (i != -1) {
             playList.get(i).playSound();
         }
-        }
+        
     }
 
     // Loops specified song set number of times
     public void loop(String find_name, int loopCount) {
-        if(canPlay){
+       
         int i = findTrack(find_name);
         if (i != -1) {
             playList.get(i).Loop(loopCount);
         }
-    }}
+    }
 
     // Stops specified song
     public void stop(String find_name) {

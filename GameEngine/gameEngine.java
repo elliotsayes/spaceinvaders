@@ -1,5 +1,6 @@
 package GameEngine;
 
+import GameScreen.BasicPlayer;
 import java.awt.Color;
 import javax.swing.JFrame;
 import MainMenu.mainMenu;
@@ -45,6 +46,9 @@ public class gameEngine {
         music.add("battle_2.mid", "battleMusic");
         music.add("TitleScreen.mid", "intro");
         music.add("win.mid", "win");
+        music.add("shoot.wav", "shoot");
+     
+        
         
         // Initialise game state
         int game_state = 0;
@@ -72,7 +76,7 @@ public class gameEngine {
                 case 1: // Play Screen
                     // Plays sound
                     music.play("battleMusic");
-                    playScreen = new GamePanel(myOptions);
+                    playScreen = new GamePanel();
                     playScreen.setBackground(backgroundColor);
                     gameWindow.add(playScreen);
                     gameWindow.validate();
@@ -119,8 +123,8 @@ public class gameEngine {
                     break;
                 case 4: // Options
                     // Add options to frame
-                    music.play("intro");
-                    optionsScreen = new /**/ OptionsScreen(windowSize);
+                    //music.play("intro");
+                    optionsScreen = new /**/ OptionsScreen(windowSize, myOptions);
                     optionsScreen.setBackground(Color.white);
                     gameWindow.add(optionsScreen);
                     gameWindow.validate();
@@ -131,7 +135,9 @@ public class gameEngine {
                     }
                     // Removes options
                     myOptions = optionsScreen.workingOptions;
-                    music.stop("intro");
+                    AudioPlayer.canPlay = myOptions.soundData;
+                    BasicPlayer.skinCode = myOptions.shooterData;
+                    //music.stop("intro");
                     gameWindow.remove(optionsScreen);
                     game_state = optionsScreen.getSelection();
                     break;

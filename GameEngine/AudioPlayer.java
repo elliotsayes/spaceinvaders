@@ -10,6 +10,7 @@ public class AudioPlayer {
 
     Clip clip;
     String name, sound_file;
+    static boolean canPlay = true;
 
     // Add sound files to GameEngine pakage then call in contructor eg "test.wav"
     // Constructor loads sound file
@@ -36,9 +37,10 @@ public class AudioPlayer {
 
     // Plays Audio file from start
     public void playSound() {
+        if(canPlay){
         clip.setFramePosition(0);  
         clip.start();
-    }
+    }}
 
     // Stops playing the Audio file
     public void stopSound() {
@@ -47,7 +49,9 @@ public class AudioPlayer {
 
     // Loops audio file "i" times
     public void Loop(int i) {
+        if(canPlay){
         clip.loop(i);
+    }
     }
 
     //Closes Audio file

@@ -47,6 +47,8 @@ public class BasicPlayer {
     spriteHandler playerSprites;
     Image player;
     ImageIcon shield;
+    public static int skinCode =0;
+    String skin;
     // Unused
     //int xa;
     //ImageIcon image;
@@ -59,7 +61,7 @@ public class BasicPlayer {
 
     public BasicPlayer(int width, int height) {
         // call main constructor with default values
-        this(new IntVector2D(370,500), width, height, 1000, Color.GREEN, 0, 3);
+        this(new IntVector2D(370,480), width, height, 1000, Color.GREEN, 0, 3);
         
     }
 
@@ -79,8 +81,19 @@ public class BasicPlayer {
                 fire_timer.stop();
             }
         }));
+        switch(skinCode) {
+            case 0:
+                skin = "playerSpriteSheet.png";
+                break;
+            case 1:
+                skin = "playerSpriteSheet2.png";
+                break;
+            case 2:
+                skin = "ElliotSpriteSheet.png";
+                break;
+        }
         Lives = new ImageIcon(getClass().getResource("HealthImage.png"));
-        this.playerSprites = new spriteHandler("playerSpriteSheet.png",150,130);
+        this.playerSprites = new spriteHandler(skin,150,130);
         this.player = playerSprites.getImage(0);
         this.shield = new ImageIcon(getClass().getResource("shield.png"));
     }
