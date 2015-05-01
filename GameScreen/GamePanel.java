@@ -42,9 +42,9 @@ public class GamePanel extends JPanel {
     
     // Game timer for repaint
     Timer paint_timer, player_timer, enemy_timer, powerUpTimer;
-    int paint_updateInterval = 300;
-    int player_updateInterval = 300;
-    int enemy_updateInterval = 200;
+    static int paint_updateInterval = 300;
+    static int player_updateInterval = 300;
+    static int enemy_updateInterval = 200;
     
     // gameScreen Constructor
     public GamePanel() throws IOException, URISyntaxException {
@@ -55,9 +55,7 @@ public class GamePanel extends JPanel {
                 repaint();
                 try {    
                     checkCollision();
-                } catch (IOException ex) {
-                    Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (URISyntaxException ex) {
+                } catch (IOException | URISyntaxException ex) {
                     Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -122,9 +120,7 @@ public class GamePanel extends JPanel {
                 if (e.getKeyCode() == KeyEvent.VK_R) {
                     try {
                         restart();
-                    } catch (IOException ex) {
-                        Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (URISyntaxException ex) {
+                    } catch (IOException | URISyntaxException ex) {
                         Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -139,9 +135,7 @@ public class GamePanel extends JPanel {
                         shooter = new PlayerMarlo();
                         invaders.enemyArray.clear();
                         invaders.enemyArray.add(new MarloEnemy(80,80));
-                    } catch (IOException ex) {
-                        Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (URISyntaxException ex) {
+                    } catch (IOException | URISyntaxException ex) {
                         Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -226,7 +220,6 @@ public class GamePanel extends JPanel {
             invaders = new bossMan();
         }
         bullets = new BulletHandler(velocity);
-        //barriers = new BarrierHandler();
         enemy_timer.stop();
         player_timer.stop();
         shooter.locationRespawn();

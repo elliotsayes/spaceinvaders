@@ -5,10 +5,15 @@ import GameEngine.AudioHandler;
 import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -21,6 +26,7 @@ public class BasicPlayer {
     IntVector2D coordinates;
 
     // player size
+    int size = 50;
     int width;
     int height;
     // health coordinates
@@ -38,6 +44,8 @@ public class BasicPlayer {
     AudioHandler soundEffects = new AudioHandler();
     boolean invincible = false;
     static ImageIcon Lives;
+    spriteHandler playerSprites;
+    Image player; 
     // Unused
     //int xa;
     //ImageIcon image;
@@ -45,11 +53,13 @@ public class BasicPlayer {
     public BasicPlayer() {
         // call secondary constructor with default width and height
         this(60, 10);
+        
     }
 
     public BasicPlayer(int width, int height) {
         // call main constructor with default values
         this(new IntVector2D(370,500), width, height, 1000, Color.GREEN, 0, 3);
+        
     }
 
     public BasicPlayer(IntVector2D coordinates, int width, int height, int fireRate, Color color, int score, int health) {
@@ -69,7 +79,8 @@ public class BasicPlayer {
             }
         }));
         Lives = new ImageIcon(getClass().getResource("HealthImage.png"));
-        //this.bullets = new BulletHandler(-1, fireRate);
+        this.playerSprites = new spriteHandler("playerSpriteSheet.png",150,130);
+        this.player = playerSprites.getImage(0);
     }
     
     public void setHeight(int height) {
@@ -100,14 +111,17 @@ public class BasicPlayer {
     public void move(JPanel win, BulletHandler bullets) {
         if (move_left && (coordinates.getX() - 1 > 0 && coordinates.getX() - 1 < win.getWidth() - width)) {
             coordinates.setX(coordinates.getX() - 1);
+            this.player = playerSprites.getImage(3);
         }
         if (move_right && (coordinates.getX() + 1 > 0 && coordinates.getX() + 1 < win.getWidth() - width)) {
             coordinates.setX(coordinates.getX() + 1);
+            this.player = playerSprites.getImage(2);
         }
         if (shoot & can_shoot){
-            bullets.spawnMissile(coordinates.getX() + width/2, coordinates.getY(), -1);
+            bullets.spawnMissile(coordinates.getX() + size/2, coordinates.getY(), -1);
             can_shoot = false;
             fire_timer.start();
+            this.player = playerSprites.getImage(1);
         }
         //bullets.move();
         //bullets.kill();
@@ -116,8 +130,9 @@ public class BasicPlayer {
     // Paints player and bullets, determins look of player
     public void paint(Graphics2D g) {
         g.setColor(color);
-        g.fillRect(coordinates.getX(), coordinates.getY(), width, height);
+        //g.fillRect(coordinates.getX(), coordinates.getY(), width, height);
         //bullets.paint(g);
+        g.drawImage(player, coordinates.getX(), coordinates.getY(), size, size, null);
         g.setColor(Color.WHITE);
         g.drawString("Score:", 20, 20);
         g.drawString(String.valueOf(score), 100, 20);
@@ -132,12 +147,15 @@ public class BasicPlayer {
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             move_left = false;
+            this.player = playerSprites.getImage(0);
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             move_right = false;
+            this.player = playerSprites.getImage(0);
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             shoot = false;
+            this.player = playerSprites.getImage(0);
         }
     }
 

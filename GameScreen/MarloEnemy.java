@@ -21,7 +21,7 @@ public class MarloEnemy extends BasicEnemy {
     
     public MarloEnemy(int x, int y) throws IOException, URISyntaxException {
         super(x, y);
-        this.temp = new spriteHandler("test.png");
+        this.temp = new spriteHandler("test.png",200,200);
         pic = temp.getImage(0);
         this.health = 50;
         this.size = 80;

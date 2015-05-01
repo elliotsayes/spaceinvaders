@@ -20,7 +20,7 @@ public class PlayerMarlo extends BasicPlayer {
 
     public PlayerMarlo() throws IOException, URISyntaxException {
         super();
-        this.temp = new spriteHandler("test.png");
+        this.temp = new spriteHandler("test.png",200,200);
         this.height = 80;
         this.width = 80;
         coordinates.setX(100);
