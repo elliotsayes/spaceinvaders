@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import MainMenu.mainMenu;
 import GameScreen.GamePanel;
+import GameScreen.Loading;
 import MainMenu.OptionsInfo;
 import MainMenu.OptionsScreen;
 import java.io.IOException;
@@ -33,6 +34,15 @@ public class gameEngine {
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // * Add game panels here *
+           Loading loading;
+         loading = new Loading(new IntVector2D(windowSize.getX(), windowSize.getY()));
+         loading.setBackground(backgroundColor);
+         gameWindow.add(loading);
+         gameWindow.validate();
+         loading.repaint();
+         
+         Thread.sleep(5000);
+         gameWindow.remove(loading);
         /**/
         mainMenu MainMenu;
         OptionsScreen optionsScreen;
