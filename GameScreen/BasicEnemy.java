@@ -10,8 +10,8 @@ public class BasicEnemy {
     static String defaultSprite = "Basic_Enemy_Sprite.gif";
     
     //  Enemy parameters
-    int health;// = 1;
-    int size;// = 30;
+    int health;
+    int size;
     int type = 0;
     Random ran = new Random();
     
@@ -19,7 +19,7 @@ public class BasicEnemy {
     IntVector2D coordinates;
     
     // Enemy Sprite
-    ImageIcon image;
+    static ImageIcon image;
 
     // Enemy constructor, initialises profile
     public BasicEnemy(int x, int y) {

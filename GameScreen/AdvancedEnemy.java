@@ -8,11 +8,8 @@ package GameScreen;
 import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import javax.swing.Timer;
 
 /**

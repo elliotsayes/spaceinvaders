@@ -6,53 +6,54 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-
-
 public class AudioPlayer {
-    
+
     Clip clip;
     String name, sound_file;
-    
+
     // Add sound files to GameEngine pakage then call in contructor eg "test.wav"
-    public AudioPlayer(String sound_name, String new_name){
+    // Constructor loads sound file
+    public AudioPlayer(String sound_name, String new_name) {
         sound_file = sound_name;
         name = new_name;
         loadTrack();
     }
-    
-    public void loadTrack(){
-        try{
+
+    // Trys to load the specified Audio file and returns message on success / faliure
+    private void loadTrack() {
+        try {
             AudioInputStream sound_one = AudioSystem.getAudioInputStream(new File(getClass().getResource(sound_file).toURI()));
             clip = AudioSystem.getClip();
             clip.open(sound_one);
-            while(!clip.isOpen()){
-                
+            while (!clip.isOpen()) {
+                // Does nothing while clip is being loaded into memory
             }
             System.out.println(name + " has loaded succesfully.\n");
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println("Error with playing sound.");
-            ex.printStackTrace( );
         }
     }
-    
-    public void playSound(){
-        clip.setFramePosition(0);  // Must always rewind!
+
+    // Plays Audio file from start
+    public void playSound() {
+        clip.setFramePosition(0);  
         clip.start();
-     }
-    
-    public void stopSound(){
+    }
+
+    // Stops playing the Audio file
+    public void stopSound() {
         clip.stop();
-     }
-    
-    public void Loop(){
-        clip.loop(2);
-     }
-    
-    public void close(){
+    }
+
+    // Loops audio file "i" times
+    public void Loop(int i) {
+        clip.loop(i);
+    }
+
+    //Closes Audio file
+    public void close() {
         clip.close();
-     }
-    
+    }
+
 }
 

@@ -19,9 +19,7 @@ public class gameEngine {
     // Config
     private static final String windowTitle = "*PewPew*";
     private static final Color backgroundColor = Color.BLACK;
-    private static final IntVector2D windowSize = new IntVector2D(800, //window width
-            600);//window height
-    
+    private static final IntVector2D windowSize = new IntVector2D(800,600);
 
     public static void main(String[] args) throws InterruptedException, IOException, URISyntaxException {
 
@@ -30,24 +28,29 @@ public class gameEngine {
         gameWindow.setSize(windowSize.getX(), windowSize.getY());
         gameWindow.setVisible(true);
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         // * Add game panels here *
-        /**/mainMenu MainMenu;
+        /**/
+        mainMenu MainMenu;
         OptionsScreen optionsScreen;
         GamePanel playScreen;
         Winnerr win;
         Loser loseWin;
-        AudioHandler music = new AudioHandler() ;
-        music.add("pacman_death.wav","death");
-        music.add("battle_2.mid","battleMusic");
-        music.add("TitleScreen.mid","intro");
-        music.add("win.mid","win");
+        
+        // Audio tracks for panels
+        AudioHandler music = new AudioHandler();
+        music.add("pacman_death.wav", "death");
+        music.add("battle_2.mid", "battleMusic");
+        music.add("TitleScreen.mid", "intro");
+        music.add("win.mid", "win");
+        
         // Initialise game state
         int game_state = 0;
         while (game_state != -1) {
             switch (game_state) {
                 case 0: // Main Menu
                     // Add main menu to frame
-                    music.loop("intro");
+                    music.play("intro");
                     MainMenu = new mainMenu(windowSize);
                     MainMenu.setBackground(Color.white);
                     gameWindow.add(MainMenu);
@@ -64,8 +67,8 @@ public class gameEngine {
                     break;
 
                 case 1: // Play Screen
-                     // Plays sound
-                    music.loop("battleMusic");
+                    // Plays sound
+                    music.play("battleMusic");
                     playScreen = new GamePanel();
                     playScreen.setBackground(backgroundColor);
                     gameWindow.add(playScreen);
@@ -84,37 +87,37 @@ public class gameEngine {
                     break;
 
                 case 2: // Win Screen
-                    music.loop("win");
+                    music.play("win");
                     win = new Winnerr(new IntVector2D(windowSize.getX(), windowSize.getY()));
                     win.setBackground(backgroundColor);
                     gameWindow.add(win);
                     gameWindow.validate();
-                    while(win.getSelection()== 0){
+                    while (win.getSelection() == 0) {
                         Thread.sleep(1);
                     }
                     game_state = win.getSelection();
                     gameWindow.remove(win);
                     music.stop("win");
                     break;
-                    
+
                 case 3: // Lose Screen
                     music.play("death");
                     loseWin = new Loser(new IntVector2D(windowSize.getX(), windowSize.getY()));
                     loseWin.setBackground(backgroundColor);
                     gameWindow.add(loseWin);
                     gameWindow.validate();
-                    while(loseWin.getSelection()== 0){
+                    while (loseWin.getSelection() == 0) {
                         Thread.sleep(1);
                     }
                     game_state = loseWin.getSelection();
                     gameWindow.remove(loseWin);
                     music.stop("death");
-                    
+
                     break;
                 case 4: // Main Menu
                     // Add main menu to frame
-                    music.loop("intro");
-                    optionsScreen = new /**/OptionsScreen(windowSize);
+                    music.play("intro");
+                    optionsScreen = new /**/ OptionsScreen(windowSize);
                     optionsScreen.setBackground(Color.white);
                     gameWindow.add(optionsScreen);
                     gameWindow.validate();
@@ -130,6 +133,7 @@ public class gameEngine {
                     break;
             }
         }
+        //Clears JFrame
         gameWindow.dispose();
     }
 }
