@@ -27,16 +27,15 @@ public class FireWorkHandler {
     ArrayList<FireWork> blowingUp = new ArrayList<>();
     ArrayList<FireWork> fireworks = new ArrayList<>();
     ArrayList<Color> colours = new ArrayList<>();
+    IntVector2D acceleration = new IntVector2D(0,0.1f);
     ArrayList<IntVector2D> velocities = new ArrayList<IntVector2D>(){{ 
         add(new IntVector2D(-2,0));
         add(new IntVector2D(0,-2));
         add(new IntVector2D(2,0));
-        add(new IntVector2D(0,2));
         add(new IntVector2D(-2,-2));
         add(new IntVector2D(2,2));
         add(new IntVector2D(2,-2));
         add(new IntVector2D(-2,2));
-        add(new IntVector2D(1,2));
         add(new IntVector2D(1,-2));
         add(new IntVector2D(-1,2));
         add(new IntVector2D(-1,-2));
@@ -44,41 +43,36 @@ public class FireWorkHandler {
         add(new IntVector2D(2,-1));
         add(new IntVector2D(-2,1));
         add(new IntVector2D(-2,-1));
-       
          add(new IntVector2D(-3,-3));
-          add(new IntVector2D(3,3));
-           add(new IntVector2D(3,-3));
-            add(new IntVector2D(-3,3));
-             add(new IntVector2D(0,-3));
-              add(new IntVector2D(-3,-3));
-               add(new IntVector2D(3,0));
-                add(new IntVector2D(0,3));
-                 add(new IntVector2D(-3,0));
+         add(new IntVector2D(3,3));
+         add(new IntVector2D(3,-3));
+         add(new IntVector2D(-3,3));
+         add(new IntVector2D(0,-3));
+         add(new IntVector2D(-3,-3));
+         add(new IntVector2D(3,0));
+         add(new IntVector2D(-3,0));
+         
+         
         
     }};
     
-    int Bcount = 0;
+    
     boolean Shoot = true;
     boolean test = false;
-    int Delay = 5;
+    int Delay = 5, testy = 0,Bcount = 0,Update = 5,BlowyUpdate = 15 ;
     Timer fireWorkTimer;
     Timer BlowyUpyTimer;
-    int Update = 5 ;
-    int BlowyUpdate = 15;
     Random crazyJoe = new Random();
    // AudioPlayer sound = new AudioPlayer("shoot.wav", "firework");
+   
+    
  
     
     
     FireWorkHandler(){
-       
-     
-        
         for(int i= 50; i <= 770; i = i + 75 ){
             fireworks.add(new FireWork(new IntVector2D(i,500), new IntVector2D(0,crazyJoe.nextInt(2)-3)));
             }
-        
-     
     }
     
     void Paint(Graphics2D firework){
@@ -144,7 +138,7 @@ public class FireWorkHandler {
          Color fireworkColor = new Color(crazyJoe.nextInt(255),crazyJoe.nextInt(255),crazyJoe.nextInt(255));
          for (int t =0 ; t < velocities.size(); t ++){
             
-            blowingUp.add( new FireWork( new IntVector2D(coordinates.getX(),coordinates.getY()),velocities.get(t), 20, new IntVector2D(0,0),
+            blowingUp.add( new FireWork( new IntVector2D(coordinates.getX(),coordinates.getY()),velocities.get(t), 20, new IntVector2D(0f,0.005f),
                    Color.RED,8,8,fireworkColor ));     
          }
      }
