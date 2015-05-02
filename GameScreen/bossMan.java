@@ -152,7 +152,7 @@ public class bossMan extends EnemyHandler {
     // moveArmy is from the Enemy Handler, but Overwritten here for the boss movment 
     @Override
     public void moveArmy(JPanel win, BulletHandler bullets){
-    if (true){//enemyArray.size() != 0 ){
+    if (enemyArray.size() != 0 ){
         
         if (enemyArray.get(0).getY() <= 25){
             
@@ -253,18 +253,20 @@ void hit(int temp) {
         win.setColor(Color.green);
         
 //        Another_timer.start();
-        if(enemyArray.get(0).coordinates.getY() >= 24 && enemyArray.get(0).coordinates.getY() <= 26){
-           if(!toMove){
-                   ImageIcon DrawImage = new ImageIcon(getClass().getResource("TheDarkLordCthulhu"+Integer.toString(r)+".png"));
-                  
-                   Fade_timer.start();
-                   
-                   win.drawImage(DrawImage.getImage(), 100, 300, null);
-           }
-                   
-                   
+        if(!enemyArray.isEmpty()) {
+            if(enemyArray.get(0).coordinates.getY() >= 24 && enemyArray.get(0).coordinates.getY() <= 26){
+               if(!toMove){
+                       ImageIcon DrawImage = new ImageIcon(getClass().getResource("TheDarkLordCthulhu"+Integer.toString(r)+".png"));
+
+                       Fade_timer.start();
+
+                       win.drawImage(DrawImage.getImage(), 100, 300, null);
+               }
+
+
+            }
         }
-        
+ 
         
        // This determines whether the health of a certain figure is below a certain point - after that turns the
         // health bar red. But is otherwise green

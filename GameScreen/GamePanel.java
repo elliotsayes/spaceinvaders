@@ -222,7 +222,7 @@ public class GamePanel extends JPanel {
                     invaders.hit(j);
                     // Changes selection to win state
                     if(invaders.enemyArray.isEmpty()){
-                        if (shooter.score > 800000){
+                        if (level == 5){
                             selection = winScreen;
                         }else{
                             restart();
@@ -245,7 +245,7 @@ public class GamePanel extends JPanel {
    
     public void restart() throws IOException, URISyntaxException {
         level += 1;
-        if(level < 6){invaders = new EnemyHandler(level);}else{
+        if(level < 5){invaders = new EnemyHandler(level);}else{
             playList.stopAll();
             invaders = new bossMan(playList);
         }

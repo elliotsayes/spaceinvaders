@@ -158,6 +158,8 @@ public class gameEngine {
         }
         //Clears JFrame
         gameWindow.dispose();
+        //clears threads and exits
+        System.exit(0);
     }
 
     public static int getTest() {
