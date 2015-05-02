@@ -27,9 +27,6 @@ public class spriteHandler {
         
     }
 
-    spriteHandler() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public Image getImage(int t){
         

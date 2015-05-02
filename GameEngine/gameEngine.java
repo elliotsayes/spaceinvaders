@@ -34,16 +34,8 @@ public class gameEngine {
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // * Add game panels here *
-           Loading loading;
-         loading = new Loading(new IntVector2D(windowSize.getX(), windowSize.getY()));
-         loading.setBackground(backgroundColor);
-         gameWindow.add(loading);
-         gameWindow.validate();
-         loading.repaint();
-         
-         Thread.sleep(5000);
-         gameWindow.remove(loading);
         /**/
+        Loading loading;
         mainMenu MainMenu;
         OptionsScreen optionsScreen;
         GamePanel playScreen;
@@ -51,12 +43,18 @@ public class gameEngine {
         Loser loseWin;
         
         // Audio tracks for panels
+        loading = new Loading(new IntVector2D(windowSize.getX(), windowSize.getY()));
+        loading.setBackground(backgroundColor);
+        gameWindow.add(loading);
+        gameWindow.validate();
         AudioHandler music = new AudioHandler();
         music.add("pacman_death.wav", "death");
         music.add("battle_2.mid", "battleMusic");
         music.add("TitleScreen.mid", "intro");
         music.add("win.mid", "win");
         music.add("shoot.wav", "shoot");
+        music.add("boss.mid", "BossMusic");
+        gameWindow.remove(loading);
      
         
         
@@ -85,8 +83,8 @@ public class gameEngine {
 
                 case 1: // Play Screen
                     // Plays sound
-                    music.play("battleMusic");
-                    playScreen = new GamePanel();
+                    //music.play("battleMusic");
+                    playScreen = new GamePanel(music);
                     playScreen.setBackground(backgroundColor);
                     gameWindow.add(playScreen);
                     gameWindow.validate();
@@ -96,7 +94,7 @@ public class gameEngine {
                         Thread.sleep(1);
                     }
                     // Removes playScreen
-                    music.stop("battleMusic");
+                    music.stopAll();
                     game_state = playScreen.getSelection();
                     playScreen.restart();
                     gameWindow.remove(playScreen);

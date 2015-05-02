@@ -70,4 +70,11 @@ public class AudioHandler {
         }
         return -1;
     }
+    
+    public void stopAll() {
+        
+        for (int i = 0; i < playList.size(); i++) {
+            playList.get(i).stopSound();
+        }
+    }
 }

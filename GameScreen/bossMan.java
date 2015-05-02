@@ -33,7 +33,6 @@ import java.awt.Image;
  */
 public class bossMan extends EnemyHandler {
     // Initialising the boss Music
-    AudioPlayer music = new AudioPlayer("boss.mid", "BossMusic") ;
     // Initialising the Timers 
     Timer BossMusic_timer, Health_timer, Fade_timer, BossMovement_timer;
     
@@ -80,11 +79,13 @@ public class bossMan extends EnemyHandler {
     int bulletCooldown = 0, bulletAngle = 0;
     
     Random bulletRandomizer = new Random();
+    AudioHandler playList;
     
 
-    public bossMan() throws IOException, URISyntaxException {
+    public bossMan(AudioHandler pl) throws IOException, URISyntaxException {
        
-       super(); 
+       super();
+       playList = pl;
        enemyArray = new ArrayList<>();
     
        this.Boss = new EnemyBoss(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),20,size,CthuluDarkLord,1,1,1);
@@ -111,7 +112,7 @@ public class bossMan extends EnemyHandler {
             @Override
             public void actionPerformed(ActionEvent e) {
               if(!toMove){
-                   music.playSound();
+                   playList.play("BossMusic");
               } 
                BossMusic_timer.stop();
                 

@@ -1,6 +1,7 @@
 package GameScreen;
 
 
+import GameEngine.AudioHandler;
 import MainMenu.OptionsInfo;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -46,9 +47,10 @@ public class GamePanel extends JPanel {
     static int paint_updateInterval = 300;
     static int player_updateInterval = 300;
     static int enemy_updateInterval = 200;
+    AudioHandler playList;
     
     // gameScreen Constructor
-    public GamePanel() throws IOException, URISyntaxException {
+    public GamePanel(AudioHandler p) throws IOException, URISyntaxException {
         // ActionListener for time, what happens when timer executes
         this.paint_timer = new Timer(1000/paint_updateInterval, (new ActionListener() {
             @Override
@@ -147,6 +149,8 @@ public class GamePanel extends JPanel {
         this.requestFocus();
         paint_timer.start();
         selection = 1;
+        playList = p;
+        playList.play("battleMusic");
     }
 
     @Override
@@ -221,7 +225,8 @@ public class GamePanel extends JPanel {
     public void restart() throws IOException, URISyntaxException {
         level += 1;
         if(level < 6){invaders = new EnemyHandler(level);}else{
-            invaders = new bossMan();
+            playList.stopAll();
+            invaders = new bossMan(playList);
         }
         bullets = new BulletHandler(velocity);
         enemy_timer.stop();
