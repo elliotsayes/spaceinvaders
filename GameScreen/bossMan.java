@@ -88,11 +88,11 @@ public class bossMan extends EnemyHandler {
        playList = pl;
        enemyArray = new ArrayList<>();
     
-       this.Boss = new EnemyBoss(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),20,size,CthuluDarkLord,1,1,1);
-       this.Bossleg1 = new EnemyBoss(Tenticles.getX()+50,Tenticles.getY()+155,1,70,CthuluDarkLordLeg1,1,1,1);
-       this.Bossleg2 = new EnemyBoss(Tenticles.getX()+85,Tenticles.getY()+160,1,80,CthuluDarkLordLeg2,1,1,1);
-       this.Bossleg3 = new EnemyBoss(Tenticles.getX()+ 135,Tenticles.getY()+159,1,70,CthuluDarkLordLeg3,1,1,1);
-       this.Bossleg4 = new EnemyBoss(Tenticles.getX()+ 170,Tenticles.getY()+160,1,70,CthuluDarkLordLeg4,1,1,1);
+       this.Boss = new EnemyBoss(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),30,size,CthuluDarkLord,1,1,1);
+       this.Bossleg1 = new EnemyBoss(Tenticles.getX()+50,Tenticles.getY()+155,10,70,CthuluDarkLordLeg1,1,1,1);
+       this.Bossleg2 = new EnemyBoss(Tenticles.getX()+85,Tenticles.getY()+160,10,80,CthuluDarkLordLeg2,1,1,1);
+       this.Bossleg3 = new EnemyBoss(Tenticles.getX()+ 135,Tenticles.getY()+159,10,70,CthuluDarkLordLeg3,1,1,1);
+       this.Bossleg4 = new EnemyBoss(Tenticles.getX()+ 170,Tenticles.getY()+160,10,70,CthuluDarkLordLeg4,1,1,1);
        enemyArray.add(Boss);
        enemyArray.add(Bossleg1);
        enemyArray.add(Bossleg2);

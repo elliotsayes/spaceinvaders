@@ -17,13 +17,15 @@ import javax.swing.Timer;
  * @author myn
  */
 public class OptionsScreen extends mainMenu {
-    private final int numShooters = 3;
+    //private final int numShooters = 3;
     public OptionsInfo workingOptions;
     public ArrayList<ImageIcon> shooterPreviews;
     
     public OptionsScreen(IntVector2D windowSize, OptionsInfo inputOptions) {
         this(windowSize);
         workingOptions = inputOptions;
+        updateButtons();
+        repaint();
     }
     
     public OptionsScreen(IntVector2D windowSize) {
@@ -35,10 +37,14 @@ public class OptionsScreen extends mainMenu {
         ImageIcon shooter0 = new ImageIcon(getClass().getResource("shooter0.png"));
         ImageIcon shooter1 = new ImageIcon(getClass().getResource("shooter1.png"));
         ImageIcon shooter2 = new ImageIcon(getClass().getResource("shooter2.png"));
+        ImageIcon shooter3 = new ImageIcon(getClass().getResource("shooter3.png"));
+        ImageIcon shooter4 = new ImageIcon(getClass().getResource("shooter4.png"));
         shooterPreviews = new ArrayList<ImageIcon>() {{
             add(shooter0);
             add(shooter1);
             add(shooter2);
+            add(shooter3);
+            add(shooter4);
         }};
         
         updateButtons();
