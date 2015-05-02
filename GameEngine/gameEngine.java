@@ -57,6 +57,7 @@ public class gameEngine {
         music.add("shoot.wav", "shoot");
         music.add("boss.mid", "BossMusic");
         music.add("Monster Sound.wav", "BossSound");
+        music.add("chainClink.wav", "Hit");
         gameWindow.remove(loading);
      
         

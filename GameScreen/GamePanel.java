@@ -40,7 +40,7 @@ public class GamePanel extends JPanel {
     EnemyHandler invaders = new EnemyHandler();
     BasicPlayer shooter = new BasicPlayer();
     BarrierHandler barriers = new BarrierHandler();
-    BulletHandler bullets = new BulletHandler(velocity);
+    BulletHandler bullets;
     
     // Game timer for repaint
     Timer paint_timer, player_timer, enemy_timer, powerUpTimer;
@@ -172,6 +172,7 @@ public class GamePanel extends JPanel {
         paint_timer.start();
         selection = 1;
         playList = p;
+        bullets = new BulletHandler(velocity, playList);
         playList.play("battleMusic");
     }
 
@@ -207,12 +208,14 @@ public class GamePanel extends JPanel {
         for (int i = 0; i < bullets.getbullets().size(); i++) {
             if(bullets.getbullets().get(i).color == Red ||bullets.getbullets().get(i).color == Cyan | bullets.getbullets().get(i).color ==White){
                 if(barrierHit(bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
-                bullets.getbullets().remove(i);
-                continue;
+                    playList.play("Hit");    
+                    bullets.getbullets().remove(i);
+                    continue;
                 }
             }if(bullets.getbullets().get(i).velocity.getY() >= 0){
                 if(hitBox(shooter.getX(),shooter.getY(),shooter.width,bullets.getbullets().get(i).getX(),bullets.getbullets().get(i).getY(),bullets.getbullets().get(i).size)){
                         bullets.getbullets().get(i).upgrade(this);
+                        playList.play("Hit");
                         bullets.getbullets().remove(i);
                     if(shooter.getHealth() == 0){selection = loseScreen;}
                     System.out.print("DEBUG - 3 \n");
@@ -231,6 +234,7 @@ public class GamePanel extends JPanel {
                         }
                     }
                     shooter.hit();
+                    playList.play("Hit");
                     bullets.getbullets().remove(i);
                     j = invaders.enemyArray.size();
                     }
@@ -250,7 +254,7 @@ public class GamePanel extends JPanel {
             playList.stopAll();
             invaders = new bossMan(playList);
         }
-        bullets = new BulletHandler(velocity);
+        bullets = new BulletHandler(velocity, playList);
         enemy_timer.stop();
         //player_timer.stop();
         shooter.locationRespawn();
@@ -266,17 +270,21 @@ public class GamePanel extends JPanel {
             if (u < x + size & u > x) {
                 if ((v < (y + size)) & (v > y)) {
                     System.out.print("DEBUG - hit 1 \n");
+                    
                     return true;
                 }else if (((v + size2) < (y + size)) & (v + size2 > y)) {
                     System.out.print("DEBUG - hit 2 \n");
+                    
                     return true;
                 }
             } else if (u + size2 < x + size & u + size2 > x){
                 if ((v < (y + size)) & (v > y)) {
                     System.out.print("DEBUG - hit 3 \n");
+                    
                     return true;
                 }else if (((v + size2) < (y + size2)) & (v + size2 > y)) {
                     System.out.print("DEBUG - hit 4 \n");
+                    
                     return true;
                 }
             }
@@ -291,6 +299,7 @@ public class GamePanel extends JPanel {
                 for(int v = 0; v < temp.barrierArray.size(); v++){
                     BarrierPiece temp2 = temp.barrierArray.get(v);
                     if (hitBox(temp2.coordinates.getX(),temp2.coordinates.getY(), 10,x,y,size)){
+                        playList.play("Hit");
                         temp.removePiece(v);
                         System.out.print("DEBUG - 1 \n");
                         return true;

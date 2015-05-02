@@ -1,5 +1,6 @@
 package GameScreen;
 
+import GameEngine.AudioHandler;
 import GameEngine.AudioPlayer;
 import GameEngine.IntVector2D;
 import java.awt.Color;
@@ -14,10 +15,10 @@ public class BulletHandler {
     ArrayList<Bullet> bullets;
     //boolean can_shoot = true;
     Timer velocity_timer;
-    AudioPlayer fire_sound = new AudioPlayer("shoot.wav","shoot");
+    AudioHandler fire_sound ;//= new AudioPlayer("shoot.wav","shoot");
 
     // Constructor initialises array of bullets
-    public BulletHandler( int velocity) {
+    public BulletHandler( int velocity, AudioHandler p) {
         bullets = new ArrayList<>();
         this.velocity_timer = new Timer(1000/velocity, (new ActionListener() {
             @Override
@@ -26,13 +27,14 @@ public class BulletHandler {
                 kill();
             }
         }));
+        fire_sound = p;
        
     }
 
     // Adds bullet and (x,y) 
     public void spawnMissile(int x, int y, int direction) {
             bullets.add(new Bullet(new IntVector2D(x,y), new IntVector2D(0,direction)));
-            fire_sound.playSound();
+            fire_sound.play("shoot");
     }
     
     public void spawnComplexMissle(IntVector2D coordinates, IntVector2D velocity, IntVector2D acceleration, Color color, int size) {
