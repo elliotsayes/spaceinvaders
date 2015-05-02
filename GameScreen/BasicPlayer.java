@@ -89,6 +89,12 @@ public class BasicPlayer {
                 skin = "playerSpriteSheet2.png";
                 break;
             case 2:
+                skin = "MarloSpriteSheet.png";
+                break;
+            case 3:
+                skin = "BraedenSpriteSheet.png";
+                break;
+            case 4:
                 skin = "ElliotSpriteSheet.png";
                 break;
         }
