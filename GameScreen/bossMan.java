@@ -88,7 +88,7 @@ public class bossMan extends EnemyHandler {
        playList = pl;
        enemyArray = new ArrayList<>();
     
-       this.Boss = new EnemyBoss(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),30,size,CthuluDarkLord,1,1,1);
+       this.Boss     = new EnemyBoss(BOSSstartCoordinates.getX(),BOSSstartCoordinates.getY(),30,size,CthuluDarkLord,1,1,1);
        this.Bossleg1 = new EnemyBoss(Tenticles.getX()+50,Tenticles.getY()+155,10,70,CthuluDarkLordLeg1,1,1,1);
        this.Bossleg2 = new EnemyBoss(Tenticles.getX()+85,Tenticles.getY()+160,10,80,CthuluDarkLordLeg2,1,1,1);
        this.Bossleg3 = new EnemyBoss(Tenticles.getX()+ 135,Tenticles.getY()+159,10,70,CthuluDarkLordLeg3,1,1,1);
@@ -158,8 +158,8 @@ public class bossMan extends EnemyHandler {
             
           
             velocity = velocity1;
-             BossMusic_timer.start();
-             BossMovement_timer.start();
+            BossMusic_timer.start();
+            BossMovement_timer.start();
          }
         
         else if(!toMove) { 
@@ -241,7 +241,11 @@ void hit(int temp) {
         if(enemyArray.get(temp).hit(1)){
            enemyArray.remove(temp); 
         }
-        if(enemyArray.size()==1){enemyArray.get(0).image = new ImageIcon(getClass().getResource("BossManEyes.gif"));}
+        if(enemyArray.size()==1){
+        enemyArray.get(0).image = new ImageIcon(getClass().getResource("BossManEyes.gif"));
+        
+        playList.play("BossSound");
+        }
     
 }
 // Paints everything on ghte scneen

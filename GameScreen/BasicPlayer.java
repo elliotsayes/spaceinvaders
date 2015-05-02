@@ -239,4 +239,8 @@ public class BasicPlayer {
         move_right = false;
         shoot = false;
     }
+
+        public int getScore() {
+        return score;
+    }
 }

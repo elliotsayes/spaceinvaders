@@ -2,7 +2,10 @@
 package killscreen;
 
 import GameEngine.IntVector2D;
+import static GameEngine.gameEngine.getTest;
 import MainMenu.Button;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -28,6 +31,8 @@ public class Loser extends JPanel {
     boolean showButton = false;
     boolean hovered;
     
+    int Score;
+    
     IntVector2D menuSize;
     ArrayList<Button> buttons = new ArrayList<>();;
     Button tempButton;
@@ -36,6 +41,7 @@ public class Loser extends JPanel {
     ImageIcon Explosion  = new ImageIcon(getClass().getResource("TESTGIF.gif"));
     ImageIcon Banner     = new ImageIcon(getClass().getResource("DIED_1.PNG"));
     ImageIcon Banner2    = new ImageIcon(getClass().getResource("Game Over_1.PNG"));
+    ImageIcon Dimmer     = new ImageIcon(getClass().getResource("Opaque.png"));
  
     
     
@@ -101,6 +107,7 @@ public class Loser extends JPanel {
     @Override
      public void paint(Graphics win) {
         // Clears window
+         Score = getTest();
         super.paint(win);
         Graphics2D window = (Graphics2D) win;
         window.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -108,6 +115,9 @@ public class Loser extends JPanel {
         win.drawImage(Explosion.getImage(), 200, 130, this);
         win.drawImage(Banner.getImage(), 75, 0, this);
         win.drawImage(Banner2.getImage(), 150, 100, this);
+        win.drawImage(Dimmer.getImage(),250,420,300,50,this);
+        
+        
      
     
         if (showButton == true){
@@ -126,6 +136,10 @@ public class Loser extends JPanel {
             buttons.get(j).paint(window,state);
             }     
         }
+        win.setColor(Color.WHITE);
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
+        win.drawString("Your Score: "+String.valueOf(Score), 300, 450);
+        
     } 
      
       public void actuateMouse(IntVector2D mouseLocation, boolean clicked) {

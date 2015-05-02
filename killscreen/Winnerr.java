@@ -3,6 +3,9 @@ package killscreen;
 
 import GameEngine.IntVector2D;
 import MainMenu.Button;
+import static GameEngine.gameEngine.getTest;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -21,15 +24,16 @@ public class Winnerr extends JPanel {
     // Initialising the timers 
     Timer paint_timer, firework_rate,paintTimer,Button_timer;
    
-    int x = 500, selection = 0, selectionCandidate = 0, state = 0, i= -1, j,paint_updatePS = 60;;
+    int x = 500, selection = 0, selectionCandidate = 0, state = 0, i= -1, j,paint_updatePS = 60,Score;
     
     final int paintUpdateRate = 1;
     
     boolean showButton = false;
     boolean hovered;
     // Initialising the Images for the screen
-    ImageIcon Banner = new ImageIcon(getClass().getResource("Winner.PNG"));
+    ImageIcon Banner     = new ImageIcon(getClass().getResource("Winner.PNG"));
     ImageIcon Background = new ImageIcon(getClass().getResource("Stars.gif"));
+    ImageIcon Dimmer     = new ImageIcon(getClass().getResource("OpaqueWinner.png"));
     
     //Initialising the classes to use within the winner 
     IntVector2D menuSize;
@@ -38,10 +42,9 @@ public class Winnerr extends JPanel {
     
  
     
-    
   
-    FireWorkHandler firework = new FireWorkHandler(); 
-    FireWorkHandler  firework2 = new FireWorkHandler();
+    FireWorkHandler firework  = new FireWorkHandler(); 
+    FireWorkHandler firework2 = new FireWorkHandler();
 
 
     public Winnerr(IntVector2D windowSize) {
@@ -132,12 +135,14 @@ public class Winnerr extends JPanel {
     @Override
      public void paint(Graphics win) {
         // Clears window
+         Score = getTest();
         super.paint(win);
         Graphics2D window = (Graphics2D) win;
         window.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        win.drawImage(Background.getImage(), -4, -5, 805, 600, this);
+        win.drawImage(Background.getImage(), 0, -5, 800, 600, this);
         win.drawImage(Banner.getImage(), 125, 0, this);
-      
+        win.drawImage(Dimmer.getImage(),250,420,300,50,this);
+        
         firework.Paint(window);
         firework2.Paint(window);
     
@@ -157,6 +162,9 @@ public class Winnerr extends JPanel {
             buttons.get(j).paint(window,state);
             }     
         }
+        win.setColor(Color.WHITE);
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
+        win.drawString("Your Score: "+String.valueOf(Score), 300, 450);
     } 
      
       public void actuateMouse(IntVector2D mouseLocation, boolean clicked) {

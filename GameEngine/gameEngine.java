@@ -20,6 +20,7 @@ import killscreen.Winnerr;
 public class gameEngine {
 
     // Config
+    static int Score;
     private static final String windowTitle = "*PewPew*";
     private static final Color backgroundColor = Color.BLACK;
     private static final IntVector2D windowSize = new IntVector2D(800,600);
@@ -42,6 +43,7 @@ public class gameEngine {
         Winnerr win;
         Loser loseWin;
         
+        
         // Audio tracks for panels
         loading = new Loading(new IntVector2D(windowSize.getX(), windowSize.getY()));
         loading.setBackground(backgroundColor);
@@ -54,6 +56,7 @@ public class gameEngine {
         music.add("win.mid", "win");
         music.add("shoot.wav", "shoot");
         music.add("boss.mid", "BossMusic");
+        music.add("Monster Sound.wav", "BossSound");
         gameWindow.remove(loading);
      
         
@@ -93,6 +96,7 @@ public class gameEngine {
                     while (playScreen.getSelection() == 1) {
                         Thread.sleep(1);
                     }
+                    Score = playScreen.Score();
                     // Removes playScreen
                     music.stopAll();
                     game_state = playScreen.getSelection();
@@ -110,6 +114,7 @@ public class gameEngine {
                     while (win.getSelection() == 0) {
                         Thread.sleep(1);
                     }
+                    
                     game_state = win.getSelection();
                     gameWindow.remove(win);
                     music.stop("win");
@@ -121,7 +126,7 @@ public class gameEngine {
                     loseWin.setBackground(backgroundColor);
                     gameWindow.add(loseWin);
                     gameWindow.validate();
-                    while (loseWin.getSelection() == 0) {
+                    while (loseWin.getSelection() == 0){
                         Thread.sleep(1);
                     }
                     game_state = loseWin.getSelection();
@@ -153,5 +158,9 @@ public class gameEngine {
         }
         //Clears JFrame
         gameWindow.dispose();
+    }
+
+    public static int getTest() {
+        return Score;
     }
 }

@@ -300,4 +300,7 @@ public class GamePanel extends JPanel {
         }
          return false;
     }
+    public int Score(){
+        return shooter.score;
+    }
 }
