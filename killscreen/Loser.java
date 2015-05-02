@@ -18,17 +18,20 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Loser extends JPanel {
-    Timer paint_timer, firework_rate,test;
-    int paint_updatePS = 60;
-    int x = 500, selection = 0, selectionCandidate = 0, state = 0, i= -1;
-    boolean hovered;
+    // initialising the timers
+    Timer paint_timer, firework_rate,Button_timer,paintTimer;
+    
+    int x = 500, selection = 0, selectionCandidate = 0, state = 0, i= -1,paint_updatePS = 60;
+    
     final int paintUpdateRate = 1;
-    Timer paintTimer;
-    boolean temp = false;
+ 
+    boolean showButton = false;
+    boolean hovered;
     
     IntVector2D menuSize;
     ArrayList<Button> buttons = new ArrayList<>();;
     Button tempButton;
+     //initialising the images to be used in the paint
     ImageIcon Background = new ImageIcon(getClass().getResource("stars.gif"));
     ImageIcon Explosion  = new ImageIcon(getClass().getResource("TESTGIF.gif"));
     ImageIcon Banner     = new ImageIcon(getClass().getResource("DIED_1.PNG"));
@@ -76,22 +79,23 @@ public class Loser extends JPanel {
     
 
         
-        this.test = new Timer(500, (new ActionListener() {
+        this.Button_timer = new Timer(500, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
                 
-                temp = true;
+                showButton = true;
                
                 ImageIcon unselected = new ImageIcon(getClass().getResource("unselected.png"));
                 ImageIcon selected = new ImageIcon(getClass().getResource("selected.png"));
                 ImageIcon hovered = new ImageIcon(getClass().getResource("hovered.png"));
-                buttons.add(new Button("EXIT", new IntVector2D(300, 480), new IntVector2D(60, 40), new IntVector2D(175, 80),  -1, unselected, selected, hovered,0));
-                buttons.add(new Button("PLAY AGAIN" , new IntVector2D(300, 390), new IntVector2D(75, 40), new IntVector2D(175, 80), 1, unselected, selected, hovered,0));
-                repaint();
+                buttons.add(new Button("EXIT", new IntVector2D(400, 480), new IntVector2D(70, 40), new IntVector2D(175, 80),  -1, unselected, selected, hovered,0));
+                buttons.add(new Button("PLAY AGAIN" , new IntVector2D(200, 480), new IntVector2D(55, 40), new IntVector2D(175, 80), 1, unselected, selected, hovered,0));
+                
+               // repaint();
             }
         }));
-        test.start();
+        Button_timer.start();
      }
 
     @Override
@@ -100,14 +104,13 @@ public class Loser extends JPanel {
         super.paint(win);
         Graphics2D window = (Graphics2D) win;
         window.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        win.drawImage(Background.getImage(), -5, -5, 800, 600, this);
-         win.drawImage(Explosion.getImage(), 200, 130, this);
-          win.drawImage(Banner.getImage(), 75, 0, this);
-           win.drawImage(Banner2.getImage(), 150, 100, this);
-       // firework.Paint(window);
-        //firework2.Paint(window);
+        win.drawImage(Background.getImage(), -4, -5, 805, 600, this);
+        win.drawImage(Explosion.getImage(), 200, 130, this);
+        win.drawImage(Banner.getImage(), 75, 0, this);
+        win.drawImage(Banner2.getImage(), 150, 100, this);
+     
     
-        if (temp == true){
+        if (showButton == true){
           for( int j=0;j<buttons.size();j++) {
             if(selectionCandidate == j) {
                 if(hovered) {

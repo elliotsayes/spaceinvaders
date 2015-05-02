@@ -18,16 +18,20 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Winnerr extends JPanel {
-    Timer paint_timer, firework_rate,test;
-    int paint_updatePS = 60;
-    int x = 500, selection = 0, selectionCandidate = 0, state = 0, i= -1, j=0;
-    boolean hovered;
+    // Initialising the timers 
+    Timer paint_timer, firework_rate,paintTimer,Button_timer;
+   
+    int x = 500, selection = 0, selectionCandidate = 0, state = 0, i= -1, j,paint_updatePS = 60;;
+    
     final int paintUpdateRate = 1;
-    Timer paintTimer;
-    boolean temp = false;
+    
+    boolean showButton = false;
+    boolean hovered;
+    // Initialising the Images for the screen
     ImageIcon Banner = new ImageIcon(getClass().getResource("Winner.PNG"));
     ImageIcon Background = new ImageIcon(getClass().getResource("Stars.gif"));
     
+    //Initialising the classes to use within the winner 
     IntVector2D menuSize;
     ArrayList<Button> buttons = new ArrayList();
     Button tempButton;
@@ -41,6 +45,7 @@ public class Winnerr extends JPanel {
 
 
     public Winnerr(IntVector2D windowSize) {
+         menuSize = windowSize;
             addMouseListener(new MouseListener() {
 
             @Override
@@ -70,10 +75,10 @@ public class Winnerr extends JPanel {
                 repaint();
             }
         });
-        menuSize = windowSize;
        
        
-         
+       
+        // paints the fireworks
         this.paint_timer = new Timer(1000/paint_updatePS, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,6 +91,7 @@ public class Winnerr extends JPanel {
             }
         }));
         
+        // Sets up the new set of fireworks to explode
         this.firework_rate = new Timer(2000, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -105,22 +111,22 @@ public class Winnerr extends JPanel {
         firework_rate.start();
        // paint_timer.setRepeats(true);
         
-        this.test = new Timer(5000, (new ActionListener() {
+        this.Button_timer = new Timer(5000, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
                 
-                temp = true;
+                showButton = true;
                 buttons = new ArrayList<>();
                 ImageIcon unselected = new ImageIcon(getClass().getResource("unselected.png"));
                 ImageIcon selected = new ImageIcon(getClass().getResource("selected.png"));
                 ImageIcon hovered = new ImageIcon(getClass().getResource("hovered.png"));
-                buttons.add(new Button("EXIT", new IntVector2D(300, 480), new IntVector2D(60, 40), new IntVector2D(175, 80),  -1, unselected, selected, hovered,0));
-                buttons.add(new Button("PLAY AGAIN" , new IntVector2D(300, 390), new IntVector2D(75, 40), new IntVector2D(175, 80), 1, unselected, selected, hovered,0));
+                buttons.add(new Button("EXIT", new IntVector2D(400, 480), new IntVector2D(70, 40), new IntVector2D(175, 80),  -1, unselected, selected, hovered,0));
+                buttons.add(new Button("PLAY AGAIN" , new IntVector2D(200, 480), new IntVector2D(55, 40), new IntVector2D(175, 80), 1, unselected, selected, hovered,0));
                 
             }
         }));
-        test.start();
+        Button_timer.start();
      }
 
     @Override
@@ -129,13 +135,13 @@ public class Winnerr extends JPanel {
         super.paint(win);
         Graphics2D window = (Graphics2D) win;
         window.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        win.drawImage(Background.getImage(), -5, -5, 800, 600, this);
+        win.drawImage(Background.getImage(), -4, -5, 805, 600, this);
         win.drawImage(Banner.getImage(), 125, 0, this);
       
         firework.Paint(window);
         firework2.Paint(window);
     
-        if (temp == true){
+        if (showButton == true){
           for( j=0;j<buttons.size();j++) {
             if(selectionCandidate == j) {
                 if(hovered) {
