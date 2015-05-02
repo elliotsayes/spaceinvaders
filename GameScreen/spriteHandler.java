@@ -3,9 +3,7 @@ package GameScreen;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -18,8 +16,8 @@ public class spriteHandler {
     
     public spriteHandler(String x, int w, int h){
         try {
-            image = ImageIO.read(new File(getClass().getResource(x).toURI()));
-        } catch (URISyntaxException | IOException ex) {
+            image = ImageIO.read(getClass().getResource(x));
+        } catch (IOException ex) {
             Logger.getLogger(spriteHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         width = w;
