@@ -135,9 +135,30 @@ public class GamePanel extends JPanel {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_M) {
                     try {
-                        shooter = new PlayerMarlo();
+                        shooter.playerSprites = new spriteHandler("MarloSpriteSheet.png",150,130);
                         invaders.enemyArray.clear();
-                        invaders.enemyArray.add(new MarloEnemy(80,80));
+                        invaders.enemyArray.add(new CreatorEnemies(80,80,"ElliotSpriteSheet.png"));
+                        invaders.enemyArray.add(new CreatorEnemies(160,160,"BraedenSpriteSheet.png"));
+                    } catch (IOException | URISyntaxException ex) {
+                        Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_E) {
+                    try {
+                        shooter.playerSprites = new spriteHandler("ElliotSpriteSheet.png",150,130);
+                        invaders.enemyArray.clear();
+                        invaders.enemyArray.add(new CreatorEnemies(80,80,"MarloSpriteSheet.png"));
+                        invaders.enemyArray.add(new CreatorEnemies(160,160,"BraedenSpriteSheet.png"));
+                    } catch (IOException | URISyntaxException ex) {
+                        Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_B) {
+                    try {
+                        shooter.playerSprites = new spriteHandler("BraedenSpriteSheet.png",150,130);
+                        invaders.enemyArray.clear();
+                        invaders.enemyArray.add(new CreatorEnemies(80,80,"ElliotSpriteSheet.png"));
+                        invaders.enemyArray.add(new CreatorEnemies(160,160,"MarloSpriteSheet.png"));
                     } catch (IOException | URISyntaxException ex) {
                         Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
                     }

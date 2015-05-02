@@ -12,16 +12,16 @@ import java.net.URISyntaxException;
 import javax.swing.Timer;
 
 
-public class MarloEnemy extends BasicEnemy {
+public class CreatorEnemies extends BasicEnemy {
 
     spriteHandler temp;
     Image pic;
     Timer animator;
     int dir = 1;
     
-    public MarloEnemy(int x, int y) throws IOException, URISyntaxException {
+    public CreatorEnemies(int x, int y, String sheet) throws IOException, URISyntaxException {
         super(x, y);
-        this.temp = new spriteHandler("ElliotSpriteSheet.png",150,160);
+        this.temp = new spriteHandler(sheet,150,130);
         pic = temp.getImage(0);
         this.health = 50;
         this.size = 80;
@@ -75,7 +75,7 @@ public class MarloEnemy extends BasicEnemy {
      @Override
       public boolean hit(int damage) {
         health -= damage;
-        pic = temp.getImage(2); 
+        pic = temp.getImage(4); 
         animator.start();
         if (health == 0) {
             return (true);

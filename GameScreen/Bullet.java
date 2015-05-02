@@ -61,7 +61,7 @@ public class Bullet {
     
     public void upgrade(GamePanel g){
         g.shooter.color = Color.WHITE;
-        if(!g.shooter.invincible)g.shooter.health -= damage;
+        if(!g.shooter.invincible){g.shooter.health -= damage;}
         g.shooter.invincible = true;
         
         g.powerUpTimer = new Timer(1500, (new ActionListener() {

@@ -147,8 +147,10 @@ public class BasicPlayer {
         g.setColor(color);
         //g.fillRect(coordinates.getX(), coordinates.getY(), width, height);
         //bullets.paint(g);
-        g.drawImage(player, coordinates.getX(), coordinates.getY(), size, size, null);
-        if(invincible){g.drawImage(shield.getImage(), coordinates.getX(), coordinates.getY(), size, size, null);}
+        
+        if(invincible){g.drawImage(playerSprites.getImage(4), coordinates.getX(), coordinates.getY(), size, size, null);}else{
+            g.drawImage(player, coordinates.getX(), coordinates.getY(), size, size, null);
+        }
         g.setColor(Color.WHITE);
         g.drawString("Score:", 20, 20);
         g.drawString(String.valueOf(score), 100, 20);
