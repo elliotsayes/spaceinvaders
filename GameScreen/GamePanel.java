@@ -71,6 +71,7 @@ public class GamePanel extends JPanel {
                 
             }
         }));
+        player_timer.start();
 
         this.enemy_timer = new Timer(1000/enemy_updateInterval, (new ActionListener() {
             @Override
@@ -96,7 +97,7 @@ public class GamePanel extends JPanel {
                 if (pause == false) {
                     if (!(enemy_timer.isRunning()) && e.getKeyCode() == KeyEvent.VK_SPACE) {
                         enemy_timer.start();
-                        player_timer.start();
+                        //player_timer.start();
                         bullets.start();
                     } else {
                         shooter.keyPressed(e);
@@ -251,7 +252,7 @@ public class GamePanel extends JPanel {
         }
         bullets = new BulletHandler(velocity);
         enemy_timer.stop();
-        player_timer.stop();
+        //player_timer.stop();
         shooter.locationRespawn();
         shooter.reset();
         
