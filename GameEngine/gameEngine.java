@@ -79,7 +79,7 @@ public class gameEngine {
                         Thread.sleep(1);
                     }
                     // Removes MainMenu 
-                    music.stop("intro");
+                    music.stopAll();
                     gameWindow.remove(MainMenu);
                     game_state = MainMenu.getSelection();
                     break;
@@ -117,7 +117,7 @@ public class gameEngine {
                     
                     game_state = win.getSelection();
                     gameWindow.remove(win);
-                    music.stop("win");
+                    music.stopAll();
                     break;
 
                 case 3: // Lose Screen
@@ -131,7 +131,7 @@ public class gameEngine {
                     }
                     game_state = loseWin.getSelection();
                     gameWindow.remove(loseWin);
-                    music.stop("death");
+                    music.stopAll();
 
                     break;
                 case 4: // Options
