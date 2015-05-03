@@ -9,11 +9,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -37,7 +33,7 @@ public class BasicPlayer {
     int score;
     int health;
     BulletHandler bullets;// = new BulletHandler(-1, fireRate);
-    Timer fire_timer;
+    Timer fire_timer, invulnrableTimer;
     int fire_rate = 5;
     boolean can_shoot = true;
     //Entite Audio Handler
@@ -79,6 +75,13 @@ public class BasicPlayer {
             public void actionPerformed(ActionEvent e) {
                 can_shoot = true;
                 fire_timer.stop();
+            }
+        }));
+        invulnrableTimer = new Timer(1500, (new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invincible = false;
+                invulnrableTimer.stop();
             }
         }));
         switch(skinCode) {
