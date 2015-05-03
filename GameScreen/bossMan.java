@@ -73,7 +73,7 @@ public class bossMan extends EnemyHandler {
     static String CthuluDarkLord        = "BossManFinal.png";
     static String CthuluDarkLordLeg2    = "Tentacle2_move.gif";
     static String CthuluDarkLordLeg3    = "Tenticle3_fast.gif";
-    static String CthuluDarkLordLeg4    = "Tenticle4.gif";
+    static String CthuluDarkLordLeg4    = "Remake_Tenticle4 (2).gif";
     static String CthulhuDarkLordEnrage = "Boss_stage 2.gif";
     
     int bulletCooldown = 0, bulletAngle = 0;
