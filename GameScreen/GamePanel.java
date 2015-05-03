@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
     int velocity = 300;
     int level = 1;
     private ImageIcon pauseImage = new ImageIcon(getClass().getResource("Paused.png"));
-    private ImageIcon helpPage = new ImageIcon(getClass().getResource("startMenu.png"));
+    private ImageIcon helpPage;
     private ImageIcon nextLevel = new ImageIcon(getClass().getResource("nextLevel.png"));
     public static int mode = 0;
     
@@ -53,6 +53,9 @@ public class GamePanel extends JPanel {
     // gameScreen Constructor
     public GamePanel(AudioHandler p) throws IOException, URISyntaxException {
         // ActionListener for time, what happens when timer executes
+        if (mode == 0){helpPage = new ImageIcon(getClass().getResource("startMenu.png"));}else
+        {helpPage = new ImageIcon(getClass().getResource("startMenu2.png"));}
+        
         this.paint_timer = new Timer(1000/paint_updateInterval, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
