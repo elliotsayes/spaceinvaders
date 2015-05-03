@@ -21,7 +21,7 @@ public class gameEngine {
 
     // Config
     static int Score;
-    static int sleepTime = 600;
+    static int sleepTime = 1;
     private static final String windowTitle = "*PewPew*";
     private static final Color backgroundColor = Color.BLACK;
     private static final IntVector2D windowSize = new IntVector2D(800,600);
