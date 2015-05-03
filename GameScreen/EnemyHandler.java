@@ -30,34 +30,7 @@ public class EnemyHandler {
     public EnemyHandler(int level) throws IOException, URISyntaxException {
         // Initialises enemys
         enemyArray = new ArrayList<>(45);
-        int x;
-        int size;
-        int y = 30;
-        for (int temp1 = 0; temp1 <= 3; temp1++) {
-            int hp = level * ran.nextInt(level);
-            if (hp == 0) {
-                hp = level * level;
-            }
-            size = (30 + (5 * hp));
-            if ((size >= 40) & (temp1 == 0)) {
-                enemyArray.add(new AdvancedEnemy(300, y));
-                y += 70;
-                 //hp = 1;
-                //level = 1;
-                continue;
-            }
-            if (hp > 10) {
-                hp = ran.nextInt(8);
-                hp++;
-                size = (30 + (5 * hp));
-            }
-            x = size / 2;
-            for (int temp = 0; temp <= 400 / (30 + (5 * hp)); temp++) {
-                enemyArray.add(new BasicEnemy(x, y, hp, (30 + (5 * hp)), "Basic_Enemy_Sprite.gif", ran.nextInt(hp), ran.nextInt(hp), ran.nextInt(hp)));
-                x = x + ((30 + (5 * hp)));
-            }
-            y += size ;
-        }
+        generateLevel(level);
 
     }
 
@@ -126,4 +99,35 @@ public class EnemyHandler {
 
     }
 
+    public void generateLevel(int level){
+        int x;
+        int size;
+        int y = 30;
+        for (int temp1 = 0; temp1 <= 3; temp1++) {
+            int hp = level * ran.nextInt(level);
+            if (hp == 0) {
+                hp = level * level;
+            }
+            size = (30 + (5 * hp));
+            if ((size >= 40) & (temp1 == 0)) {
+                enemyArray.add(new AdvancedEnemy(300, y));
+                y += 70;
+                 //hp = 1;
+                //level = 1;
+                continue;
+            }
+            if (hp > 10) {
+                hp = ran.nextInt(8);
+                hp++;
+                size = (30 + (5 * hp));
+            }
+            x = size / 2;
+            for (int temp = 0; temp <= 400 / (30 + (5 * hp)); temp++) {
+                enemyArray.add(new BasicEnemy(x, y, hp, (30 + (5 * hp)), "Basic_Enemy_Sprite.gif", ran.nextInt(hp), ran.nextInt(hp), ran.nextInt(hp)));
+                x = x + ((30 + (5 * hp)));
+            }
+            y += size ;
+        }
+    
+    }
 }

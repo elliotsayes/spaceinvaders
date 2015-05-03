@@ -11,7 +11,6 @@ public class Bullet {
     Color color;// = Color.red;
     int size;// = 3;
     IntVector2D coordinates, velocity, acceleration;
-    int damage = 1;
     //AudioPlayer fire_sound = new AudioPlayer("shoot.wav","shoot");
     
     public Bullet(IntVector2D coordinates, IntVector2D velocity) {
@@ -59,7 +58,7 @@ public class Bullet {
     
     public void upgrade(GamePanel g){
         if(!g.shooter.invincible){
-        g.shooter.health -= damage;
+        g.shooter.health -= 1;
         g.shooter.invincible = true;
         g.shooter.invulnrableTimer.start();
         }

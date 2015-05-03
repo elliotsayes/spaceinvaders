@@ -257,7 +257,8 @@ public class GamePanel extends JPanel {
             playList.stopAll();
             invaders = new bossMan(playList);
         }else{
-            invaders = new EnemyHandler(level);
+            invaders.enemyArray.clear();
+            invaders.generateLevel(level);
         }
         bullets.bullets.clear();
         //bullets = new BulletHandler(velocity, playList);
