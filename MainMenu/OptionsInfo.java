@@ -12,14 +12,16 @@ package MainMenu;
 public class OptionsInfo {
     public boolean soundData; // false - no sound, true - sound
     public int shooterData; // ID code for which shooter sprite
+    public int gameMode;
 
     public OptionsInfo() {
-        this(true,0); // default to sound on and shooter 0
+        this(true,0,0); // default to sound on and shooter 0
     }
     
-    public OptionsInfo(boolean soundData, int shooterData) {
+    public OptionsInfo(boolean soundData, int shooterData, int gameMode) {
         this.soundData = soundData;
         this.shooterData = shooterData;
+        this.gameMode = gameMode;
     }
     
 }
