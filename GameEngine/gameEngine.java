@@ -55,7 +55,7 @@ public class gameEngine {
         music.add("battle_2.mid", "battleMusic");
         music.add("TitleScreen.mid", "intro");
         music.add("win.mid", "win");
-        music.add("Shooting.wav", "shoot");
+        music.add("Shooting (1).wav", "shoot");
         music.add("boss.mid", "BossMusic");
         music.add("Monster Sound.wav", "BossSound");
         music.add("chainClink.wav", "Hit");
