@@ -29,7 +29,7 @@ public class EnemyHandler {
 
     public EnemyHandler(int level) throws IOException, URISyntaxException {
         // Initialises enemys
-        enemyArray = new ArrayList<>();
+        enemyArray = new ArrayList<>(45);
         int x;
         int size;
         int y = 30;

@@ -1,12 +1,10 @@
 package GameScreen;
 
-import GameEngine.AudioPlayer;
+
 import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
+
 
 public class Bullet {
 
@@ -60,7 +58,6 @@ public class Bullet {
     }
     
     public void upgrade(GamePanel g){
-        g.shooter.color = Color.WHITE;
         if(!g.shooter.invincible){
         g.shooter.health -= damage;
         g.shooter.invincible = true;

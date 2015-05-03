@@ -1,7 +1,6 @@
 package GameScreen;
 
 import GameEngine.AudioHandler;
-import GameEngine.AudioPlayer;
 import GameEngine.IntVector2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -19,7 +18,7 @@ public class BulletHandler {
 
     // Constructor initialises array of bullets
     public BulletHandler( int velocity, AudioHandler p) {
-        bullets = new ArrayList<>();
+        bullets = new ArrayList<>(60);
         this.velocity_timer = new Timer(1000/velocity, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

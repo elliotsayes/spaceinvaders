@@ -6,11 +6,12 @@ import java.util.Random;
 
 public class AudioHandler {
 
-    ArrayList<AudioPlayer> playList = new ArrayList();
-    Random ran = new Random();
+    private ArrayList<AudioPlayer> playList = new ArrayList(8);
+    
     
 
     public AudioHandler() {
+        
     }
 
     // Creates playlist of songs passed to constructor
@@ -55,6 +56,7 @@ public class AudioHandler {
 
     // Plays random audio file from playlist
     public void playRandom() {
+        Random ran = new Random();
         int num = ran.nextInt(playList.size());
         playList.get(num).playSound();
         System.out.print(num);

@@ -19,7 +19,6 @@ ImageIcon Speed          = new ImageIcon(getClass().getResource("SpeedPowerUp.pn
     
     @Override
     public void upgrade(GamePanel g) {
-        g.shooter.color = Color.RED;
         g.player_timer.stop();
         g.player_timer = new Timer(1000 / (g.player_updateInterval * 2), (new ActionListener() {
             @Override
@@ -43,7 +42,7 @@ ImageIcon Speed          = new ImageIcon(getClass().getResource("SpeedPowerUp.pn
                 }));
                 g.player_timer.start();
                 g.powerUpTimer.stop();
-                g.shooter.color = Color.GREEN;
+                
             }
         }));
         g.powerUpTimer.start();

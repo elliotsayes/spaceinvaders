@@ -14,15 +14,11 @@ import javax.sound.sampled.Clip;
 
 public class AudioPlayer {
 
-    Clip clip;
-    String name, sound_file;
+    private Clip clip;
+    final String name, sound_file;
     static boolean canPlay = true;
     
-    URL url;
-    File file;
     
-    
-
     // Add sound files to GameEngine pakage then call in contructor eg "test.wav"
     // Constructor loads sound file
     public AudioPlayer(String sound_name, String new_name) {

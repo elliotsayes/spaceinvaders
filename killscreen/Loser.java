@@ -37,10 +37,10 @@ public class Loser extends JPanel {
     ArrayList<Button> buttons = new ArrayList<>();;
     Button tempButton;
      //initialising the images to be used in the paint
-    ImageIcon Background = new ImageIcon(getClass().getResource("stars.gif"));
+    ImageIcon Background = new ImageIcon(getClass().getResource("Stars.gif"));
     ImageIcon Explosion  = new ImageIcon(getClass().getResource("TESTGIF.gif"));
     ImageIcon Banner     = new ImageIcon(getClass().getResource("DIED_1.PNG"));
-    ImageIcon Banner2    = new ImageIcon(getClass().getResource("Game Over_1.PNG"));
+    ImageIcon Banner2    = new ImageIcon(getClass().getResource("GameOver_1.PNG"));
     ImageIcon Dimmer     = new ImageIcon(getClass().getResource("Opaque.png"));
  
     

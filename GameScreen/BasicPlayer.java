@@ -29,26 +29,18 @@ public class BasicPlayer {
     IntVector2D healthCoord = new IntVector2D(250,5);
     int fireRate;
     boolean move_left, move_right, shoot;
-    Color color;
     int score;
     int health;
-    BulletHandler bullets;// = new BulletHandler(-1, fireRate);
     Timer fire_timer, invulnrableTimer;
-    int fire_rate = 5;
     boolean can_shoot = true;
     //Entite Audio Handler
-    AudioHandler soundEffects = new AudioHandler();
     boolean invincible = false;
     static ImageIcon Lives;
     spriteHandler playerSprites;
     Image player;
-    ImageIcon shield;
     public static int skinCode =0;
-    String skin;
-    // Unused
-    //int xa;
-    //ImageIcon image;
-    // Player constructor
+    
+    
     public BasicPlayer() {
         // call secondary constructor with default width and height
         this(60, 10);
@@ -57,20 +49,17 @@ public class BasicPlayer {
 
     public BasicPlayer(int width, int height) {
         // call main constructor with default values
-        this(new IntVector2D(370,480), width, height, 1000, Color.GREEN, 0, 3);
+        this(new IntVector2D(370,480), width, height, 5, Color.GREEN, 0, 3);
         
     }
 
     public BasicPlayer(IntVector2D coordinates, int width, int height, int fireRate, Color color, int score, int health) {
-        soundEffects.add("BananaSlap.wav","hit");
         this.coordinates = coordinates;
         this.height = height;
         this.width = width;
-        this.fireRate = fireRate;
-        this.color = color;
         this.score = score;
         this.health = health;
-         this.fire_timer = new Timer(1000/fire_rate, (new ActionListener() {
+         this.fire_timer = new Timer(1000/fireRate, (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 can_shoot = true;
@@ -84,6 +73,7 @@ public class BasicPlayer {
                 invulnrableTimer.stop();
             }
         }));
+        String skin = "playerSpriteSheet.png";
         switch(skinCode) {
             case 0:
                 skin = "playerSpriteSheet.png";
@@ -104,7 +94,6 @@ public class BasicPlayer {
         Lives = new ImageIcon(getClass().getResource("HealthImage.png"));
         this.playerSprites = new spriteHandler(skin,150,130);
         this.player = playerSprites.getImage(0);
-        this.shield = new ImageIcon(getClass().getResource("shield.png"));
     }
     
     public void setHeight(int height) {
@@ -113,10 +102,6 @@ public class BasicPlayer {
 
     public void setWidth(int width) {
         this.width = width;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 
     public void setHealth(int health) {
@@ -152,7 +137,6 @@ public class BasicPlayer {
 
     // Paints player and bullets, determins look of player
     public void paint(Graphics2D g) {
-        g.setColor(color);
         //g.fillRect(coordinates.getX(), coordinates.getY(), width, height);
         //bullets.paint(g);
         
@@ -200,11 +184,6 @@ public class BasicPlayer {
         }
     }
 
-    // Returns bullets array
-    public ArrayList getAmo() {
-        return bullets.getbullets();
-    }
-
     // Removes bullet and increases player score
     public void hit() {
         score = score + 100;
@@ -225,7 +204,6 @@ public class BasicPlayer {
     void playerHit() {
         if(!invincible){
         health -= 1;
-        soundEffects.play("hit");
         locationRespawn();
         }
     }

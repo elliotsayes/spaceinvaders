@@ -26,16 +26,16 @@ public class GamePanel extends JPanel {
     boolean pause = false;
     int velocity = 300;
     int level = 1;
-    ImageIcon pauseImage = new ImageIcon(getClass().getResource("Paused.png"));
-    ImageIcon helpPage = new ImageIcon(getClass().getResource("startMenu.png"));
-    ImageIcon nextLevel = new ImageIcon(getClass().getResource("nextLevel.png"));
+    private ImageIcon pauseImage = new ImageIcon(getClass().getResource("Paused.png"));
+    private ImageIcon helpPage = new ImageIcon(getClass().getResource("startMenu.png"));
+    private ImageIcon nextLevel = new ImageIcon(getClass().getResource("nextLevel.png"));
     public static int mode = 0;
     
     // Menu Numbers
-    int mainMenu = 0;
-    int winScreen = 2;
-    int loseScreen = 3;
-    int options = 4;
+    private static final int mainMenu = 0;
+    private static final int winScreen = 2;
+    private static final int loseScreen = 3;
+    private static final int options = 4;
     
     // Game Screen Entities
     EnemyHandler invaders = new EnemyHandler();
@@ -164,6 +164,8 @@ public class GamePanel extends JPanel {
                     } catch (IOException | URISyntaxException ex) {
                         Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                }if (e.getKeyCode() == KeyEvent.VK_A) {
+                    shooter = new AIplayer();
                 }
                 
             }
@@ -227,7 +229,7 @@ public class GamePanel extends JPanel {
                     invaders.hit(j);
                     // Changes selection to win state
                     if(invaders.enemyArray.isEmpty()){
-                        if (level == 5){
+                        if (level == 5 & mode == 0){
                             selection = winScreen;
                         }else{
                             restart();
@@ -257,7 +259,8 @@ public class GamePanel extends JPanel {
         }else{
             invaders = new EnemyHandler(level);
         }
-        bullets = new BulletHandler(velocity, playList);
+        bullets.bullets.clear();
+        //bullets = new BulletHandler(velocity, playList);
         enemy_timer.stop();
         //player_timer.stop();
         shooter.locationRespawn();
@@ -272,21 +275,21 @@ public class GamePanel extends JPanel {
     public boolean hitBox(int x, int y, int size, int u, int v, int size2) {    
             if (u < x + size & u > x) {
                 if ((v < (y + size)) & (v > y)) {
-                    System.out.print("DEBUG - hit 1 \n");
+                    //System.out.print("DEBUG - hit 1 \n");
                     
                     return true;
                 }else if (((v + size2) < (y + size)) & (v + size2 > y)) {
-                    System.out.print("DEBUG - hit 2 \n");
+                    //System.out.print("DEBUG - hit 2 \n");
                     
                     return true;
                 }
             } else if (u + size2 < x + size & u + size2 > x){
                 if ((v < (y + size)) & (v > y)) {
-                    System.out.print("DEBUG - hit 3 \n");
+                    //System.out.print("DEBUG - hit 3 \n");
                     
                     return true;
                 }else if (((v + size2) < (y + size2)) & (v + size2 > y)) {
-                    System.out.print("DEBUG - hit 4 \n");
+                    //System.out.print("DEBUG - hit 4 \n");
                     
                     return true;
                 }
@@ -298,13 +301,13 @@ public class GamePanel extends JPanel {
         for (int k = 0; k < barriers.arrayOfBarriers.size();k++){
             Barrier temp = barriers.arrayOfBarriers.get(k);
             if (hitBox(temp.coordinates.getX(),temp.coordinates.getY(),100,x,y,size)){
-                System.out.print("DEBUG - 2 \n");
+                //System.out.print("DEBUG - 2 \n");
                 for(int v = 0; v < temp.barrierArray.size(); v++){
                     BarrierPiece temp2 = temp.barrierArray.get(v);
                     if (hitBox(temp2.coordinates.getX(),temp2.coordinates.getY(), 10,x,y,size)){
                         playList.play("Hit");
                         temp.removePiece(v);
-                        System.out.print("DEBUG - 1 \n");
+                        //System.out.print("DEBUG - 1 \n");
                         return true;
                     }
                 }
