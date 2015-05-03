@@ -173,7 +173,7 @@ public class GamePanel extends JPanel {
         selection = 1;
         playList = p;
         bullets = new BulletHandler(velocity, playList);
-        playList.play("battleMusic");
+        playList.loop("battleMusic",5);
     }
 
     @Override

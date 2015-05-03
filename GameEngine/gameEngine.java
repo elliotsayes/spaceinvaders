@@ -21,6 +21,7 @@ public class gameEngine {
 
     // Config
     static int Score;
+    static int sleepTime = 600;
     private static final String windowTitle = "*PewPew*";
     private static final Color backgroundColor = Color.BLACK;
     private static final IntVector2D windowSize = new IntVector2D(800,600);
@@ -77,7 +78,7 @@ public class gameEngine {
                     MainMenu.repaint();
                     // MainMenu loop Waits for a getSelection to be made
                     while (MainMenu.getSelection() == 0) {
-                        Thread.sleep(1);
+                        Thread.sleep(sleepTime);
                     }
                     // Removes MainMenu 
                     music.stopAll();
@@ -95,7 +96,7 @@ public class gameEngine {
                     playScreen.requestFocus();
                     // Play screen loop
                     while (playScreen.getSelection() == 1) {
-                        Thread.sleep(1);
+                         Thread.sleep(sleepTime);
                     }
                     Score = playScreen.Score();
                     // Removes playScreen
@@ -113,7 +114,7 @@ public class gameEngine {
                     gameWindow.add(win);
                     gameWindow.validate();
                     while (win.getSelection() == 0) {
-                        Thread.sleep(1);
+                         Thread.sleep(sleepTime);
                     }
                     
                     game_state = win.getSelection();
@@ -128,7 +129,7 @@ public class gameEngine {
                     gameWindow.add(loseWin);
                     gameWindow.validate();
                     while (loseWin.getSelection() == 0){
-                        Thread.sleep(1);
+                         Thread.sleep(sleepTime);
                     }
                     game_state = loseWin.getSelection();
                     gameWindow.remove(loseWin);
@@ -145,7 +146,7 @@ public class gameEngine {
                     optionsScreen.repaint();
                     // Options loop Waits for a getSelection to be made
                     while (optionsScreen.getSelection() == 4) {
-                        Thread.sleep(1);
+                         Thread.sleep(sleepTime);
                     }
                     // Removes options
                     myOptions = optionsScreen.workingOptions;
