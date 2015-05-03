@@ -29,6 +29,7 @@ public class GamePanel extends JPanel {
     ImageIcon pauseImage = new ImageIcon(getClass().getResource("Paused.png"));
     ImageIcon helpPage = new ImageIcon(getClass().getResource("startMenu.png"));
     ImageIcon nextLevel = new ImageIcon(getClass().getResource("nextLevel.png"));
+    public static int mode = 0;
     
     // Menu Numbers
     int mainMenu = 0;
@@ -250,9 +251,11 @@ public class GamePanel extends JPanel {
    
     public void restart() throws IOException, URISyntaxException {
         level += 1;
-        if(level < 4){invaders = new EnemyHandler(level);}else{
+        if((level > 4) & mode == 0){
             playList.stopAll();
             invaders = new bossMan(playList);
+        }else{
+            invaders = new EnemyHandler(level);
         }
         bullets = new BulletHandler(velocity, playList);
         enemy_timer.stop();

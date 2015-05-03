@@ -152,6 +152,7 @@ public class gameEngine {
                     myOptions = optionsScreen.workingOptions;
                     AudioPlayer.canPlay = myOptions.soundData;
                     BasicPlayer.skinCode = myOptions.shooterData;
+                    GamePanel.mode = myOptions.gameMode;
                     //music.stop("intro");
                     gameWindow.remove(optionsScreen);
                     game_state = optionsScreen.getSelection();

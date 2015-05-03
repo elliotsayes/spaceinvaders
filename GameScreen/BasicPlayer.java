@@ -147,8 +147,7 @@ public class BasicPlayer {
             fire_timer.start();
             this.player = playerSprites.getImage(1);
         }
-        //bullets.move();
-        //bullets.kill();
+        
     }
 
     // Paints player and bullets, determins look of player
