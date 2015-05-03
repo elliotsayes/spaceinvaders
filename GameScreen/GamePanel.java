@@ -52,6 +52,8 @@ public class GamePanel extends JPanel {
     
     // gameScreen Constructor
     public GamePanel(AudioHandler p) throws IOException, URISyntaxException {
+        playList = p;
+        this.bullets = new BulletHandler(velocity, playList);
         // ActionListener for time, what happens when timer executes
         if (mode == 0){helpPage = new ImageIcon(getClass().getResource("startMenu.png"));}else
         {helpPage = new ImageIcon(getClass().getResource("startMenu2.png"));}
@@ -177,8 +179,7 @@ public class GamePanel extends JPanel {
         this.requestFocus();
         paint_timer.start();
         selection = 1;
-        playList = p;
-        bullets = new BulletHandler(velocity, playList);
+        
         playList.loop("battleMusic",5);
     }
 
@@ -302,11 +303,13 @@ public class GamePanel extends JPanel {
         }
     
     public boolean barrierHit(int x, int y, int size){
-        for (int k = 0; k < barriers.arrayOfBarriers.size();k++){
+        int numOfBarriers = barriers.arrayOfBarriers.size();
+        for (int k = 0; k < numOfBarriers;k++){
             Barrier temp = barriers.arrayOfBarriers.get(k);
+            int tempSize = temp.barrierArray.size();
             if (hitBox(temp.coordinates.getX(),temp.coordinates.getY(),100,x,y,size)){
                 //System.out.print("DEBUG - 2 \n");
-                for(int v = 0; v < temp.barrierArray.size(); v++){
+                for(int v = 0; v < tempSize; v++){
                     BarrierPiece temp2 = temp.barrierArray.get(v);
                     if (hitBox(temp2.coordinates.getX(),temp2.coordinates.getY(), 10,x,y,size)){
                         playList.play("Hit");
