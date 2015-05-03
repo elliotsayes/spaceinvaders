@@ -152,7 +152,7 @@ public class bossMan extends EnemyHandler {
     // moveArmy is from the Enemy Handler, but Overwritten here for the boss movment 
     @Override
     public void moveArmy(JPanel win, BulletHandler bullets){
-    if (enemyArray.size() != 0 ){
+    if (enemyArray.size() != 0 ){ // make sure there are still enemies, or else errors will occur
         
         if (enemyArray.get(0).getY() <= 25){
             
@@ -176,7 +176,7 @@ public class bossMan extends EnemyHandler {
                     velocity = velocity3;
                 }   
             }
-        }
+        
         
           
         for (int k = 0; k < enemyArray.size();k++){
@@ -223,6 +223,7 @@ public class bossMan extends EnemyHandler {
             bulletCooldown++;
         }
     }
+    }
     
     
   
@@ -253,7 +254,7 @@ void hit(int temp) {
         win.setColor(Color.green);
         
 //        Another_timer.start();
-        if(!enemyArray.isEmpty()) {
+        if(!enemyArray.isEmpty()) { // make sure there are still enemies
             if(enemyArray.get(0).coordinates.getY() >= 24 && enemyArray.get(0).coordinates.getY() <= 26){
                if(!toMove){
                        ImageIcon DrawImage = new ImageIcon(getClass().getResource("TheDarkLordCthulhu"+Integer.toString(r)+".png"));
